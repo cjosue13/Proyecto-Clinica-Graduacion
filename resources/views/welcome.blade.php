@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIRHENA</title>
+    <title>HAHNEMANN</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
@@ -28,7 +28,7 @@
         <section class="b1">
             <div class="in1">
                 <div class="top-left links2">
-                    <a>SIRHENA</h1>
+                    <a>HAHNEMANN</h1>
                 </div>
             </div>
 
