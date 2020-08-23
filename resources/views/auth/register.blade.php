@@ -102,10 +102,10 @@
                                 {{ Form::radio('tipoUsuario', 'C', ['class'=>'with-gap']) }}<span>Candidatos</span>
                             </label>-->
                             <div class="radio ">
-                                <label class="textaa"><input id="columnaRadio" name="tipoUsuario" type="radio" value="E">Empresa</label>
+                                <label class="textaa"><input id="columnaRadio" name="tipoUsuario" type="radio" value="D">Doctor</label>
                             </div>
                             <div class="radio ">
-                                <label class="textaa"><input id="columnaRadio" checked="checked" name="tipoUsuario" type="radio" value="C">Candidatos</label>
+                                <label class="textaa"><input id="columnaRadio" checked="checked" name="tipoUsuario" type="radio" value="S">Secretaria/o</label>
                             </div>
                         </div>
 
