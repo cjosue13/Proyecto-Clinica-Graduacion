@@ -24,7 +24,6 @@
       <td>Dirección</td>
       <td>Teléfono</td>
       <td>Tipo de Usuario</td>
-      <td>Foto</td>
       <td>Cédula</td>
       <td>Acciones</td>
     </tr>
@@ -39,7 +38,6 @@
       <td>{{ $value->address }}</td>
       <td>{{ $value->phone }}</td>
       <td>{{ $value->tipoUsuario }}</td>
-      <td><img class="imagen" src="<?php echo ('../../storage/images/' . auth()->user()->photo) ?>"></td>
       <td>{{ $value->cedula }}</td>
       <td>
         <a class="btn btn-info btn-sm" href="{{route('usuarios.show',$value->id)}}">
