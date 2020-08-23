@@ -102,7 +102,7 @@ class usuariosController extends Controller
     public function destroy($id)
     {
         user::find($id)->delete();
-        return redirect()->route('usuarios.index')->with('success', 'Usuario Eliminado con Exito');
+        return redirect()->route('home')->with('success', 'Usuario Eliminado con Exito');
     }
 
     /**
