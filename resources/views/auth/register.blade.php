@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('PageTitle', 'Registro')
 @section('content')
-
 <div class="containerAux">
     <div class="row justify-content-center">
         <div class="col-md-8">
