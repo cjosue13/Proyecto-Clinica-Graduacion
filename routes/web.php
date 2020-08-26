@@ -24,6 +24,10 @@ Route::get('/Reportes', function () {
     return view('Reportes');
 })->name('reportes');
 
+Route::get('/auth', function () {
+    return view('auth.register');
+})->name('auth');
+
 Route::post('/upload','usuariosController@subirImagen');
 
 Route::get('pdf/{user}', 'ReportGeneratorController@ReporteCurriculum')->name('pdf');//Reportecurriculum

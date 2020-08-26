@@ -121,7 +121,6 @@ class usuariosController extends Controller
                 'email',
                 'address',
                 'phone',
-                'photo',
                 'cedula'
             )->where('tipoUsuario', 'E')->get()->toArray();
 
