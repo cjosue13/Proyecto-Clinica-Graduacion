@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\pacientes;
+use App\tbl_pacientes;
 use Illuminate\Support\Facades\DB;
 
 class pacientesController extends Controller
@@ -46,7 +46,7 @@ class pacientesController extends Controller
             'pac_sNombre' => 'required|string|max:50',
             'pac_pApellido' => 'required|string|max:50',
             'pac_sApellido' => 'required|string|max:50',
-            'pac_Edad' => 'required|int|max:3',
+            'pac_Edad' => 'required|int|max:150',
             'pac_Cedula' => 'required|string|max:20',
             'pac_Genero' => 'required|string|max:1',
             'pac_FechaNacimiento' => 'required|string|max:10',
@@ -56,7 +56,7 @@ class pacientesController extends Controller
             'pac_EstadoCivil' => 'required|string|max:2',
             'pac_Religion' => 'required|string|max:50'
         ]);
-        pacientes::create($request->all());
+        tbl_pacientes::create($request->all());
         return redirect()->route('pacientes.index')->with('success','Paciente creado con éxito');
     }
 
@@ -68,7 +68,7 @@ class pacientesController extends Controller
      */
     public function show($id)
     {
-        $pacientes = pacientes::find($id);
+        $pacientes = tbl_pacientes::find($id);
         return view('pacientes.show', compact('pacientes'));
     }
 
@@ -80,7 +80,7 @@ class pacientesController extends Controller
      */
     public function edit($id)
     {
-        $pacientes = pacientes::find($id);
+        $pacientes = tbl_pacientes::find($id);
         return view('pacientes.edit', compact('pacientes'));
     }
 
@@ -99,7 +99,7 @@ class pacientesController extends Controller
             'pac_sNombre' => 'required|string|max:50',
             'pac_pApellido' => 'required|string|max:50',
             'pac_sApellido' => 'required|string|max:50',
-            'pac_Edad' => 'required|int|max:3',
+            'pac_Edad' => 'required|int|max:150',
             'pac_Cedula' => 'required|string|max:20',
             'pac_Genero' => 'required|string|max:1',
             'pac_FechaNacimiento' => 'required|string|max:10',
@@ -110,7 +110,7 @@ class pacientesController extends Controller
             'pac_Religion' => 'required|string|max:50'
         ]);
        
-        pacientes::find($id)->update($request->all());
+        tbl_pacientes::find($id)->update($request->all());
         return redirect()->route('pacientes.index')->with('success','Paciente actualizado con éxito');
     }
 
@@ -122,7 +122,7 @@ class pacientesController extends Controller
      */
     public function destroy($id)
     {
-        pacientes::find($id)->delete();
+        tbl_pacientes::find($id)->delete();
         return redirect()->route('pacientes.index')->with('success','Paciente Eliminado');
     }
 }
