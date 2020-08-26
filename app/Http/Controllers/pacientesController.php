@@ -41,7 +41,6 @@ class pacientesController extends Controller
     {
         $empresa = auth()->user()->id;
         $this->validate($request, [
-            'pac_fkExpediente' => 'required|int|max:10000',
             'pac_pNombre' => 'required|string|max:50',
             'pac_sNombre' => 'required|string|max:50',
             'pac_pApellido' => 'required|string|max:50',
@@ -94,7 +93,6 @@ class pacientesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'pac_fkExpediente' => 'required|int|max:10000',
             'pac_pNombre' => 'required|string|max:50',
             'pac_sNombre' => 'required|string|max:50',
             'pac_pApellido' => 'required|string|max:50',
