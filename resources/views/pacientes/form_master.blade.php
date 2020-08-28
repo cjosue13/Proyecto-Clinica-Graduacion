@@ -127,7 +127,7 @@
     <div class="form-group {{ $errors->has('pac_EstadoCivil') ? 'has-error' : "" }}">
       {!! Form::select('pac_EstadoCivil', array('' => 'Seleccione una Opción','ST' => 'Soltero', 'CO' => 'Comprometido', 'ER' => 'En una Relación',
       'CA' => 'Casado/Casada', 'UL' => 'Unión Libre', 'SP' => 'Separado', 'DV' => 'Divorciado', 'VD' => 'Viudo'),
-      '',['class'=>'form-control', 'id'=>'pac_EstadoCivil']); !!}
+      '' ,['class'=>'form-control', 'id'=>'pac_EstadoCivil']); !!}
       {!! $errors->first('pac_EstadoCivil', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
@@ -152,14 +152,26 @@
     {!! form::label('pac_Genero','Genero') !!}
   </div>
   <div class="col-sm-10">
-    <?php
-      echo $pacientes->pac_id;
-    ?>
     <div class="form-group {{ $errors->has('pac_Genero') ? 'has-error' : "" }}">
       <div class="form-group">
         <div class="radio " style="left: 0%;">
-          <label><input id="columnaRadio" name="pac_Genero" type="radio" value="M">Masculino</label>
-          <label><input id="columnaRadio" checked="checked" name="pac_Genero" type="radio" value="F">Femenino</label>
+        
+          <label><input id="columnaRadio" <?php 
+        if(isset($pacientes)){
+          if($pacientes->pac_Genero=='M'){
+            echo "checked='checked'";
+          }
+        }
+        ?> name="pac_Genero" type="radio" value="M">Masculino</label>
+          <label><input id="columnaRadio" <?php 
+        if(isset($pacientes)){
+          if($pacientes->pac_Genero=='F'){
+            echo "checked='checked'";
+          }
+        }else{
+          echo "checked='checked'";
+        }
+        ?> name="pac_Genero" type="radio" value="F" <?php ?>>Femenino</label>
         </div>
       </div>
     </div>
