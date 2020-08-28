@@ -5,7 +5,7 @@
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('name') ? 'has-error' : "" }}">
       {{ Form::text('pac_pNombre',NULL, ['class'=>'form-control', 'id'=>'pac_pNombre', 'placeholder'=>'Primer Nombre']) }}
-      {{ $errors->first('pac_pNombre', '<p class="help-block">:message</p>') }}
+      {!! $errors->first('pac_pNombre', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
 </div>
@@ -17,7 +17,7 @@
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_sNombre') ? 'has-error' : "" }}">
       {{ Form::text('pac_sNombre',NULL, ['class'=>'form-control', 'id'=>'pac_sNombre', 'placeholder'=>'Segundo Nombre']) }}
-      {{ $errors->first('pac_sNombre', '<p class="help-block">:message</p>') }}
+      {!! $errors->first('pac_sNombre', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
 </div>
@@ -29,7 +29,7 @@
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_pApellido') ? 'has-error' : "" }}">
       {{ Form::text('pac_pApellido',NULL, ['class'=>'form-control', 'id'=>'pac_pApellido', 'placeholder'=>'Primer Apellido']) }}
-      {{ $errors->first('pac_pApellido', '<p class="help-block">:message</p>') }}
+      {!! $errors->first('pac_pApellido', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
 </div>
@@ -41,7 +41,7 @@
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_sApellido') ? 'has-error' : "" }}">
       {{ Form::text('pac_sApellido',NULL, ['class'=>'form-control', 'id'=>'pac_sApellido', 'placeholder'=>'Segundo Apellido']) }}
-      {{ $errors->first('pac_sApellido', '<p class="help-block">:message</p>') }}
+      {!! $errors->first('pac_sApellido', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
 </div>
@@ -53,7 +53,7 @@
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_Edad') ? 'has-error' : "" }}">
       {{ Form::text('pac_Edad',NULL, ['class'=>'form-control', 'id'=>'pac_Edad', 'placeholder'=> 'Edad']) }}
-      {{ $errors->first('pac_Edad', '<p class="help-block">:message</p>') }}
+      {!! $errors->first('pac_Edad', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
 </div>
@@ -65,33 +65,21 @@
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_Cedula') ? 'has-error' : "" }}">
       {{ Form::text('pac_Cedula',NULL, ['class'=>'form-control', 'id'=>'pac_Cedula', 'placeholder'=> 'Cedula']) }}
-      {{ $errors->first('pac_Cedula', '<p class="help-block">:message</p>') }}
+      {!! $errors->first('pac_Cedula', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col-sm-2">
-    {!! form::label('pac_Genero','Genero') !!}
+    {!! form::label('pac_FechaNacimiento','Fecha de Nacimiento:') !!}
   </div>
   <div class="col-sm-10">
-    <div class="form-group {{ $errors->has('pac_Genero') ? 'has-error' : "" }}">
-      {{ Form::text('pac_Genero',NULL, ['class'=>'form-control', 'id'=>'pac_Genero', 'placeholder'=> 'Genero']) }}
-      {{ $errors->first('pac_Genero', '<p class="help-block">:message</p>') }}
+    <div class="form-group {{ $errors->has('pac_FechaNacimiento') ? 'has-error' : "" }}">
+      {{ Form::date('pac_FechaNacimiento',NULL, ['class'=>'form-control', 'id'=>'pac_FechaNacimiento', 'placeholder'=>'YYYY-MM-DD']) }}
+      {!! $errors->first('pac_FechaNacimiento', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-2">
-        {!! form::label('pac_FechaNacimiento','Fecha de Nacimiento:') !!}
-    </div>
-    <div class="col-sm-10">
-        <div class="form-group {{ $errors->has('pac_FechaNacimiento') ? 'has-error' : "" }}">
-            {{ Form::date('pac_FechaNacimiento',NULL, ['class'=>'form-control', 'id'=>'pac_FechaNacimiento', 'placeholder'=>'YYYY-MM-DD']) }}
-            {!! $errors->first('pac_FechaNacimiento', '<p class="help-block">:message</p>') !!}
-        </div>
-    </div>
 </div>
 
 <div class="row">
@@ -101,7 +89,7 @@
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_Residencia') ? 'has-error' : "" }}">
       {{ Form::text('pac_Residencia',NULL, ['class'=>'form-control', 'id'=>'pac_Residencia', 'placeholder'=> 'Residencia']) }}
-      {{ $errors->first('pac_Residencia', '<p class="help-block">:message</p>') }}
+      {!! $errors->first('pac_Residencia', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
 </div>
@@ -113,7 +101,7 @@
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_Correo') ? 'has-error' : "" }}">
       {{ Form::text('pac_Correo',NULL, ['class'=>'form-control', 'id'=>'pac_Correo', 'placeholder'=> 'Correo']) }}
-      {{ $errors->first('pac_Correo', '<p class="help-block">:message</p>') }}
+      {!! $errors->first('pac_Correo', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
 </div>
@@ -125,7 +113,7 @@
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_Profesion_Oficio') ? 'has-error' : "" }}">
       {{ Form::text('pac_Profesion_Oficio',NULL, ['class'=>'form-control', 'id'=>'pac_Profesion_Oficio', 'placeholder'=> 'Profesion/Oficio']) }}
-      {{ $errors->first('pac_Profesion_Oficio', '<p class="help-block">:message</p>') }}
+      {!! $errors->first('pac_Profesion_Oficio', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
 </div>
@@ -137,11 +125,15 @@
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_EstadoCivil') ? 'has-error' : "" }}">
-      {{ Form::text('pac_EstadoCivil',NULL, ['class'=>'form-control', 'id'=>'pac_EstadoCivil', 'placeholder'=> 'Estado Civil']) }}
-      {{ $errors->first('pac_EstadoCivil', '<p class="help-block">:message</p>') }}
+      {!! Form::select('pac_EstadoCivil', array('' => 'Seleccione una Opción','ST' => 'Soltero', 'CO' => 'Comprometido', 'ER' => 'En una Relación',
+      'CA' => 'Casado/Casada', 'UL' => 'Unión Libre', 'SP' => 'Separado', 'DV' => 'Divorciado', 'VD' => 'Viudo'),
+      '',['class'=>'form-control', 'id'=>'pac_EstadoCivil']); !!}
+      {!! $errors->first('pac_EstadoCivil', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
 </div>
+
+
 
 <div class="row">
   <div class="col-sm-2">
@@ -150,7 +142,26 @@
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_Religion') ? 'has-error' : "" }}">
       {{ Form::text('pac_Religion',NULL, ['class'=>'form-control', 'id'=>'pac_Religion', 'placeholder'=> 'Religión']) }}
-      {{ $errors->first('pac_Religion', '<p class="help-block">:message</p>') }}
+      {!! $errors->first('pac_Religion', '<p class="help-block">:message</p>') !!}
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-2">
+    {!! form::label('pac_Genero','Genero') !!}
+  </div>
+  <div class="col-sm-10">
+    <?php
+      echo $pacientes->pac_id;
+    ?>
+    <div class="form-group {{ $errors->has('pac_Genero') ? 'has-error' : "" }}">
+      <div class="form-group">
+        <div class="radio " style="left: 0%;">
+          <label><input id="columnaRadio" name="pac_Genero" type="radio" value="M">Masculino</label>
+          <label><input id="columnaRadio" checked="checked" name="pac_Genero" type="radio" value="F">Femenino</label>
+        </div>
+      </div>
     </div>
   </div>
 </div>
