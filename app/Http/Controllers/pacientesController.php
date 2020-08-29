@@ -42,13 +42,12 @@ class pacientesController extends Controller
         $empresa = auth()->user()->id;
         $this->validate($request, [
             'pac_pNombre' => 'required|string|max:50',
-            'pac_sNombre' => 'required|string|max:50',
+            'pac_sNombre' => 'nullable|string|max:50',
             'pac_pApellido' => 'required|string|max:50',
             'pac_sApellido' => 'required|string|max:50',
-            'pac_Edad' => 'required|int|max:150',
             'pac_Cedula' => 'required|string|max:20',
             'pac_Genero' => 'required|string|max:1',
-            'pac_FechaNacimiento' => 'required|string|max:10',
+            'pac_FechaNacimiento' => 'required|date|before_or_equal:today',
             'pac_Residencia' => 'required|string|max:400',
             'pac_Correo' => 'required|string|max:50',
             'pac_Profesion_Oficio' => 'required|string|max:50',
@@ -94,13 +93,12 @@ class pacientesController extends Controller
     {
         $this->validate($request, [
             'pac_pNombre' => 'required|string|max:50',
-            'pac_sNombre' => 'required|string|max:50',
+            'pac_sNombre' => 'nullable|string|max:50',
             'pac_pApellido' => 'required|string|max:50',
             'pac_sApellido' => 'required|string|max:50',
-            'pac_Edad' => 'required|int|max:150',
             'pac_Cedula' => 'required|string|max:20',
             'pac_Genero' => 'required|string|max:1',
-            'pac_FechaNacimiento' => 'required|string|max:10',
+            'pac_FechaNacimiento' => 'required|date|before_or_equal:today',
             'pac_Residencia' => 'required|string|max:400',
             'pac_Correo' => 'required|string|max:50',
             'pac_Profesion_Oficio' => 'required|string|max:50',
