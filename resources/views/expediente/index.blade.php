@@ -45,6 +45,8 @@
       {!! Form::open(['method' => 'DELETE','route' => ['expediente.destroy', $value->exp_id],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
       {!! Form::close() !!}
+      <a class="btn btn-info btn-sm" href="{{ url('antecedentesginecologicos') }}">
+      Antecedentes Ginecologicos</a>
     </td>
   </tr>
   @endforeach

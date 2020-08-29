@@ -113,3 +113,4 @@ Route::resource('requisitos', 'requisitosController');
 Route::resource('formaciones', 'formacionesController');
 Route::resource('pacientes', 'pacientesController');
 Route::resource('expediente', 'expedienteController');
+Route::resource('antecedentesginecologicos', 'antecedentesginecologicosController');
