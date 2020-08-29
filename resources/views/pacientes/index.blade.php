@@ -24,7 +24,6 @@
   <tr >
     <th width="80px">No</th>
     <td>Nombre Completo</td>
-    <td>Edad</td>
     <td>Cedula</td>
     <td>Genero</td>
     <td>Fecha de Nacimiento</td>
@@ -44,7 +43,6 @@
   <tr>
     <td>{{$no++}}</td>
     <td width = '150px' >{{ $value->pac_pNombre . " " . $value->pac_sNombre . " " . $value->pac_pApellido . " " . $value->	pac_sApellido }}</td>
-    <td>{{ $value->	pac_Edad }}</td>
     <td>{{ $value->	pac_Cedula }}</td>
     <td>{{ $value->	pac_Genero }}</td>
     <td>{{ $value->	pac_FechaNacimiento }}</td>
