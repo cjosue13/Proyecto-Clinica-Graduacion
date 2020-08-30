@@ -51,13 +51,15 @@ Route::get('usuarios/filtro/', [
 ]);
 
 Route::get('requisitos/create/{id}', 'requisitosController@create')->name('create');
+Route::get('pacientes/VerExpediente/{id}', 'pacientesController@VerExpediente')->name('VerExpediente');
+Route::get('expediente/create/{id}', 'expedienteController@create')->name('create');
+
+Route::post('expediente/store/{id}', [
+    'as' => 'store', 'uses' => 'expedienteController@store'
+]);
 
 Route::get('requisitos/show/{id}/{oferta}', [
     'as' => 'show', 'uses' => 'requisitosController@show'
-]);
-
-Route::post('requisitos/store/{oferta}', [
-    'as' => 'store', 'uses' => 'requisitosController@store'
 ]);
 
 Route::get('usuarios/listaEmpresas/', [
