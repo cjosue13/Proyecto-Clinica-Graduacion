@@ -131,6 +131,11 @@
             },
             eventClick: function(info) {
                 console.log(info.event.extendedProps);
+                $("#agenda_modal").modal();
+                $("#agn_fecha").val(moment(info.event.extendedProps['agn_fecha']).format("YYYY-MM-DD"));
+                $("#agn_NombreCompleto").val(info.event.extendedProps['agn_NombreCompleto']);
+                $("#agn_telefono").val(info.event.extendedProps['agn_telefono']);
+                $("#agn_descripcion").val(info.event.extendedProps['agn_descripcion']);
             },
             /*
                         eventClick: function(arg) {
