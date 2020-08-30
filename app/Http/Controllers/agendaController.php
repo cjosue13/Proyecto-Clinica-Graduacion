@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\tbl_agenda;
+use App\tbl_agendas;
 use Illuminate\Support\Facades\DB;
 
 class agendaController extends Controller
@@ -19,10 +19,62 @@ class agendaController extends Controller
         return view('agenda.index');
     }
 
-    public function guardar(Request $request){
+    public function listar()
+    {
+        $agenda = tbl_agendas::all();
+        $nueva_agenda = [];
+        foreach ($agenda as $value) {
+            $nueva_agenda[] = [
+                "id" => $value->agn_id,
+                "start" => $value->agn_fecha . " " . $value->agn_HoraInicio,
+                "end" => $value->agn_fecha . " " . $value->agn_HoraFinal,
+                "title" => $value->agn_NombreCompleto . " " . $value->agn_descripcion,
+                "backgroundColor" => $value->agn_estado == 1 ? "#71f587" : "#ff0000",
+                "textColor" => "#fff",
+                "extendedProps" => [
+                    "agn_NombreCompleto" => $value->agn_NombreCompleto,
+                    "agn_telefono" => $value->agn_telefono,
+                    "agn_fecha" => $value->agn_fecha,
+                    "agn_HoraInicio" => $value->agn_HoraInicio,
+                    "agn_HoraFinal" => $value->agn_HoraFinal,
+                    "agn_estado" => $value->agn_estado,
+                    "agn_descripcion" => $value->agn_descripcion
+                ]
+            ];
+        }
+        return response()->json($nueva_agenda);
+    }
+
+    public function validarFecha($fecha, $horaInicial, $horaFinal)
+    {
+        $agenda = tbl_agendas::select()
+            ->whereDate('agn_fecha', $fecha)
+            ->whereBetween('agn_HoraInicio', [$horaInicial,  $horaFinal])
+            ->orwhereBetween('agn_HoraFinal', [$horaInicial,  $horaFinal])
+            ->first();
+        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, que sea mayor o igual, menor o igual que las horas dadas
+
+        return $agenda == null ? true : false;
+        //si no encontró nada, es porque no hay una fecha a esa hora
+    }
+
+    public function guardar(Request $request)
+    {
         $input = $request->all();
-        dd($input);
-        return redirect()->route('pacientes.index');
+        if ($this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])) { //validamos  que no existe una
+            $agenda = tbl_agendas::create([
+                'agn_NombreCompleto' => $input["agn_NombreCompleto"],
+                'agn_telefono' => $input["agn_telefono"],
+                'agn_fecha' => $input["agn_fecha"],
+                'agn_HoraInicio' => $input["agn_HoraInicio"],
+                'agn_HoraFinal' => $input["agn_HoraFinal"],
+                'agn_descripcion' => $input["agn_descripcion"]
+            ]);
+            // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
+            return response()->json(["ok" => true]);
+        } else {
+            return response()->json(["ok" => false]);
+        }
     }
 
     /**
@@ -42,7 +94,7 @@ class agendaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   /* public function store(Request $request)
+    /* public function store(Request $request)
     {
         $empresa = auth()->user()->id;
         $this->validate($request, [

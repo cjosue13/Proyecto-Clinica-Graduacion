@@ -76,6 +76,7 @@
 
 
 <script>
+    var calendar = null;
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var es = {
@@ -99,9 +100,10 @@
             noEventsText: "No hay eventos para mostrar"
         };
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+        calendar = new FullCalendar.Calendar(calendarEl, {
             /*plugins: ['momentTimezone'],
             timeZone: 'America/Costa_Rica',*/
+            schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
             locale: es,
             headerToolbar: {
                 left: 'prev,next today',
@@ -114,27 +116,34 @@
             select: function(arg) {
                 let fechaConFomato = moment(arg.start).format("YYYY-MM-DD"); //para convertirlo
                 let horaInicial = moment(arg.start).format("HH:mm:ss");
-                console.log(horaInicial + "hora inicial");
+
                 let horaFinal = moment(arg.end).format("HH:mm:ss");
-                console.log(horaFinal);
-                console.log(fechaConFomato);
+                //valores por defecto
                 $("#agn_fecha").val(fechaConFomato);
                 $("#agn_HoraInicio").val(horaInicial);
-                $("#agn_HoraFinal_horafinal").val(horaFinal);
+                $("#agn_HoraFinal_tiempo").val("30");
+
                 $("#agenda_modal").modal();
                 calendar.unselect()
             },
+            eventClick: function(info){
+                console.log(info.event.extendedProps);
+            },
+/*
             eventClick: function(arg) {
                 if (confirm('Are you sure you want to delete this event?')) {
                     arg.event.remove()
                 }
-            },
+            },*/
             editable: true,
             dayMaxEvents: true, // allow "more" link when too many events
-            events: [{
-                title: 'All Day Event',
-                start: '2020-06-01'
-            }]
+            events: {
+                url: '/agenda/listar',
+                method: 'GET',
+                failure: function(){
+                    alert('Hubo un error mientras se cargaban los eventos');
+                }
+            }
         });
 
         calendar.render();
@@ -153,16 +162,33 @@
         fd.append("agn_HoraInicio", hora_inicial);
         fd.append("agn_HoraFinal", hora_final);
 
+        //enviamos por ajax
         $.ajax({
             url: "/agenda/guardar",
             type: "POST",
             data: fd,
             processData: false,
             contentType: false
+        }).done(function(respuesta){
+            if(respuesta && respuesta.ok){
+                calendar.refetchEvents();
+                alert("Se registró la cita en la agenda");
+                limpiar();
+            }else{
+                alert("La agenda ya contiene la fecha seleccionada");
+            }
         });
-
-
     }
+
+    function limpiar(){
+        $("#agenda_modal").modal('hide');
+        $("#agn_HoraInicio").val("");
+        $("#agn_HoraFinal_tiempo").val("");
+        $("#agn_NombreCompleto").val("");
+        $("#agn_telefono").val("");
+        $("#agn_descripcion").val("");
+    }
+
 </script>
 
 <style>
