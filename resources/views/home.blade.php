@@ -16,7 +16,7 @@
                     <div id='div_media'>
                         <nav>
                             <ul id='menu'>
-                                <a href="{{ url('curriculums') }}"><button id="Button1" class="Button1" onclick="CambiarColor(this)"><i class="far fa-file-alt"></i><br><label style="font-size: 20px; cursor: pointer;">Agenda</label></button></a>
+                                <a href="{{ url('agenda') }}"><button id="Button1" class="Button1" onclick="CambiarColor(this)"><i class="far fa-file-alt"></i><br><label style="font-size: 20px; cursor: pointer;">Agenda</label></button></a>
                                 <a href="{{ url('pacientes') }}"><button id="Button3" class="Button1" onclick="CambiarColor(this)"><i class="fas fa-id-card-alt"></i><br><label style="font-size: 20px; cursor: pointer;">Pacientes</label></button></a>
                                 <a href="{{ url('expediente') }}"><button id="Button2" class="Button1" onclick="CambiarColor(this)"><i class="fas fa-user-circle"></i><br><label style="font-size: 20px; cursor: pointer;">Expedientes</label></button></a>
                                 <a href="{{ url('ofertas') }}"><button id="Button3" class="Button1" onclick="CambiarColor(this)"><i class="far fa-address-card"></i><br><label style="font-size: 20px; cursor: pointer;">Perfil</label></button></a>
