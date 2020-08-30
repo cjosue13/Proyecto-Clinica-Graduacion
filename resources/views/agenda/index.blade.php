@@ -13,26 +13,29 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body-lg">
                 <form id="formulario_agenda">
                     @csrf
-                    <div class="row">
+                    <div class="input-group">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="">Fecha</label>
                                 <input type="date" class="form-control" id="agn_fecha" name="agn_fecha">
                             </div>
                         </div>
+
+                    </div>
+                    <div class="input-group">
                         <div class="col">
                             <div class="form-group">
                                 <label for="">Hora Inicial</label>
-                                <input type="time" class="form-control" id="agn_HoraInicio"  name="agn_HoraInicio">
+                                <input type="time" class="form-control" id="agn_HoraInicio" name="agn_HoraInicio">
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="">Tiempo (minutos)</label>
-                                <input type="number" class="form-control" id="agn_HoraFinal_tiempo" name="agn_HoraFinal_tiempo" >
+                                <input type="number" class="form-control" id="agn_HoraFinal_tiempo" name="agn_HoraFinal_tiempo">
                             </div>
                         </div>
                     </div>
@@ -50,11 +53,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="input-group">
                         <div class="col">
                             <div class="form-group">
                                 <label for="">Descripcion</label>
-                                <textarea class="form-control" id="agn_descripcion" cols="20" rows="10" name="agn_descripcion"></textarea>
+                                <textarea class="form-control" id="agn_descripcion" cols="20" rows="5" name="agn_descripcion"></textarea>
                             </div>
                         </div>
                     </div>
@@ -126,21 +129,21 @@
                 $("#agenda_modal").modal();
                 calendar.unselect()
             },
-            eventClick: function(info){
+            eventClick: function(info) {
                 console.log(info.event.extendedProps);
             },
-/*
-            eventClick: function(arg) {
-                if (confirm('Are you sure you want to delete this event?')) {
-                    arg.event.remove()
-                }
-            },*/
+            /*
+                        eventClick: function(arg) {
+                            if (confirm('Are you sure you want to delete this event?')) {
+                                arg.event.remove()
+                            }
+                        },*/
             editable: true,
             dayMaxEvents: true, // allow "more" link when too many events
             events: {
                 url: '/agenda/listar',
                 method: 'GET',
-                failure: function(){
+                failure: function() {
                     alert('Hubo un error mientras se cargaban los eventos');
                 }
             }
@@ -154,11 +157,11 @@
         var fd = new FormData(document.getElementById("formulario_agenda"));
         var fecha = $("#agn_fecha").val();
         var hora = $("#agn_HoraInicio").val();
-        var tiempo = $("#agn_HoraFinal_tiempo").val(); 
+        var tiempo = $("#agn_HoraFinal_tiempo").val();
 
-        var hora_inicial = moment(fecha + " " + hora).format('HH:mm:ss');//le agrega el formato
-        var hora_final = moment(fecha + " " + hora).add(tiempo, 'm').format('HH:mm:ss');//suma el tiempo
-        
+        var hora_inicial = moment(fecha + " " + hora).format('HH:mm:ss'); //le agrega el formato
+        var hora_final = moment(fecha + " " + hora).add(tiempo, 'm').format('HH:mm:ss'); //suma el tiempo
+
         fd.append("agn_HoraInicio", hora_inicial);
         fd.append("agn_HoraFinal", hora_final);
 
@@ -169,18 +172,18 @@
             data: fd,
             processData: false,
             contentType: false
-        }).done(function(respuesta){
-            if(respuesta && respuesta.ok){
+        }).done(function(respuesta) {
+            if (respuesta && respuesta.ok) {
                 calendar.refetchEvents();
                 alert("Se registró la cita en la agenda");
                 limpiar();
-            }else{
+            } else {
                 alert("La agenda ya contiene la fecha seleccionada");
             }
         });
     }
 
-    function limpiar(){
+    function limpiar() {
         $("#agenda_modal").modal('hide');
         $("#agn_HoraInicio").val("");
         $("#agn_HoraFinal_tiempo").val("");
@@ -188,7 +191,6 @@
         $("#agn_telefono").val("");
         $("#agn_descripcion").val("");
     }
-
 </script>
 
 <style>
