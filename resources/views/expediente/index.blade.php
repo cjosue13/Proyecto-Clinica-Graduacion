@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('PageTitle', 'Ofertas')
+@section('PageTitle', 'Expedientes')
 @section('content')
 <div class="row">
   <div class="col-sm-12">
@@ -25,11 +25,13 @@
     <th with="80px">No</th>
     <td>Metas</td>
     <td>Historia Biopatografica</td>
-    <th width="140px" class="text-center">
-      <a href="{{route('expediente.create')}}" class="btn btn-success btn-sm">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </th>
+    <?php if (sizeof($expediente) == 0) {?>
+      <th width="140px" class="text-center">
+        <a href="{{route('create', $paciente[0]->pac_id)}}" class="btn btn-success btn-sm">
+          <i class="glyphicon glyphicon-plus"></i>
+        </a>
+      </th>
+    <?php } ?>
   </tr>
   <?php $no = 1; ?>
   @foreach ($expediente as $key => $value)

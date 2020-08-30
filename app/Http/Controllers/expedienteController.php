@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\tbl_expedientes;
+use App\tbl_pacientes;
 use Illuminate\Support\Facades\DB;
 
 
@@ -26,10 +27,9 @@ class expedienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($idPac)
     {
-
-        return view('expediente.create');
+        return view('expediente.create', compact('idPac'));
     }
 
     /**
@@ -38,14 +38,16 @@ class expedienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $idPac)
     {
         $this->validate($request, [
             'exp_Metas' => 'required|string|max:1000',
             'exp_Historiabiopatografica' => 'required|string|max:500'
         ]);
         tbl_expedientes::create($request->all());
-        return redirect()->route('expediente.index')->with('success','Expediente creado con éxito');
+        $expediente = tbl_expedientes::latest('exp_id')->first(); // esto es para obtener el expediente que se acaba de insertar
+        DB::table('tbl_pacientes')->where('tbl_pacientes.pac_id', $idPac)->update(['pac_fkExpediente' => $expediente['exp_id']]);
+        return redirect()->route('pacientes.index')->with('success','Expediente creado con éxito');
     }
 
 
@@ -89,7 +91,7 @@ class expedienteController extends Controller
             'exp_Historiabiopatografica' => 'required|string|max:500'
         ]);
         tbl_expedientes::find($id)->update($request->all());
-        return redirect()->route('expediente.index')->with('success','Expediente actualizado con éxito');
+        return redirect()->route('pacientes.index')->with('success','Expediente actualizado con éxito');
     }
 
     /**
@@ -101,6 +103,6 @@ class expedienteController extends Controller
     public function destroy($id)
     {
         tbl_expedientes::find($id)->delete();
-        return redirect()->route('expediente.index')->with('success', 'Expediente Eliminado con Exito');
+        return redirect()->route('pacientes.index')->with('success', 'Expediente Eliminado con Exito');
     }
 }

@@ -83,6 +83,18 @@ class pacientesController extends Controller
     }
 
     /**
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function VerExpediente($idPac){
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $idPac)->get()->toArray();
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $paciente[0]->pac_fkExpediente)->get()->toArray();
+        return view('expediente.index', compact('expediente', 'paciente'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

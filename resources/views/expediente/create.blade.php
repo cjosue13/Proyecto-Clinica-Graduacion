@@ -7,7 +7,7 @@
 </div>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    {{ Form::open(['route'=>'expediente.store', 'method'=>'POST']) }}
+    {{ Form::open(['route'=>['store', $idPac], 'method'=>'POST']) }}
     @include('expediente.form_master')
     {{ form::close() }}
   </div>
