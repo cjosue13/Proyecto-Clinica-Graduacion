@@ -70,6 +70,32 @@ class agendaController extends Controller
         //si no encontró nada, es porque no hay una fecha a esa hora
     }
 
+    public function validarFecha3($fecha, $horaInicial, $horaFinal, $id)
+    {
+        $agenda = null;
+        $agenda = tbl_agendas::select()
+            ->where('agn_id', '!=' , $id)
+            ->whereDate('agn_fecha', $fecha)
+            ->whereBetween('agn_HoraInicio', [$horaInicial,  $horaFinal])
+            ->first();
+        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, que sea mayor o igual, menor o igual que las horas dadas
+        return $agenda == null ? true : false;
+        //si no encontró nada, es porque no hay una fecha a esa hora
+    }
+
+    public function validarFecha4($fecha, $horaInicial, $horaFinal, $id)
+    {
+        $agenda = null;
+        $agenda = tbl_agendas::select()
+            ->where('agn_id', '!=' , $id)
+            ->whereDate('agn_fecha', $fecha)
+            ->whereBetween('agn_HoraFinal', [$horaInicial,  $horaFinal])
+            ->first();
+        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, que sea mayor o igual, menor o igual que las horas dadas
+        return $agenda == null ? true : false;
+        //si no encontró nada, es porque no hay una fecha a esa hora
+    }
+
     public function guardar(Request $request)
     {
         $input = $request->all();
@@ -103,8 +129,25 @@ class agendaController extends Controller
             tbl_agendas::find($input["agn_id"])->update($request->all());
             return response()->json(["ok" => true]);
         }
-        if ($this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
-        && $this->validarFecha2($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])) { //validamos  que no existe una
+        if (
+            $input["agn_fecha"] == $input["agn_fechaAnt"] && $input["agn_HoraInicio"] == $input["agn_HoraInicioAnt"]
+            && $input["agn_Tiempo"] == $input["agn_TiempoAnt"] &&
+            ($input["agn_NombreCompletoAnt"] != $input["agn_NombreCompleto"] || $input["agn_telefonoAnt"] != $input["agn_telefono"]
+                || $input["agn_descripcionAnt"] != $input["agn_descripcion"])
+        ) {
+            tbl_agendas::find($input["agn_id"])->update($request->all());
+            return response()->json(["ok" => true]);
+        }
+        if (
+            $input["agn_fecha"] == $input["agn_fechaAnt"] && $input["agn_HoraInicio"] == $input["agn_HoraInicioAnt"]
+            && $input["agn_Tiempo"] != $input["agn_TiempoAnt"] 
+            && $this->validarFecha3($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"], $input["agn_id"])
+        ) {
+            tbl_agendas::find($input["agn_id"])->update($request->all());
+            return response()->json(["ok" => true]);
+        }
+        if ($this->validarFecha3($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"], $input["agn_id"])
+        && $this->validarFecha4($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"], $input["agn_id"])) { //validamos  que no existe una
             tbl_agendas::find($input["agn_id"])->update($request->all());
             // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
             return response()->json(["ok" => true]);
