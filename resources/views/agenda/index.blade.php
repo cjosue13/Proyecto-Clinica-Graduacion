@@ -64,7 +64,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button onclick="limpiar()" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button onclick="limpiar()" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button onclick="Eliminar()" type="button" class="btn btn-danger">Eliminar</button>
                 <button onclick="guardar()" type="button" class="btn btn-success">Guardar</button>
             </div>
         </div>
@@ -227,6 +228,29 @@
         telefonoAnt = null;
         descripcionAnt = null;
         tiempoAnt = null;
+    }
+
+    function Eliminar() {
+        var fd = new FormData(document.getElementById("formulario_agenda"));
+        if (ID != null) {
+            fd.append("agn_id", ID);
+            //enviamos por ajax
+            $.ajax({
+                url: "/agenda/eliminar",
+                type: "POST",
+                data: fd,
+                processData: false,
+                contentType: false
+            }).done(function(respuesta) {
+                if (respuesta && respuesta.ok) {
+                    calendar.refetchEvents();
+                    alert("Se eliminó la cita correctamente");
+                    limpiar();
+                } else {
+                    alert("No se ha podido eliminar la cita");
+                }
+            });
+        }
     }
 </script>
 

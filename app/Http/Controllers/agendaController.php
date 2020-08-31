@@ -15,7 +15,6 @@ class agendaController extends Controller
      */
     public function index()
     {
-        //$pacientes = DB::table('tbl_pacientes')->orderBy('pac_id', 'asc')->get()->toArray();
         return view('agenda.index');
     }
 
@@ -48,59 +47,53 @@ class agendaController extends Controller
 
     public function validarFecha($fecha, $horaInicial, $horaFinal)
     {
-        $agenda = null;
         $agenda = tbl_agendas::select()
             ->whereDate('agn_fecha', $fecha)
             ->whereBetween('agn_HoraInicio', [$horaInicial,  $horaFinal])
             ->first();
-        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, que sea mayor o igual, menor o igual que las horas dadas
-        return $agenda == null ? true : false;
-        //si no encontró nada, es porque no hay una fecha a esa hora
+        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy y haya una fecha con hora de inicio entre el rango de la cita a guardar
+        return $agenda == null ? true : false; //si no encontró nada, es porque no hay una fecha a esa hora
     }
 
     public function validarFecha2($fecha, $horaInicial, $horaFinal)
     {
-        $agenda = null;
         $agenda = tbl_agendas::select()
             ->whereDate('agn_fecha', $fecha)
             ->whereBetween('agn_HoraFinal', [$horaInicial,  $horaFinal])
             ->first();
-        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, que sea mayor o igual, menor o igual que las horas dadas
-        return $agenda == null ? true : false;
-        //si no encontró nada, es porque no hay una fecha a esa hora
+        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy y haya una fecha con hora final entre el rango de la cita a guardar
+        return $agenda == null ? true : false; //si no encontró nada, es porque no hay una fecha a esa hora
     }
 
     public function validarFecha3($fecha, $horaInicial, $horaFinal, $id)
     {
-        $agenda = null;
         $agenda = tbl_agendas::select()
-            ->where('agn_id', '!=' , $id)
+            ->where('agn_id', '!=', $id)
             ->whereDate('agn_fecha', $fecha)
             ->whereBetween('agn_HoraInicio', [$horaInicial,  $horaFinal])
             ->first();
-        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, que sea mayor o igual, menor o igual que las horas dadas
-        return $agenda == null ? true : false;
-        //si no encontró nada, es porque no hay una fecha a esa hora
+        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, haya una fecha con hora inicial entre el rango de la cita a guardar y que no tome en cuenta a la misma cita
+        return $agenda == null ? true : false; //si no encontró nada, es porque no hay una fecha a esa hora
     }
 
     public function validarFecha4($fecha, $horaInicial, $horaFinal, $id)
     {
-        $agenda = null;
         $agenda = tbl_agendas::select()
-            ->where('agn_id', '!=' , $id)
+            ->where('agn_id', '!=', $id)
             ->whereDate('agn_fecha', $fecha)
             ->whereBetween('agn_HoraFinal', [$horaInicial,  $horaFinal])
             ->first();
-        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, que sea mayor o igual, menor o igual que las horas dadas
-        return $agenda == null ? true : false;
-        //si no encontró nada, es porque no hay una fecha a esa hora
+        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, haya una fecha con hora final entre el rango de la cita a guardar y que no tome en cuenta a la misma cita
+        return $agenda == null ? true : false; //si no encontró nada, es porque no hay una fecha a esa hora
     }
 
     public function guardar(Request $request)
     {
         $input = $request->all();
-        if ($this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
-        && $this->validarFecha2($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])) { //validamos  que no existe una
+        if (
+            $this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
+            && $this->validarFecha2($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
+        ) { //validamos  que no existe una
             $agenda = tbl_agendas::create([
                 'agn_NombreCompleto' => $input["agn_NombreCompleto"],
                 'agn_telefono' => $input["agn_telefono"],
@@ -110,8 +103,7 @@ class agendaController extends Controller
                 'agn_Tiempo' => $input["agn_Tiempo"],
                 'agn_descripcion' => $input["agn_descripcion"]
             ]);
-            // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
-            return response()->json(["ok" => true]);
+            return response()->json(["ok" => true]); // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
         } else {
             return response()->json(["ok" => false]);
         }
@@ -121,142 +113,41 @@ class agendaController extends Controller
     {
         $input = $request->all();
         if (
-            $input["agn_fecha"] == $input["agn_fechaAnt"] && $input["agn_HoraInicio"] == $input["agn_HoraInicioAnt"]
-            && $input["agn_Tiempo"] == $input["agn_TiempoAnt"] &&
-            ($input["agn_NombreCompletoAnt"] != $input["agn_NombreCompleto"] || $input["agn_telefonoAnt"] != $input["agn_telefono"]
+            $input["agn_fecha"] == $input["agn_fechaAnt"]
+            && $input["agn_HoraInicio"] == $input["agn_HoraInicioAnt"]
+            && $input["agn_Tiempo"] == $input["agn_TiempoAnt"]
+            && ($input["agn_NombreCompletoAnt"] != $input["agn_NombreCompleto"] || $input["agn_telefonoAnt"] != $input["agn_telefono"]
                 || $input["agn_descripcionAnt"] != $input["agn_descripcion"])
-        ) {
+        ) { //si solamente se editan los campos que no tienen que ver con horas o fecha
             tbl_agendas::find($input["agn_id"])->update($request->all());
             return response()->json(["ok" => true]);
         }
         if (
-            $input["agn_fecha"] == $input["agn_fechaAnt"] && $input["agn_HoraInicio"] == $input["agn_HoraInicioAnt"]
-            && $input["agn_Tiempo"] == $input["agn_TiempoAnt"] &&
-            ($input["agn_NombreCompletoAnt"] != $input["agn_NombreCompleto"] || $input["agn_telefonoAnt"] != $input["agn_telefono"]
-                || $input["agn_descripcionAnt"] != $input["agn_descripcion"])
-        ) {
-            tbl_agendas::find($input["agn_id"])->update($request->all());
-            return response()->json(["ok" => true]);
-        }
-        if (
-            $input["agn_fecha"] == $input["agn_fechaAnt"] && $input["agn_HoraInicio"] == $input["agn_HoraInicioAnt"]
-            && $input["agn_Tiempo"] != $input["agn_TiempoAnt"] 
+            $input["agn_fecha"] == $input["agn_fechaAnt"]
+            && $input["agn_HoraInicio"] == $input["agn_HoraInicioAnt"]
+            && $input["agn_Tiempo"] != $input["agn_TiempoAnt"]
             && $this->validarFecha3($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"], $input["agn_id"])
-        ) {
+        ) { //si se edita el tiempo de hora final
             tbl_agendas::find($input["agn_id"])->update($request->all());
             return response()->json(["ok" => true]);
         }
-        if ($this->validarFecha3($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"], $input["agn_id"])
-        && $this->validarFecha4($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"], $input["agn_id"])) { //validamos  que no existe una
+        if (
+            $this->validarFecha3($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"], $input["agn_id"])
+            && $this->validarFecha4($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"], $input["agn_id"])
+        ) { //validamos  que no existe una cita en el mismo lugar
             tbl_agendas::find($input["agn_id"])->update($request->all());
-            // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
             return response()->json(["ok" => true]);
         } else {
             return response()->json(["ok" => false]);
         }
-
-        
+        // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json, retornamos este cada vez que sea necesario
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    /*public function create()
+    function eliminar(Request $request)
     {
-
-        return view('pacientes.create');
-    }*/
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    /* public function store(Request $request)
-    {
-        $empresa = auth()->user()->id;
-        $this->validate($request, [
-            'pac_pNombre' => 'required|string|max:50',
-            'pac_sNombre' => 'nullable|string|max:50',
-            'pac_pApellido' => 'required|string|max:50',
-            'pac_sApellido' => 'required|string|max:50',
-            'pac_Cedula' => 'required|string|max:20',
-            'pac_Genero' => 'required|string|max:1',
-            'pac_FechaNacimiento' => 'required|date|before_or_equal:today',
-            'pac_Residencia' => 'required|string|max:400',
-            'pac_Correo' => 'required|string|max:50',
-            'pac_Profesion_Oficio' => 'required|string|max:50',
-            'pac_EstadoCivil' => 'required|string|max:2',
-            'pac_Religion' => 'required|string|max:50'
-        ]);
-        tbl_pacientes::create($request->all());
-        return redirect()->route('pacientes.index')->with('success','Paciente creado con éxito');
-    }*/
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    /*public function show($id)
-    {
-        $pacientes = tbl_pacientes::find($id);
-        return view('pacientes.show', compact('pacientes'));
-    }*/
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    /*public function edit($id)
-    {
-        $pacientes = tbl_pacientes::find($id);
-        return view('pacientes.edit', compact('pacientes'));
-    }*/
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    /*public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-            'pac_pNombre' => 'required|string|max:50',
-            'pac_sNombre' => 'nullable|string|max:50',
-            'pac_pApellido' => 'required|string|max:50',
-            'pac_sApellido' => 'required|string|max:50',
-            'pac_Cedula' => 'required|string|max:20',
-            'pac_Genero' => 'required|string|max:1',
-            'pac_FechaNacimiento' => 'required|date|before_or_equal:today',
-            'pac_Residencia' => 'required|string|max:400',
-            'pac_Correo' => 'required|string|max:50',
-            'pac_Profesion_Oficio' => 'required|string|max:50',
-            'pac_EstadoCivil' => 'required|string|max:2',
-            'pac_Religion' => 'required|string|max:50'
-        ]);
-       
-        tbl_pacientes::find($id)->update($request->all());
-        return redirect()->route('pacientes.index')->with('success','Paciente actualizado con éxito');
-    }*/
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    /*public function destroy($id)
-    {
-        tbl_pacientes::find($id)->delete();
-        return redirect()->route('pacientes.index')->with('success','Paciente Eliminado');
-    }*/
+        $input = $request->all();
+        tbl_agendas::find($input["agn_id"])->delete();
+        return response()->json(["ok" => true]);
+        // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json, retornamos este cada vez que sea necesario
+    }
 }
