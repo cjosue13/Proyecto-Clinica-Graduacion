@@ -64,7 +64,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button onclick="limpiar()" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 <button onclick="guardar()" type="button" class="btn btn-success">Guardar</button>
             </div>
         </div>
@@ -79,6 +79,14 @@
 
 
 <script>
+    var ID = null;
+    var FechaAnt = null;
+    var NombreCompletoAnt = null;
+    var telefonoAnt = null;
+    var horaInicioAnt = null;
+    var tiempoAnt = null;
+    var descripcionAnt = null;
+
     var calendar = null;
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
@@ -125,7 +133,6 @@
                 $("#agn_fecha").val(fechaConFomato);
                 $("#agn_HoraInicio").val(horaInicial);
                 $("#agn_HoraFinal_tiempo").val("30");
-
                 $("#agenda_modal").modal();
                 calendar.unselect()
             },
@@ -133,9 +140,18 @@
                 console.log(info.event.extendedProps);
                 $("#agenda_modal").modal();
                 $("#agn_fecha").val(moment(info.event.extendedProps['agn_fecha']).format("YYYY-MM-DD"));
+                FechaAnt = moment(info.event.extendedProps['agn_fecha']).format("YYYY-MM-DD");
                 $("#agn_NombreCompleto").val(info.event.extendedProps['agn_NombreCompleto']);
+                NombreCompletoAnt = info.event.extendedProps['agn_NombreCompleto'];
                 $("#agn_telefono").val(info.event.extendedProps['agn_telefono']);
+                telefonoAnt = info.event.extendedProps['agn_telefono'];
                 $("#agn_descripcion").val(info.event.extendedProps['agn_descripcion']);
+                descripcionAnt = info.event.extendedProps['agn_descripcion'];
+                $("#agn_HoraFinal_tiempo").val(info.event.extendedProps['agn_Tiempo']);
+                tiempoAnt = info.event.extendedProps['agn_Tiempo'];
+                $("#agn_HoraInicio").val(info.event.extendedProps['agn_HoraInicio']);
+                horaInicioAnt = info.event.extendedProps['agn_HoraInicio'];
+                ID = info.event.id;
             },
             /*
                         eventClick: function(arg) {
@@ -158,21 +174,29 @@
     })
 
     function guardar() {
-
         var fd = new FormData(document.getElementById("formulario_agenda"));
         var fecha = $("#agn_fecha").val();
         var hora = $("#agn_HoraInicio").val();
         var tiempo = $("#agn_HoraFinal_tiempo").val();
-
         var hora_inicial = moment(fecha + " " + hora).format('HH:mm:ss'); //le agrega el formato
         var hora_final = moment(fecha + " " + hora).add(tiempo, 'm').format('HH:mm:ss'); //suma el tiempo
-
+        fd.append("agn_Tiempo", tiempo);
         fd.append("agn_HoraInicio", hora_inicial);
         fd.append("agn_HoraFinal", hora_final);
+        if (ID != null) {
+            fd.append("agn_id", ID);
+            //datos anteriores
+            fd.append("agn_HoraInicioAnt", horaInicioAnt);
+            fd.append("agn_NombreCompletoAnt", NombreCompletoAnt);
+            fd.append("agn_fechaAnt", FechaAnt);
+            fd.append("agn_telefonoAnt", telefonoAnt);
+            fd.append("agn_descripcionAnt", descripcionAnt);
+            fd.append("agn_TiempoAnt", tiempoAnt);
+        }
 
         //enviamos por ajax
         $.ajax({
-            url: "/agenda/guardar",
+            url: (ID == null) ? "/agenda/guardar" : "/agenda/editar", //si ID es nulo entonces guardamos, sino, editamos
             type: "POST",
             data: fd,
             processData: false,
@@ -186,6 +210,7 @@
                 alert("La agenda ya contiene la fecha seleccionada");
             }
         });
+
     }
 
     function limpiar() {
@@ -195,6 +220,13 @@
         $("#agn_NombreCompleto").val("");
         $("#agn_telefono").val("");
         $("#agn_descripcion").val("");
+        ID = null;
+        horaInicioAnt = null;
+        NombreCompletoAnt = null;
+        FechaAnt = null;
+        telefonoAnt = null;
+        descripcionAnt = null;
+        tiempoAnt = null;
     }
 </script>
 

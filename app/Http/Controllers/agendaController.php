@@ -38,6 +38,7 @@ class agendaController extends Controller
                     "agn_HoraInicio" => $value->agn_HoraInicio,
                     "agn_HoraFinal" => $value->agn_HoraFinal,
                     "agn_estado" => $value->agn_estado,
+                    "agn_Tiempo" => $value->agn_Tiempo,
                     "agn_descripcion" => $value->agn_descripcion
                 ]
             ];
@@ -47,10 +48,11 @@ class agendaController extends Controller
 
     public function validarFecha($fecha, $horaInicial, $horaFinal)
     {
+        $agenda = null;
         $agenda = tbl_agendas::select()
             ->whereDate('agn_fecha', $fecha)
             ->whereBetween('agn_HoraInicio', [$horaInicial,  $horaFinal])
-            ->orwhereBetween('agn_HoraFinal', [$horaInicial,  $horaFinal])
+            ->whereBetween('agn_HoraFinal', [$horaInicial,  $horaFinal])
             ->first();
         //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, que sea mayor o igual, menor o igual que las horas dadas
 
@@ -68,6 +70,7 @@ class agendaController extends Controller
                 'agn_fecha' => $input["agn_fecha"],
                 'agn_HoraInicio' => $input["agn_HoraInicio"],
                 'agn_HoraFinal' => $input["agn_HoraFinal"],
+                'agn_Tiempo' => $input["agn_Tiempo"],
                 'agn_descripcion' => $input["agn_descripcion"]
             ]);
             // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
@@ -75,6 +78,29 @@ class agendaController extends Controller
         } else {
             return response()->json(["ok" => false]);
         }
+    }
+
+    public function editar(Request $request)
+    {
+        $input = $request->all();
+        if (
+            $input["agn_fecha"] == $input["agn_fechaAnt"] && $input["agn_HoraInicio"] == $input["agn_HoraInicioAnt"]
+            && $input["agn_Tiempo"] == $input["agn_TiempoAnt"] &&
+            ($input["agn_NombreCompletoAnt"] != $input["agn_NombreCompleto"] || $input["agn_telefonoAnt"] != $input["agn_telefono"]
+                || $input["agn_descripcionAnt"] != $input["agn_descripcion"])
+        ) {
+            tbl_agendas::find($input["agn_id"])->update($request->all());
+            return response()->json(["ok" => true]);
+        }
+        if ($this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])) { //validamos  que no existe una
+            tbl_agendas::find($input["agn_id"])->update($request->all());
+            // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
+            return response()->json(["ok" => true]);
+        } else {
+            return response()->json(["ok" => false]);
+        }
+
+        
     }
 
     /**
