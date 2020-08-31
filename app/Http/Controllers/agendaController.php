@@ -52,10 +52,20 @@ class agendaController extends Controller
         $agenda = tbl_agendas::select()
             ->whereDate('agn_fecha', $fecha)
             ->whereBetween('agn_HoraInicio', [$horaInicial,  $horaFinal])
+            ->first();
+        //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, que sea mayor o igual, menor o igual que las horas dadas
+        return $agenda == null ? true : false;
+        //si no encontró nada, es porque no hay una fecha a esa hora
+    }
+
+    public function validarFecha2($fecha, $horaInicial, $horaFinal)
+    {
+        $agenda = null;
+        $agenda = tbl_agendas::select()
+            ->whereDate('agn_fecha', $fecha)
             ->whereBetween('agn_HoraFinal', [$horaInicial,  $horaFinal])
             ->first();
         //coja todo lo de al agenda, donde la fecha sea igual a la fecha de hoy, que sea mayor o igual, menor o igual que las horas dadas
-
         return $agenda == null ? true : false;
         //si no encontró nada, es porque no hay una fecha a esa hora
     }
@@ -63,7 +73,8 @@ class agendaController extends Controller
     public function guardar(Request $request)
     {
         $input = $request->all();
-        if ($this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])) { //validamos  que no existe una
+        if ($this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
+        && $this->validarFecha2($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])) { //validamos  que no existe una
             $agenda = tbl_agendas::create([
                 'agn_NombreCompleto' => $input["agn_NombreCompleto"],
                 'agn_telefono' => $input["agn_telefono"],
@@ -92,7 +103,8 @@ class agendaController extends Controller
             tbl_agendas::find($input["agn_id"])->update($request->all());
             return response()->json(["ok" => true]);
         }
-        if ($this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])) { //validamos  que no existe una
+        if ($this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
+        && $this->validarFecha2($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])) { //validamos  que no existe una
             tbl_agendas::find($input["agn_id"])->update($request->all());
             // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
             return response()->json(["ok" => true]);
