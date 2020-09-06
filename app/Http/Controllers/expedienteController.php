@@ -105,4 +105,15 @@ class expedienteController extends Controller
         tbl_expedientes::find($id)->delete();
         return redirect()->route('pacientes.index')->with('success', 'Expediente Eliminado con Exito');
     }
+
+    /**
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function VerAntecedenteGinecologico($idExp){
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_id', $expediente[0]->exp_fkAntGin)->get()->toArray();
+        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos'));
+    }
 }

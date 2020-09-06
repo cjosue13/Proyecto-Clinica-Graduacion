@@ -52,10 +52,16 @@ Route::get('usuarios/filtro/', [
 
 Route::get('requisitos/create/{id}', 'requisitosController@create')->name('create');
 Route::get('pacientes/VerExpediente/{id}', 'pacientesController@VerExpediente')->name('VerExpediente');
+Route::get('expediente/VerAntecedenteGinecologico/{id}', 'expedienteController@VerAntecedenteGinecologico')->name('VerAntecedenteGinecologico');
 Route::get('expediente/create/{id}', 'expedienteController@create')->name('create');
+Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosController@create')->name('create');
 
 Route::post('expediente/store/{id}', [
     'as' => 'store', 'uses' => 'expedienteController@store'
+]);
+
+Route::post('antecedentesginecologicos/store/{id}', [
+    'as' => 'store', 'uses' => 'antecedentesginecologicosController@store'
 ]);
 
 Route::get('requisitos/show/{id}/{oferta}', [

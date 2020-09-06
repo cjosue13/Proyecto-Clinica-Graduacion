@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\tbl_antecedentesginecologicos;
+use App\tbl_expedientes;
 use Illuminate\Support\Facades\DB;
 
 class antecedentesginecologicosController extends Controller
@@ -25,10 +26,9 @@ class antecedentesginecologicosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($idExp)
     {
-
-        return view('antecedentesginecologicos.create');
+        return view('antecedentesginecologicos.create', compact($idExp));
     }
 
     /**
@@ -37,7 +37,7 @@ class antecedentesginecologicosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $idExp)
     {
         $this->validate($request, [
             'ag_Menarca' => 'required|string|max:10',
@@ -55,6 +55,9 @@ class antecedentesginecologicosController extends Controller
             'ag_NoCS' => 'required|int|max:999'
         ]);
         tbl_antecedentesginecologicos::create($request->all());
+        $antecedente = tbl_antecedentesginecologicos::latest('ag_id')->first(); // esto es para obtener el expediente que se acaba de insertar
+        DB::table('tbl_expedientes')->where('tbl_expedientes.exp_id', $idExp)->update(['exp_fkAntGin' => $antecedente['ag_id']]);
+        
         return redirect()->route('antecedentesginecologicos.index')->with('success','Antecedentes Ginecologicos creado con éxito');
     }
 
