@@ -42,10 +42,6 @@ Route::get('formaciones/curriculum/{id}', 'formacionesController@curriculum')->n
 
 Route::post('usuarios/save', 'usuariosController@save');
 
-Route::get('ofertas/filter/', [
-    'as' => 'filter', 'uses' => 'ofertasController@filter'
-]);
-
 Route::get('usuarios/filtro/', [
     'as' => 'filtro', 'uses' => 'usuariosController@filtro'
 ]);
@@ -63,42 +59,6 @@ Route::post('expediente/store/{id}', [
 Route::post('antecedentesginecologicos/store/{id}', [
     'as' => 'storeAG', 'uses' => 'antecedentesginecologicosController@storeAG'
 ]);
-
-Route::get('requisitos/show/{id}/{oferta}', [
-    'as' => 'show', 'uses' => 'requisitosController@show'
-]);
-
-Route::get('usuarios/listaEmpresas/', [
-    'as' => 'listaEmpresas', 'uses' => 'usuariosController@listaEmpresas'
-]);
-
-Route::get('ofertas/listaOfertas/', [
-    'as' => 'listaOfertas', 'uses' => 'ofertasController@listaOfertas'
-]);
-
-Route::get('ofertas/listaEmpleos/', [
-    'as' => 'listaEmpleos', 'uses' => 'ofertasController@listaEmpleos'
-]);
-
-Route::post('ofertas/inscribir/{ofID}', [
-    'as' => 'inscribir', 'uses' => 'ofertasController@inscribir'
-]);
-
-Route::get('ofertas/listaCandidatos/{ofID}', [
-    'as' => 'listaCandidatos', 'uses' => 'ofertasController@listaCandidatos'
-]);
-
-Route::get('requisitos/edit/{id}/{oferta}', [
-    'as' => 'edit', 'uses' => 'requisitosController@edit'
-]);
-
-Route::patch('requisitos/update/{id}/{oferta}', [
-    'as' => 'update', 'uses' => 'requisitosController@update'
-]);
-
-Route::delete('requisitos/destroy/{id}/{oferta}', [
-    'as' => 'destroy', 'uses' => 'requisitosController@destroy']);
-
 
 
 Auth::routes();

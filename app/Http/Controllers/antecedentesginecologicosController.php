@@ -28,7 +28,7 @@ class antecedentesginecologicosController extends Controller
      */
     public function create($idExp)
     {
-        return view('antecedentesginecologicos.create', compact($idExp));
+        return view('antecedentesginecologicos.create', compact('idExp'));
     }
 
     /**
@@ -37,7 +37,7 @@ class antecedentesginecologicosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $idExp)
+    public function storeAG(Request $request, $idExp)
     {
         $this->validate($request, [
             'ag_Menarca' => 'required|string|max:10',
@@ -58,7 +58,10 @@ class antecedentesginecologicosController extends Controller
         $antecedente = tbl_antecedentesginecologicos::latest('ag_id')->first(); // esto es para obtener el expediente que se acaba de insertar
         DB::table('tbl_expedientes')->where('tbl_expedientes.exp_id', $idExp)->update(['exp_fkAntGin' => $antecedente['ag_id']]);
         
-        return redirect()->route('antecedentesginecologicos.index')->with('success','Antecedentes Ginecologicos creado con éxito');
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_id', $expediente[0]->exp_fkAntGin)->get()->toArray();
+
+        return redirect()->route('antecedentesginecologicos.index',compact('expediente','antecedentesginecologicos'))->with('success','Antecedente Ginecologico creado con éxito');
     }
 
     /**
