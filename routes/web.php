@@ -61,7 +61,7 @@ Route::post('expediente/store/{id}', [
 ]);
 
 Route::post('antecedentesginecologicos/store/{id}', [
-    'as' => 'store', 'uses' => 'antecedentesginecologicosController@store'
+    'as' => 'storeAG', 'uses' => 'antecedentesginecologicosController@store'
 ]);
 
 Route::get('requisitos/show/{id}/{oferta}', [
