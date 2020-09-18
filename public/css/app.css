@@ -2593,6 +2593,12 @@ a.btn.disabled, fieldset:disabled a.btn {
   border-color: #2176bd;
 }
 
+.btn-hover:hover {
+  color: #fff;
+  background-color: #288371;
+  border-color: #288371;
+}
+
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
   background-color: #227dc7;
@@ -9434,3 +9440,6 @@ th {
   background-color: #209f85;
   color: white;
 } 
+
+.black-background {background-color:#209f85;}
+.white {color:#ffffff;}

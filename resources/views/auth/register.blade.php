@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <img class="wave" src="img/wave.png">
+                <!--<img class="wave" src="img/wave.png">-->
                 <div class="TituloLogin">Registro</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">

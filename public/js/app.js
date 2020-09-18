@@ -49923,3 +49923,16 @@
 
   /******/
 });
+
+
+var cont = 0;
+function CambiarColor(boton){
+  if (cont % 2 == 0) {
+    boton.firstChild.style.color="#ffffff";
+    boton.firstChild.nextSibling.nextSibling.style.color="#ffffff";
+  }else{
+    boton.firstChild.style.color="#209f85";
+    boton.firstChild.nextSibling.nextSibling.style.color="#209f85";
+  }
+  cont++;
+}
