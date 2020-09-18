@@ -20,28 +20,30 @@
 </div>
 @endif
 
-<table class="table table-bordered">
-  <tr >
+<table class="table table-hover">
+  <tr>
+  <thead>
     <th width="80px">No</th>
-    <td>Nombre Completo</td>
-    <td>Cedula</td>
-    <td>Genero</td>
-    <td>Fecha de Nacimiento</td>
-    <td>Residencia</td>
-    <td>Correo</td>
-    <td>Profesion/Oficio</td>
-    <td>Estado Civil</td>
-    <td>Religión</td>
+    <th>Nombre Completo</th>
+    <th>Cedula</th>
+    <th>Genero</th>
+    <th>Fecha de Nacimiento</th>
+    <th>Residencia</th>
+    <th>Correo</th>
+    <th>Profesion/Oficio</th>
+    <th>Estado Civil</th>
+    <th>Religión</th>
     <th width="140px" class="text-center">
       <a href="{{route('pacientes.create')}}" class="btn btn-success btn-sm">
         <i class="glyphicon glyphicon-plus"></i>
       </a>
     </th>
+  </thead>
   </tr>
   <?php $no = 1; ?>
   @foreach ($pacientes as $key => $value)
   <tr>
-    <td>{{$no++}}</td>
+    <td >{{$no++}}</td>
     <td width = '150px' >{{ $value->pac_pNombre . " " . $value->pac_sNombre . " " . $value->pac_pApellido . " " . $value->	pac_sApellido }}</td>
     <td>{{ $value->	pac_Cedula }}</td>
     <td>{{ $value->	pac_Genero }}</td>
