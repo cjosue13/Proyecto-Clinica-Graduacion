@@ -146,13 +146,19 @@ li {
   margin-right: 20px;
 }
 
+.textocool{
+  outline: none;
+  color: #209f85; 
+  font-size: 20px; 
+  cursor: pointer;
+}
+
 .Button1 {
   background-color: #FFFFFF;
   border: 1px solid rgb(192, 192, 192);
   border-radius: 10px;
   color:gray;
   text-align: center;
-  outline: none;
   font-size: 50px;
   /*padding: 20px;*/
   width: 150px;
@@ -160,6 +166,7 @@ li {
   /*transition: all 0.5s;*/
   cursor: pointer;
   margin: 5px;
+  outline: none;
 }
 
 .Button1:hover{
@@ -6501,6 +6508,10 @@ a.bg-light:hover, a.bg-light:focus, button.bg-light:hover, button.bg-light:focus
 
 .bg-dark {
   background-color: #343a40 !important;
+}
+
+.bg-green {
+  background-color: #209f85 !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {

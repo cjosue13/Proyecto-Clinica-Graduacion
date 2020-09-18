@@ -14,18 +14,18 @@
           <p>{{ $message }}</p>
       </div>
   @endif
-  <table class="table table-bordered">
+  <table class="table table-hover">
     <tr>
       <th with="80px">No</th>
-      <td>Nombre Real</td>
-      <td>Nombre de Usuario</td>
-      <td>Correo</td>
+      <th>Nombre Real</th>
+      <th>Nombre de Usuario</th>
+      <th>Correo</th>
       <!--<td>Contraseña</td>-->
-      <td>Dirección</td>
-      <td>Teléfono</td>
-      <td>Tipo de Usuario</td>
-      <td>Cédula</td>
-      <td>Acciones</td>
+      <th>Dirección</th>
+      <th>Teléfono</th>
+      <th>Tipo de Usuario</th>
+      <th>Cédula</th>
+      <th>Acciones</th>
     </tr>
     <?php $no = 1; ?>
     @foreach ($usuarios as $key => $value)
