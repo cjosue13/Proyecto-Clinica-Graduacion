@@ -27,7 +27,7 @@
     <td>Historia Biopatografica</td>
     <?php if (sizeof($expediente) == 0) {?>
       <th width="140px" class="text-center">
-        <a href="{{route('create', $paciente[0]->pac_id)}}" class="btn btn-success btn-sm">
+        <a href="{{route('createExp', $paciente[0]->pac_id)}}" class="btn btn-success btn-sm">
           <i class="glyphicon glyphicon-plus"></i>
         </a>
       </th>

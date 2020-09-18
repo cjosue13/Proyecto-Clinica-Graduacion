@@ -50,10 +50,10 @@ Route::get('usuarios/filtro/', [
     'as' => 'filtro', 'uses' => 'usuariosController@filtro'
 ]);
 
-Route::get('requisitos/create/{id}', 'requisitosController@create')->name('create');
+
 Route::get('pacientes/VerExpediente/{id}', 'pacientesController@VerExpediente')->name('VerExpediente');
 Route::get('expediente/VerAntecedenteGinecologico/{id}', 'expedienteController@VerAntecedenteGinecologico')->name('VerAntecedenteGinecologico');
-Route::get('expediente/create/{id}', 'expedienteController@create')->name('create');
+Route::get('expediente/create/{id}', 'expedienteController@create')->name('createExp');
 Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosController@create')->name('create');
 
 Route::post('expediente/store/{id}', [

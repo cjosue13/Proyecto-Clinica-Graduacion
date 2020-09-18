@@ -17,7 +17,6 @@ class expedienteController extends Controller
      */
     public function index()
     {
-        $id = auth()->user()->id;
         $expediente = DB::table('tbl_expedientes')->orderBy('exp_id', 'asc')->get()->toArray();
         return view('expediente.index', compact('expediente'));
     }
@@ -47,7 +46,9 @@ class expedienteController extends Controller
         tbl_expedientes::create($request->all());
         $expediente = tbl_expedientes::latest('exp_id')->first(); // esto es para obtener el expediente que se acaba de insertar
         DB::table('tbl_pacientes')->where('tbl_pacientes.pac_id', $idPac)->update(['pac_fkExpediente' => $expediente['exp_id']]);
-        return redirect()->route('pacientes.index')->with('success','Expediente creado con éxito');
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $idPac)->get()->toArray();
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $paciente[0]->pac_fkExpediente)->get()->toArray();
+        return view('expediente.index', compact('expediente', 'paciente'))->with('success','Expediente creado con éxito');
     }
 
 
