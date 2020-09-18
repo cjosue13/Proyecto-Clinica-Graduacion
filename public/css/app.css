@@ -9418,3 +9418,8 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+
+th {
+  background-color: #209f85;
+  color: white;
+} 

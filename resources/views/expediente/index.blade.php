@@ -20,18 +20,22 @@
 </div>
 @endif
 
-<table class="table table-bordered">
+<table class="table table-hover">
   <tr>
-    <th with="80px">No</th>
-    <td>Metas</td>
-    <td>Historia Biopatografica</td>
-    <?php if (sizeof($expediente) == 0) {?>
-      <th width="140px" class="text-center">
-        <a href="{{route('createExp', $paciente[0]->pac_id)}}" class="btn btn-success btn-sm">
-          <i class="glyphicon glyphicon-plus"></i>
-        </a>
-      </th>
-    <?php } ?>
+    <thead>
+      <th with="80px">No</th>
+      <th>Metas</th>
+      <th>Historia Biopatografica</th>
+      <?php if (sizeof($expediente) == 0) { ?>
+        <th width="140px" class="text-center">
+          <a href="{{route('createExp', $paciente[0]->pac_id)}}" class="btn btn-success btn-sm">
+            <i class="glyphicon glyphicon-plus"></i>
+          </a>
+        </th>
+      <?php } else { ?>
+        <th> </th>
+      <?php } ?>
+    </thead>
   </tr>
   <?php $no = 1; ?>
   @foreach ($expediente as $key => $value)
@@ -48,7 +52,7 @@
       <button type="submit" style="display: inline;" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
       {!! Form::close() !!}
       <a class="btn btn-info btn-sm" href="{{route('VerAntecedenteGinecologico',$value->exp_id)}}">
-      Antecedentes Ginecologicos</a>
+        Antecedentes Ginecologicos</a>
     </td>
   </tr>
   @endforeach

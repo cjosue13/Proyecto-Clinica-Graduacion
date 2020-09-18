@@ -20,22 +20,22 @@
 </div>
 @endif
 
-<table class="table table-bordered">
+<table class="table table-hover">
   <tr >
     <th width="80px">No</th>
-    <td>Primer Ciclo Menstrual</td>
-    <td>Edad Primer Ciclo Menstrual</td>
-    <td>Cantidad de Ciclos menstruales</td>
-    <td>Embarazos</td>
-    <td>Partos</td>
-    <td>Abortos</td>
-    <td>Cesareas</td>
-    <td>FUR</td>
-    <td>FUPAP</td>
-    <td>PF</td>
-    <td>PF Detalle</td>
-    <td>PRS</td>
-    <td>NoCS</td>
+    <th>Primer Ciclo Menstrual</th>
+    <th>Edad Primer Ciclo Menstrual</th>
+    <th>Cantidad de Ciclos menstruales</th>
+    <th>Embarazos</th>
+    <th>Partos</th>
+    <th>Abortos</th>
+    <th>Cesareas</th>
+    <th>FUR</th>
+    <th>FUPAP</th>
+    <th>PF</th>
+    <th>PF Detalle</th>
+    <th>PRS</th>
+    <th>NoCS</th>
     <th width="140px" class="text-center">
       <a href="{{route('create', $expediente[0]->exp_id)}}" class="btn btn-success btn-sm">
         <i class="glyphicon glyphicon-plus"></i>
