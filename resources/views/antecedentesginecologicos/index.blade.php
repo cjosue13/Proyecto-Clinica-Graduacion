@@ -36,11 +36,13 @@
     <td>PF Detalle</td>
     <td>PRS</td>
     <td>NoCS</td>
-    <th width="140px" class="text-center">
-      <a href="{{route('create', $expediente[0]->exp_id)}}" class="btn btn-success btn-sm">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </th>
+    <?php if (sizeof($antecedentesginecologicos) == 0) {?>
+      <th width="140px" class="text-center">
+        <a href="{{route('create', $expediente[0]->exp_id)}}" class="btn btn-success btn-sm">
+          <i class="glyphicon glyphicon-plus"></i>
+        </a>
+      </th>
+    <?php } ?>
   </tr>
   <?php $no = 1; ?>
   @foreach ($antecedentesginecologicos as $key => $value)
