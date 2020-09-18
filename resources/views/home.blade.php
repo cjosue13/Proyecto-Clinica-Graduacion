@@ -19,6 +19,7 @@
                                 <a href="{{ url('agenda') }}"><button id="Button1" class="Button1" onclick="CambiarColor(this)"><i class="far fa-file-alt"></i><br><label style="font-size: 20px; cursor: pointer;">Agenda</label></button></a>
                                 <a href="{{ url('pacientes') }}"><button id="Button3" class="Button1" onclick="CambiarColor(this)"><i class="fas fa-id-card-alt"></i><br><label style="font-size: 20px; cursor: pointer;">Pacientes</label></button></a>
                                 <a href="{{ url('usuarios') }}"><button id="Button3" class="Button1" onclick="CambiarColor(this)"><i class="far fa-address-card"></i><br><label style="font-size: 20px; cursor: pointer;">Perfil</label></button></a>
+                                <a href="{{ route('auth') }}"><button id="Button3" class="Button1" onclick="CambiarColor(this)"><i class="fas fa-user-alt"></i><br><label style="font-size: 20px; cursor: pointer;">Usuarios</label></button></a>
                                 <a href="{{ route('reportes') }}"><button id="Button3" class="Button1" onclick="CambiarColor(this)"><i class="fas fa-scroll"></i><br><label style="font-size: 20px; cursor: pointer;">Reportes</label></button></a>
                             </ul>
                         </nav>
