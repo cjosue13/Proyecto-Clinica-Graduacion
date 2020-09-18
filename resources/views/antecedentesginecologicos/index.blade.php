@@ -20,7 +20,7 @@
 </div>
 @endif
 
-<table class="table table-bordered">
+<table class="table table-hover">
   <tr >
     <th width="80px">No</th>
     <td>Primer Ciclo Menstrual</td>
