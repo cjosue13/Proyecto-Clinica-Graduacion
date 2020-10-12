@@ -22,27 +22,31 @@
 
 <table class="table table-hover">
   <tr >
+    <thead>
     <th width="80px">No</th>
-    <td>Primer Ciclo Menstrual</td>
-    <td>Edad Primer Ciclo Menstrual</td>
-    <td>Cantidad de Ciclos menstruales</td>
-    <td>Embarazos</td>
-    <td>Partos</td>
-    <td>Abortos</td>
-    <td>Cesareas</td>
-    <td>FUR</td>
-    <td>FUPAP</td>
-    <td>PF</td>
-    <td>PF Detalle</td>
-    <td>PRS</td>
-    <td>NoCS</td>
+    <th>Primer Ciclo Menstrual</th>
+    <th>Edad Primer Ciclo Menstrual</th>
+    <th>Cantidad de Ciclos menstruales</th>
+    <th>Embarazos</th>
+    <th>Partos</th>
+    <th>Abortos</th>
+    <th>Cesareas</th>
+    <th>FUR</th>
+    <th>FUPAP</th>
+    <th>PF</th>
+    <th>PF Detalle</th>
+    <th>PRS</th>
+    <th>NoCS</th>
     <?php if (sizeof($antecedentesginecologicos) == 0) {?>
       <th width="140px" class="text-center">
         <a href="{{route('create', $expediente[0]->exp_id)}}" class="btn btn-success btn-sm">
           <i class="glyphicon glyphicon-plus"></i>
         </a>
       </th>
-    <?php } ?>
+    <?php } else { ?>
+        <th> </th>
+      <?php } ?>
+    </thead>
   </tr>
   <?php $no = 1; ?>
   @foreach ($antecedentesginecologicos as $key => $value)
@@ -61,13 +65,17 @@
     <td>{{ $value->	ag_PF_detalle }}</td>
     <td>{{ $value->	ag_PRS }}</td>	
     <td>{{ $value->	ag_NoCS }}</td>
-    <td>
-      <a class="btn btn-info btn-sm" href="{{route('antecedentesginecologicos.show',$value->ag_id)}}">
-        <i class="glyphicon glyphicon-th-large"></i></a>
-      <a class="btn btn-primary btn-sm" href="{{route('antecedentesginecologicos.edit',$value->ag_id)}}">
-        <i class="glyphicon glyphicon-pencil"></i></a>
+    <td width='150px'>
+      <a class="btn btn-hover btn-sm black-background" href="{{route('antecedentesginecologicos.show',$value->ag_id)}}">
+        <i style="color: #ffffff;"  class="fas fa-bars"></i>
+      </a>
+      <a class="btn btn-hover btn-sm black-background" href="{{route('antecedentesginecologicos.edit',$value->ag_id)}}">
+        <i style="color: #ffffff;" class="fas fa-edit"></i>
+      </a>
       {!! Form::open(['method' => 'DELETE','route' => ['antecedentesginecologicos.destroy', $value->ag_id],'style'=>'display:inline']) !!}
-      <button type="submit" style="display: inline;" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
+      <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
+        <i style="color: #ffffff;" class="far fa-trash-alt"></i>
+      </button>
       {!! Form::close() !!}
       
     </td>

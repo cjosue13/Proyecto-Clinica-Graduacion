@@ -44,15 +44,19 @@
     <td>{{ $value->exp_Metas }}</td>
     <td>{{ $value->exp_Historiabiopatografica }}</td>
     <td>
-      <a class="btn btn-info btn-sm" href="{{route('expediente.show',$value->exp_id)}}">
-        <i class="glyphicon glyphicon-th-large"></i></a>
-      <a class="btn btn-primary btn-sm" href="{{route('expediente.edit',$value->exp_id)}}">
-        <i class="glyphicon glyphicon-pencil"></i></a>
+      <a class="btn btn-hover btn-sm black-background" href="{{route('expediente.show',$value->exp_id)}}">
+        <i style="color: #ffffff;" class="fas fa-bars"></i>
+      </a>
+      <a class="btn btn-hover btn-sm black-background" href="{{route('expediente.edit',$value->exp_id)}}">
+        <i style="color: #ffffff;" class="fas fa-edit"></i>
+      </a>
       {!! Form::open(['method' => 'DELETE','route' => ['expediente.destroy', $value->exp_id],'style'=>'display:inline']) !!}
-      <button type="submit" style="display: inline;" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
+      <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
+        <i style="color: #ffffff;" class="far fa-trash-alt"></i>
+      </button>
       {!! Form::close() !!}
-      <a class="btn btn-info btn-sm" href="{{route('VerAntecedenteGinecologico',$value->exp_id)}}">
-        Antecedentes Ginecologicos</a>
+      <a class="btn btn-info btn-sm btn-block" style="margin-top: 5px;" href="{{route('VerAntecedenteGinecologico',$value->exp_id)}}">
+      <i class=""></i>Antecedentes Ginecologicos</a>
     </td>
   </tr>
   @endforeach

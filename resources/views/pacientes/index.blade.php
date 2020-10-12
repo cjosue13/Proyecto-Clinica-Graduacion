@@ -55,13 +55,13 @@
     <td>{{ $value->	pac_Religion }}</td>
     <td>
       <a class="btn btn-hover btn-sm black-background" href="{{route('pacientes.show',$value->pac_id)}}">
-        <i style="color: #ffffff;"  class="fas fa-bars"></i>
+        <i style="color: #ffffff;" class="fas fa-bars"></i>
       </a>
       <a class="btn btn-hover btn-sm black-background" href="{{route('pacientes.edit',$value->pac_id)}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>
-      
-        {!! Form::open(['method' => 'DELETE','route' => ['pacientes.destroy', $value->pac_id],'style'=>'display:inline']) !!}
+
+      {!! Form::open(['method' => 'DELETE','route' => ['pacientes.destroy', $value->pac_id],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>
