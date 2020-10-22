@@ -54,12 +54,10 @@ class antecedentesginecologicosController extends Controller
             'ag_PRS' => 'required|string|max:10',
             'ag_NoCS' => 'required|int|max:999'
         ]);
-        tbl_antecedentesginecologicos::create($request->all());
-        $antecedente = tbl_antecedentesginecologicos::latest('ag_id')->first(); // esto es para obtener el expediente que se acaba de insertar
-        DB::table('tbl_expedientes')->where('tbl_expedientes.exp_id', $idExp)->update(['exp_fkAntGin' => $antecedente['ag_id']]);
+        tbl_antecedentesginecologicos::create(['ag_expediente' => $idExp] + $request->all());
         
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
-        $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_id', $expediente[0]->exp_fkAntGin)->get()->toArray();
+        $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
 
         return redirect()->route('antecedentesginecologicos.index',compact('expediente','antecedentesginecologicos'))->with('success','Antecedente Ginecologico creado con éxito');
     }
@@ -114,7 +112,7 @@ class antecedentesginecologicosController extends Controller
         ]);
        
         tbl_antecedentesginecologicos::find($id)->update($request->all());
-        return redirect()->route('antecedentesginecologicos.index')->with('success','Antecedentes Ginecologicos actualizado con éxito');
+        return redirect()->route('antecedentesginecologicos.index')->with('success','Antecedentes Ginecologicos actualizados con éxito');
     }
 
     /**
@@ -123,9 +121,11 @@ class antecedentesginecologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function eliminar($id,$idExp)
     {
         tbl_antecedentesginecologicos::find($id)->delete();
-        return redirect()->route('antecedentesginecologicos.index')->with('success','Antecedentes Ginecologicos Eliminado');
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
+        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos'));
     }
 }

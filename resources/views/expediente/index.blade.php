@@ -55,8 +55,10 @@
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>
       {!! Form::close() !!}
-      <a class="btn btn-info btn-sm btn-block" style="margin-top: 5px;" href="{{route('VerAntecedenteGinecologico',$value->exp_id)}}">
-      <i class=""></i>Antecedentes Ginecologicos</a>
+      <?php if ($paciente[0]->pac_Genero == 'F') { ?>
+        <a class="btn btn-info btn-sm btn-block" style="margin-top: 5px;" href="{{route('VerAntecedenteGinecologico',$value->exp_id)}}">
+        <i class=""></i>Antecedentes Ginecologicos</a>
+      <?php }?>
     </td>
   </tr>
   @endforeach

@@ -72,7 +72,7 @@
       <a class="btn btn-hover btn-sm black-background" href="{{route('antecedentesginecologicos.edit',$value->ag_id)}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>
-      {!! Form::open(['method' => 'DELETE','route' => ['antecedentesginecologicos.destroy', $value->ag_id],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'DELETE','route' => ['eliminar', $value->ag_id, $value->ag_expediente],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>
