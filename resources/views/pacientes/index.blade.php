@@ -30,7 +30,7 @@
       <th>Fecha de Nacimiento</th>
       <th>Residencia</th>
       <th>Correo</th>
-      <th>Profesion/Oficio</th>
+      <th>Profesión/Oficio</th>
       <th>Estado Civil</th>
       <th>Religión</th>
       <th width="140px" class="text-center">

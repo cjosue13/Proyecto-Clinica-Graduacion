@@ -44,12 +44,11 @@ class expedienteController extends Controller
             'exp_Metas' => 'required|string|max:1000',
             'exp_Historiabiopatografica' => 'required|string|max:500'
         ]);
-        tbl_expedientes::create($request->all());
-        $expediente = tbl_expedientes::latest('exp_id')->first(); // esto es para obtener el expediente que se acaba de insertar
-        DB::table('tbl_pacientes')->where('tbl_pacientes.pac_id', $idPac)->update(['pac_fkExpediente' => $expediente['exp_id']]);
+        
+        tbl_expedientes::create(['exp_paciente' => $idPac] + $request->all());
         
         $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $idPac)->get()->toArray();
-        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $paciente[0]->pac_fkExpediente)->get()->toArray();
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_paciente', $paciente[0]->pac_id)->get()->toArray();
         return view('expediente.index', compact('expediente', 'paciente'))->with('success','Expediente creado con éxito');
     }
 
@@ -116,7 +115,7 @@ class expedienteController extends Controller
      */
     public function VerAntecedenteGinecologico($idExp){
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
-        $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_id', $expediente[0]->exp_fkAntGin)->get()->toArray();
+        $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
         return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos'));
     }
 }

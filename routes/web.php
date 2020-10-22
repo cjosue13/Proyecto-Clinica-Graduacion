@@ -60,6 +60,10 @@ Route::post('antecedentesginecologicos/store/{id}', [
     'as' => 'storeAG', 'uses' => 'antecedentesginecologicosController@storeAG'
 ]);
 
+Route::delete('antecedentesginecologicos/eliminar/{id}/{idExp}', [
+    'as' => 'eliminar', 'uses' => 'antecedentesginecologicosController@eliminar'
+]);
+
 
 Auth::routes();
 
