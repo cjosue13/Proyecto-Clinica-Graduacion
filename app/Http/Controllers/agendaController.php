@@ -94,7 +94,7 @@ class agendaController extends Controller
             $this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
             && $this->validarFecha2($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
         ) { //validamos  que no existe una
-            $agenda = tbl_agendas::create([
+            tbl_agendas::create([
                 'agn_NombreCompleto' => $input["agn_NombreCompleto"],
                 'agn_telefono' => $input["agn_telefono"],
                 'agn_fecha' => $input["agn_fecha"],
