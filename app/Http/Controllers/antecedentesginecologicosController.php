@@ -39,27 +39,35 @@ class antecedentesginecologicosController extends Controller
      */
     public function storeAG(Request $request, $idExp)
     {
-        $this->validate($request, [
-            'ag_Menarca' => 'required|string|max:10',
-            'ag_Edad' => 'required|int|max:150',
-            'ag_CiclosMenstruales' => 'required|int|max:999',
-            'ag_Embarazos' => 'required|int|max:99',
-            'ag_Partos' => 'required|int|max:99',
-            'ag_Abortos' => 'required|int|max:99',
-            'ag_Cesareas' => 'required|int|max:99',
-            'ag_FUR' => 'required|string|max:10',
-            'ag_FUPAP' => 'required|string|max:10',
-            'ag_PF' => 'required|string|max:1',
-            'ag_PF_detalle' => 'required|string|max:1000',
-            'ag_PRS' => 'required|string|max:10',
-            'ag_NoCS' => 'required|int|max:999'
-        ]);
-        tbl_antecedentesginecologicos::create(['ag_expediente' => $idExp] + $request->all());
-        
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
         $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
 
-        return redirect()->route('antecedentesginecologicos.index',compact('expediente','antecedentesginecologicos'))->with('success','Antecedente Ginecologico creado con éxito');
+        if(sizeof($antecedentesginecologicos)==0){
+            $this->validate($request, [
+                'ag_Menarca' => 'required|string|max:10',
+                'ag_Edad' => 'required|int|max:150',
+                'ag_CiclosMenstruales' => 'required|int|max:999',
+                'ag_Embarazos' => 'required|int|max:99',
+                'ag_Partos' => 'required|int|max:99',
+                'ag_Abortos' => 'required|int|max:99',
+                'ag_Cesareas' => 'required|int|max:99',
+                'ag_FUR' => 'required|string|max:10',
+                'ag_FUPAP' => 'required|string|max:10',
+                'ag_PF' => 'required|string|max:1',
+                'ag_PF_detalle' => 'required|string|max:1000',
+                'ag_PRS' => 'required|string|max:10',
+                'ag_NoCS' => 'required|int|max:999'
+            ]);
+            tbl_antecedentesginecologicos::create(['ag_expediente' => $idExp] + $request->all());
+            
+            $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+            $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
+    
+            return redirect()->route('antecedentesginecologicos.index',compact('expediente','antecedentesginecologicos'))->with('success','Antecedente Ginecologico creado con éxito');    
+        }
+        else{
+            return redirect()->route('antecedentesginecologicos.index',compact('expediente','antecedentesginecologicos'))->with('warning','Ya existen antecedentes para este paciente');    
+        }
     }
 
     /**

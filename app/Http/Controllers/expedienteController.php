@@ -40,16 +40,23 @@ class expedienteController extends Controller
      */
     public function store(Request $request, $idPac)
     {
-        $this->validate($request, [
-            'exp_Metas' => 'required|string|max:1000',
-            'exp_Historiabiopatografica' => 'required|string|max:500'
-        ]);
-        
-        tbl_expedientes::create(['exp_paciente' => $idPac] + $request->all());
-        
         $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $idPac)->get()->toArray();
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_paciente', $paciente[0]->pac_id)->get()->toArray();
-        return view('expediente.index', compact('expediente', 'paciente'))->with('success','Expediente creado con éxito');
+        if(sizeof($expediente)==0){
+            $this->validate($request, [
+                'exp_Metas' => 'required|string|max:1000',
+                'exp_Historiabiopatografica' => 'required|string|max:500'
+            ]);
+            
+            tbl_expedientes::create(['exp_paciente' => $idPac] + $request->all());
+            
+            $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $idPac)->get()->toArray();
+            $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_paciente', $paciente[0]->pac_id)->get()->toArray();
+            return view('expediente.index', compact('expediente', 'paciente'))->with('success','Expediente creado con éxito');
+        }
+        else{
+            return view('expediente.index', compact('expediente', 'paciente'))->with('warning','Ya existe un expediente para este paciente');
+        }
     }
 
 
