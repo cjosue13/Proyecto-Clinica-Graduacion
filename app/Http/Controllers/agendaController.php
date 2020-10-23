@@ -103,10 +103,10 @@ class agendaController extends Controller
                 'agn_Tiempo' => $input["agn_Tiempo"],
                 'agn_descripcion' => $input["agn_descripcion"]
             ]);
-            return response()->json(["ok" => true]); // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
-        } else {
+            //return response()->json(["ok" => true]); // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
+        } /*else {
             return response()->json(["ok" => false]);
-        }
+        }*/
     }
 
     public function editar(Request $request)

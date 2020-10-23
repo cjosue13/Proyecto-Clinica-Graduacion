@@ -138,7 +138,6 @@
                 calendar.unselect()
             },
             eventClick: function(info) {
-                console.log(info.event.extendedProps);
                 $("#agenda_modal").modal();
                 $("#agn_fecha").val(moment(info.event.extendedProps['agn_fecha']).format("YYYY-MM-DD"));
                 FechaAnt = moment(info.event.extendedProps['agn_fecha']).format("YYYY-MM-DD");
@@ -198,18 +197,15 @@
         //enviamos por ajax
         $.ajax({
             url: (ID == null) ? "/agenda/guardar" : "/agenda/editar", //si ID es nulo entonces guardamos, sino, editamos
-            type: "POST",
             data: fd,
+            type: "POST",
             processData: false,
-            contentType: false
-        }).done(function(respuesta) {
-            if (respuesta && respuesta.ok) {
+            contentType: false,
+            success: function(json) {
                 calendar.refetchEvents();
-                /*alert("Se registró la cita en la agenda");*/
+                alert("Se agregó la cita correctamente");
                 limpiar();
-            } else {
-                alert("La agenda ya contiene la fecha seleccionada");
-            }
+               }
         });
 
     }
@@ -237,8 +233,8 @@
             //enviamos por ajax
             $.ajax({
                 url: "/agenda/eliminar",
-                type: "POST",
                 data: fd,
+                type: "POST",
                 processData: false,
                 contentType: false
             }).done(function(respuesta) {
