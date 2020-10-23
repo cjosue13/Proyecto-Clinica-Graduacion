@@ -201,11 +201,14 @@
             type: "POST",
             processData: false,
             contentType: false,
-            success: function(json) {
+        }).done(function(respuesta) {
+            if (respuesta && respuesta.ok) {
                 calendar.refetchEvents();
-                alert("Se agregó la cita correctamente");
+                alert("Se registró la cita en la agenda");
                 limpiar();
-               }
+            } else {
+                alert("La agenda ya contiene la fecha seleccionada");
+            }
         });
 
     }
