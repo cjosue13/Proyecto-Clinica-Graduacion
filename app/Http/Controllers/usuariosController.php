@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use App;
 
 class usuariosController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -71,7 +73,30 @@ class usuariosController extends Controller
         $usuarios = user::find($id);
         return view('usuarios.edit', compact('usuarios'));
     }
+ /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
 
+        
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:50','unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'address' => ['required', 'string', 'max:50'],
+            'phone' => ['required', 'string', 'max:50'],
+            'tipoUsuario' => ['required', 'string', 'max:1'],
+            'cedula' => ['required', 'string', 'max:50','unique:users']
+        ]);
+        $request['password'] = Hash::make($request['password']);
+        User::create($request->all());
+        return redirect()->route('home')->with('success','Uusario creado con éxito');
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -103,27 +128,5 @@ class usuariosController extends Controller
     {
         user::find($id)->delete();
         return redirect()->route('home')->with('success', 'Usuario Eliminado con Exito');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function listaEmpresas()
-    {
-        $usuarios = DB::table('users')
-            ->select(
-                'id',
-                'name',
-                'username',
-                'email',
-                'address',
-                'phone',
-                'cedula'
-            )->where('tipoUsuario', 'E')->get()->toArray();
-
-        return view('usuarios.listaEmpresas', compact('usuarios'));
     }
 }
