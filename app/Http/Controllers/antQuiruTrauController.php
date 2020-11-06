@@ -57,7 +57,7 @@ class antQuiruTrauController extends Controller
      */
     public function show($id)
     {
-        $pacientes = tbl_antquirutrau::find($id);
+        $antecedentes = tbl_antquirutrau::find($id);
         return view('antQuiruTrau.show', compact('pacientes'));
     }
 
@@ -67,10 +67,10 @@ class antQuiruTrauController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editQT($id, $idExp, $tipo)
     {
         $antecedentes = tbl_antquirutrau::find($id);
-        return view('antQuiruTrau.edit', compact('antecedentes'));
+        return view('antQuiruTrau.edit', compact('antecedentes', 'idExp', 'tipo'));
     }
 
     /**
@@ -80,7 +80,7 @@ class antQuiruTrauController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateQT(Request $request, $id, $idExp, $tipo)
     {
         $this->validate($request, [
             'atqt_Nombre' => 'required|string|max:50',
@@ -89,7 +89,8 @@ class antQuiruTrauController extends Controller
         ]);
        
         tbl_antquirutrau::find($id)->update($request->all());
-        return redirect()->route('antQuiruTrau.index')->with('success','Paciente actualizado con éxito');
+        $antecedentes = DB::table('tbl_antquirutrau')->select('tbl_antquirutrau.*')->where('tbl_antquirutrau.atqt_fkExpediente', $idExp)->where('tbl_antquirutrau.atqt_tipo',$tipo)->get()->toArray();
+        return view('antQuiruTrau.index', compact('idExp','tipo','antecedentes'));;
     }
 
     /**
@@ -98,9 +99,11 @@ class antQuiruTrauController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteQT($id, $idExp, $tipo)
     {
         tbl_antquirutrau::find($id)->delete();
-        return redirect()->route('pacientes.index')->with('success','Paciente Eliminado');
+        $antecedentes = DB::table('tbl_antquirutrau')->select('tbl_antquirutrau.*')->where('tbl_antquirutrau.atqt_fkExpediente', $idExp)->where('tbl_antquirutrau.atqt_tipo',$tipo)->get()->toArray();
+        return view('antQuiruTrau.index', compact('idExp','tipo','antecedentes'));;
+
     }
 }

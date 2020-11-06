@@ -1,10 +1,18 @@
 @extends('layouts.app')
-@section('PageTitle', 'Antecedentes Quirúrgicos')
+<?php if($tipo == 'q') {?>
+  @section('PageTitle', 'Antecedentes Quirúrgicos')
+<?php } else {?>
+  @section('PageTitle', 'Antecedentes Traumáticos')
+<?php }?>
 @section('content')
 <div class="row">
   <div class="col-sm-12">
     <div class="full-right">
+    <?php if($tipo == 'q') {?>
       <h2>Antecedentes Quirúrgicos</h2>
+      <?php } else {?>
+        <h2>Antecedentes Traumáticos</h2>
+        <?php }?>
     </div>
   </div>
 </div>
@@ -29,7 +37,7 @@
       <th>Fecha</th>
       <th width="140px" class="text-center">
       {!! Form::open(['method' => 'GET','route' => ['createQT', $idExp, $tipo],'style'=>'display:inline']) !!}
-      <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
+      <button type="submit" style="display: inline;" class="btn btn-success btn-sm">
           <i class="glyphicon glyphicon-plus"></i>
       </button>
       {!! Form::close() !!}
@@ -44,14 +52,17 @@
     <td>{{ $value->	atqt_descripcion }}</td>
     <td>{{ $value->	atqt_fecha }}</td>
     <td>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('antQuiruTrau.show',$value->atqt_id)}}">
+      <!--<a class="btn btn-hover btn-sm black-background" href="{{route('antQuiruTrau.show',$value->atqt_id)}}">
         <i style="color: #ffffff;" class="fas fa-bars"></i>
-      </a>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('antQuiruTrau.edit',$value->atqt_id)}}">
-        <i style="color: #ffffff;" class="fas fa-edit"></i>
-      </a>
+      </a>-->
 
-      {!! Form::open(['method' => 'DELETE','route' => ['antQuiruTrau.destroy', $value->atqt_id],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'POST','route' => ['editQT', $value->atqt_id, $idExp, $tipo],'style'=>'display:inline']) !!}
+      <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
+        <i style="color: #ffffff;" class="fas fa-edit"></i>
+      </button>
+      {!! Form::close() !!}
+
+      {!! Form::open(['method' => 'DELETE','route' => ['deleteQT', $value->atqt_id, $idExp, $tipo],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>

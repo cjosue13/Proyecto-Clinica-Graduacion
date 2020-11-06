@@ -45,7 +45,6 @@ Route::get('pacientes/VerExpediente/{id}', 'pacientesController@VerExpediente')-
 Route::get('expediente/VerAntecedenteGinecologico/{id}', 'expedienteController@VerAntecedenteGinecologico')->name('VerAntecedenteGinecologico');
 Route::get('expediente/create/{id}', 'expedienteController@create')->name('createExp');
 Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosController@create')->name('create');
-Route::get('antQuiruTrau/createQT/{idExp}/{Tipo}', 'antQuiruTrauController@createQT')->name('createQT');
 
 Route::post('expediente/store/{id}', [
     'as' => 'store', 'uses' => 'expedienteController@store'
@@ -59,12 +58,31 @@ Route::post('antecedentesginecologicos/store/{id}', [
     'as' => 'storeAG', 'uses' => 'antecedentesginecologicosController@storeAG'
 ]);
 
+// Antecedentes Quirúrgicos Traumáticos -------------------------------------------------------------------------
+Route::get('antQuiruTrau/createQT/{idExp}/{Tipo}', 'antQuiruTrauController@createQT')->name('createQT');
 Route::post('antQuiruTrau/storeQT/{idExp}/{Tipo}', [
     'as' => 'storeQT', 'uses' => 'antQuiruTrauController@storeQT'
 ]);
 
+Route::post('antQuiruTrau/editQT/{id}/{idExp}/{Tipo}', [
+    'as' => 'editQT', 'uses' => 'antQuiruTrauController@editQT'
+]);
+
+Route::post('antQuiruTrau/updateQT/{id}/{idExp}/{Tipo}', [
+    'as' => 'updateQT', 'uses' => 'antQuiruTrauController@updateQT'
+]);
+
+Route::delete('antQuiruTrau/deleteQT/{id}/{idExp}/{tipo}', [
+    'as' => 'deleteQT', 'uses' => 'antQuiruTrauController@deleteQT'
+]);
+// ------------------------------------------------------------------------------------------------------------
+
 Route::post('expediente/MenuAntecedentes/{id}/{Genero}', [
     'as' => 'MenuAntecedentes', 'uses' => 'expedienteController@MenuAntecedentes'
+]);
+
+Route::delete('antecedentesginecologicos/eliminar/{id}/{idExp}', [
+    'as' => 'eliminar', 'uses' => 'antecedentesginecologicosController@eliminar'
 ]);
 
 Route::delete('antecedentesginecologicos/eliminar/{id}/{idExp}', [
