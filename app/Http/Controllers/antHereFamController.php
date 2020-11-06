@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ class antHereFamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    /*public function index()
     {
         $user = auth()->user();
         $curriculums = DB::table('curriculums')->join('users','curriculums.crUsuario', '=', 'users.id')
@@ -27,7 +27,7 @@ class antHereFamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+   /* public function create()
     {
         $user = auth()->user();
         $curriculums = DB::table('curriculums')->join('users','curriculums.crUsuario', '=', 'users.id')
@@ -46,7 +46,7 @@ class antHereFamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    /*public function store(Request $request)
     {
         $this->validate($request, [
             'crObservaciones' => 'required|string|max:300',
@@ -62,7 +62,7 @@ class antHereFamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    /*public function show($id)
     {
         $curriculums = antHereFam::find($id);
         return view('curriculums.show', compact('curriculums'));
@@ -74,7 +74,7 @@ class antHereFamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    /*public function edit($id)
     {
         $curriculums = antHereFam::find($id);
         return view('curriculums.edit', compact('curriculums'));
@@ -87,7 +87,7 @@ class antHereFamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    /*public function update(Request $request, $id)
     {
         $this->validate($request, [
             'crObservaciones' => 'required|string|max:300',
@@ -102,9 +102,9 @@ class antHereFamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    /*public function destroy($id)
     {
         antHereFam::find($id)->delete();
         return redirect()->route('curriculums.index')->with('success', 'curriculums Eliminado con Exito');
     }
-}
+}*/

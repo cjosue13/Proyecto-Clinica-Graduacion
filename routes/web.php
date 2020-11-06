@@ -28,17 +28,11 @@ Route::get('/auth', function () {
     return view('auth.register');
 })->name('auth');
 
-Route::post('/upload','usuariosController@subirImagen');
-
 Route::get('pdf/{user}', 'ReportGeneratorController@ReporteCurriculum')->name('pdf');//Reportecurriculum
 Route::get('pdf2', 'ReportGeneratorController@ReporteEmpleos')->name('pdf2');//ReporteEmpresa
 Route::get('pdf3/{user}', 'ReportGeneratorController@ReporteEmpresa')->name('pdf3');//ReporteEmpresa
 Route::get('pdf4/{user}', 'ReportGeneratorController@ReporteOferta')->name('pdf4');//Reporteoferta
 Route::get('pdf5', 'ReportGeneratorController@ReporteGrafico')->name('pdf5');//ReporteGrafico
-
-Route::get('requisitos/offer/{id}', 'requisitosController@offer')->name('offer');
-Route::get('experiencias/curriculum/{id}', 'experienciasController@curriculum')->name('exp');
-Route::get('formaciones/curriculum/{id}', 'formacionesController@curriculum')->name('form');
 
 Route::post('usuarios/save', 'usuariosController@save');
 
@@ -77,12 +71,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('curriculums', 'curriculumsController');
 Route::resource('usuarios', 'usuariosController');
 Route::resource('experiencias', 'experienciasController');
-Route::resource('ofertas', 'ofertasController');
-Route::resource('requisitos', 'requisitosController');
-Route::resource('formaciones', 'formacionesController');
 Route::resource('pacientes', 'pacientesController');
 Route::resource('expediente', 'expedienteController');
 Route::resource('antecedentesginecologicos', 'antecedentesginecologicosController');

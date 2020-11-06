@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class tbl_examenes extends Model
 {
   protected $primaryKey = 'exmm_id';
-  protected $fillable = ['exmm_Nombre', 'exmm_Descripcion'];
+  protected $fillable = ['exmm_fkExamenClinico','exmm_Nombre', 'exmm_Descripcion'];
   protected $dates = ['created_at', 'updated_at'];
   
 }

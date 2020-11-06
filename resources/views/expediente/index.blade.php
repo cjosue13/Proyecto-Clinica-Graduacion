@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="full-right">
-      <h2>Expedientes</h2>
+      <h2> Expediente de {{$paciente[0]->pac_pNombre}} {{$paciente[0]->pac_pApellido}}</h2>
     </div>
   </div>
 </div>

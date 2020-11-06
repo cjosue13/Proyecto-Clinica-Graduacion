@@ -15,7 +15,6 @@ class pacientesController extends Controller
      */
     public function index()
     {
-        $id = auth()->user()->id;
         $pacientes = DB::table('tbl_pacientes')->orderBy('pac_id', 'asc')->get()->toArray();
         return view('pacientes.index', compact('pacientes'));
     }
@@ -39,7 +38,7 @@ class pacientesController extends Controller
      */
     public function store(Request $request)
     {
-        $empresa = auth()->user()->id;
+
         $this->validate($request, [
             'pac_pNombre' => 'required|string|max:50',
             'pac_sNombre' => 'nullable|string|max:50',
