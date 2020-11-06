@@ -44,14 +44,14 @@
     <td>{{ $value->	atqt_descripcion }}</td>
     <td>{{ $value->	atqt_fecha }}</td>
     <td>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('pacientes.show',$value->pac_id)}}">
+      <a class="btn btn-hover btn-sm black-background" href="{{route('antQuiruTrau.show',$value->atqt_id)}}">
         <i style="color: #ffffff;" class="fas fa-bars"></i>
       </a>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('pacientes.edit',$value->pac_id)}}">
+      <a class="btn btn-hover btn-sm black-background" href="{{route('antQuiruTrau.edit',$value->atqt_id)}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>
 
-      {!! Form::open(['method' => 'DELETE','route' => ['pacientes.destroy', $value->pac_id],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'DELETE','route' => ['antQuiruTrau.destroy', $value->atqt_id],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>

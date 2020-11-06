@@ -43,7 +43,9 @@ class antQuiruTrauController extends Controller
             'atqt_descripcion' => 'required|string|max:100',
             'atqt_fecha' => 'required|date|before_or_equal:today',
         ]);
+
         tbl_antquirutrau::create(['atqt_fkExpediente' => $idExp] + ['atqt_tipo' => $tipo] + $request->all());
+        $antecedentes = DB::table('tbl_antquirutrau')->select('tbl_antquirutrau.*')->where('tbl_antquirutrau.atqt_fkExpediente', $idExp)->where('tbl_antquirutrau.atqt_tipo',$tipo)->get()->toArray();
         return view('antQuiruTrau.index', compact('idExp','tipo','antecedentes'));
     }
 
