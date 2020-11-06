@@ -125,4 +125,8 @@ class expedienteController extends Controller
         $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
         return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos'));
     }
+
+    public function MenuAntecedentes($idExp, $Genero){
+        return view('MenuAntecedentes', compact('idExp','Genero'));
+    }
 }

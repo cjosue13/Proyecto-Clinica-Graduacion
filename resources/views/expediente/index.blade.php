@@ -55,10 +55,12 @@
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>
       {!! Form::close() !!}
-      <?php if ($paciente[0]->pac_Genero == 'F') { ?>
-        <a class="btn btn-info btn-sm btn-block" style="margin-top: 5px;" href="{{route('VerAntecedenteGinecologico',$value->exp_id)}}">
-        <i class=""></i>Antecedentes Ginecologicos</a>
-      <?php }?>
+      {!! Form::open(['method' => 'POST','route' => ['MenuAntecedentes', $value->exp_id,$paciente[0]->pac_Genero ],'style'=>'display:inline']) !!}
+      <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
+        <i style="color: #ffffff;">Antecedentes</i>
+      </button>
+      {!! Form::close() !!}
+      
     </td>
   </tr>
   @endforeach

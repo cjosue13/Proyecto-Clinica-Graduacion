@@ -45,13 +45,26 @@ Route::get('pacientes/VerExpediente/{id}', 'pacientesController@VerExpediente')-
 Route::get('expediente/VerAntecedenteGinecologico/{id}', 'expedienteController@VerAntecedenteGinecologico')->name('VerAntecedenteGinecologico');
 Route::get('expediente/create/{id}', 'expedienteController@create')->name('createExp');
 Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosController@create')->name('create');
+Route::get('antQuiruTrau/createQT/{idExp}/{Tipo}', 'antQuiruTrauController@createQT')->name('createQT');
 
 Route::post('expediente/store/{id}', [
     'as' => 'store', 'uses' => 'expedienteController@store'
 ]);
 
+Route::post('antQuiruTrau/index/{idExp}/{Tipo}', [
+    'as' => 'index', 'uses' => 'antQuiruTrauController@index'
+]);
+
 Route::post('antecedentesginecologicos/store/{id}', [
     'as' => 'storeAG', 'uses' => 'antecedentesginecologicosController@storeAG'
+]);
+
+Route::post('antQuiruTrau/storeQT/{idExp}/{Tipo}', [
+    'as' => 'storeQT', 'uses' => 'antQuiruTrauController@storeQT'
+]);
+
+Route::post('expediente/MenuAntecedentes/{id}/{Genero}', [
+    'as' => 'MenuAntecedentes', 'uses' => 'expedienteController@MenuAntecedentes'
 ]);
 
 Route::delete('antecedentesginecologicos/eliminar/{id}/{idExp}', [
@@ -75,6 +88,7 @@ Route::resource('usuarios', 'usuariosController');
 Route::resource('experiencias', 'experienciasController');
 Route::resource('pacientes', 'pacientesController');
 Route::resource('expediente', 'expedienteController');
+Route::resource('antQuiruTrau', 'antQuiruTrauController');
 Route::resource('antecedentesginecologicos', 'antecedentesginecologicosController');
 Route::get('/agenda', 'agendaController@index');
 Route::get('/agenda/listar', 'agendaController@listar');
