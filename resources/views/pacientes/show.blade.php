@@ -52,16 +52,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Edad: </strong>
-            {{ $pacientes->pac_Edad}}
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Edad: </strong>
+            <strong>Cedula: </strong>
             {{ $pacientes->pac_Cedula}}
         </div>
     </div>
@@ -70,7 +61,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Edad: </strong>
+            <strong>Genero: </strong>
             {{ $pacientes->pac_Genero}}
         </div>
     </div>
@@ -79,7 +70,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Edad: </strong>
+            <strong>Fecha Nacimiento: </strong>
             {{ $pacientes->pac_FechaNacimiento}}
         </div>
     </div>
@@ -88,7 +79,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Edad: </strong>
+            <strong>Residencia: </strong>
             {{ $pacientes->pac_Residencia}}
         </div>
     </div>
@@ -97,7 +88,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Edad: </strong>
+            <strong>Correo: </strong>
             {{ $pacientes->pac_Correo}}
         </div>
     </div>

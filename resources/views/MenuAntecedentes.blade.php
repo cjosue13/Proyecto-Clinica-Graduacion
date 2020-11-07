@@ -25,7 +25,6 @@
                             {!! Form::open(['method' => 'POST','route' => ['index', $idExp, 't' ],'style'=>'display:inline']) !!}
                                 <a style=" outline:none;"><button type="submit" id="Button1" onmouseout="CambiarColor(this)" onmouseover="CambiarColor(this)" class="Button1" onclick="CambiarColor(this)"><i   style="outline:none; color: #209f85;" class="far fa-file-alt"></i><br><label class="textocool">Traumáticos</label></button></a>
                             {!! Form::close() !!}
-                            
                                 <a style=" outline:none;" href="{{ route('usuarios.create')}}"><button id="Button1" onmouseout="CambiarColor(this)" onmouseover="CambiarColor(this)" class="Button1" onclick="CambiarColor(this)"><i     style="outline:none; color: #209f85;" class="far fa-file-alt"></i><br><label class="textocool">Patológicos</label></button></a>
                                 <a style=" outline:none;" href="{{ route('reportes') }}"><button id="Button1" onmouseout="CambiarColor(this)" onmouseover="CambiarColor(this)" class="Button1" onclick="CambiarColor(this)"><i style="outline:none; color: #209f85;" class="far fa-file-alt"></i><br><label class="textocool">No Patológicos</label></button></a>
                             </ul>
