@@ -44,6 +44,7 @@ Route::get('usuarios/filtro/', [
 Route::get('pacientes/VerExpediente/{id}', 'pacientesController@VerExpediente')->name('VerExpediente');
 Route::get('expediente/VerAntecedenteGinecologico/{id}', 'expedienteController@VerAntecedenteGinecologico')->name('VerAntecedenteGinecologico');
 Route::get('expediente/create/{id}', 'expedienteController@create')->name('createExp');
+Route::get('personalsocial/create/{id}', 'personalsocialController@create')->name('createPS');
 Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosController@create')->name('create');
 Route::get('consultas/index/{id}', 'consultasController@index')->name('indexConsulta');
 Route::get('consultas/create/{id}', 'consultasController@create')->name('createConsulta');
@@ -87,8 +88,14 @@ Route::delete('antecedentesginecologicos/eliminar/{id}/{idExp}', [
     'as' => 'eliminar', 'uses' => 'antecedentesginecologicosController@eliminar'
 ]);
 
-Route::delete('antecedentesginecologicos/eliminar/{id}/{idExp}', [
-    'as' => 'eliminar', 'uses' => 'antecedentesginecologicosController@eliminar'
+//------------------------------------------------------------------------------------
+// Personal Social
+Route::post('personalsocial/indexPS/{idExp}', [
+    'as' => 'indexPS', 'uses' => 'personalsocialController@indexPS'
+]);
+
+Route::post('personalsocial/storePS/{idExp}', [
+    'as' => 'storePS', 'uses' => 'personalsocialController@storePS'
 ]);
 
 
@@ -109,6 +116,7 @@ Route::resource('experiencias', 'experienciasController');
 Route::resource('pacientes', 'pacientesController');
 Route::resource('expediente', 'expedienteController');
 Route::resource('antQuiruTrau', 'antQuiruTrauController');
+Route::resource('personalsocial', 'personalsocialController');
 Route::resource('antecedentesginecologicos', 'antecedentesginecologicosController');
 Route::get('/agenda', 'agendaController@index');
 Route::get('/agenda/listar', 'agendaController@listar');
