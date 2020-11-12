@@ -46,6 +46,8 @@ Route::get('expediente/VerAntecedenteGinecologico/{id}', 'expedienteController@V
 Route::get('expediente/create/{id}', 'expedienteController@create')->name('createExp');
 Route::get('personalsocial/create/{id}', 'personalsocialController@create')->name('createPS');
 Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosController@create')->name('create');
+Route::get('consultas/index/{id}', 'consultasController@index')->name('indexConsulta');
+Route::get('consultas/create/{id}', 'consultasController@create')->name('createConsulta');
 
 Route::post('expediente/store/{id}', [
     'as' => 'store', 'uses' => 'expedienteController@store'
