@@ -42,30 +42,24 @@ class personalsocialController extends Controller
     {
         $personalsocial = DB::table('tbl_personalessociales')->select('tbl_personalessociales.*')
         ->where('tbl_personalessociales.ps_fkExpediente', $idExp)->get()->toArray();
-        $this->validate($request, [
-            'ps_Etapa' => 'required|string|max:30',
-            'ps_descripcion' => 'required|string|max:1000'
-        ]);
-        
-        tbl_personalessociales::create(['ps_fkExpediente' => $idExp] + $request->all());
-        $personalsocial = DB::table('tbl_personalessociales')->select('tbl_personalessociales.*')
+
+        $validacion = DB::table('tbl_personalessociales')->select('tbl_personalessociales.*')
+        ->where('tbl_personalessociales.ps_fkExpediente', $idExp)
+        ->where('tbl_personalessociales.ps_Etapa', $request['ps_Etapa'])->get()->toArray();
+        if(sizeof($validacion)==0){
+            $this->validate($request, [
+                'ps_Etapa' => 'required|string|max:30',
+                'ps_descripcion' => 'required|string|max:1000'
+            ]);
+            tbl_personalessociales::create(['ps_fkExpediente' => $idExp] + $request->all());
+            $personalsocial = DB::table('tbl_personalessociales')->select('tbl_personalessociales.*')
         ->where('tbl_personalessociales.ps_fkExpediente', $idExp)->get()->toArray();
-        return view('personalsocial.index', compact('personalsocial', 'idExp'))->with('success','Datos guardados con éxito');
+            return view('personalsocial.index', compact('personalsocial', 'idExp'))->with('success','Datos guardados con éxito');
+        }
+        else{
+            return view('personalsocial.index', compact('personalsocial', 'idExp'))->with('warning','Esta etapa ya existe');
+        }
     }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $expediente = tbl_expedientes::find($id);
-        return view('expediente.show', compact('expediente'));
-    }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -73,10 +67,10 @@ class personalsocialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editPS($id,$idExp)
     {
-        $expediente = tbl_expedientes::find($id);
-        return view('expediente.edit', compact('expediente'));
+        $personalsocial = tbl_personalessociales::find($id);
+        return view('personalsocial.edit', compact('personalsocial','idExp'));
     }
 
 
@@ -87,14 +81,20 @@ class personalsocialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updatePS(Request $request, $id,$idExp)
     {
+        $actual = tbl_personalessociales::find($id);
+
         $this->validate($request, [
-            'exp_Metas' => 'required|string|max:1000',
-            'exp_Historiabiopatografica' => 'required|string|max:500'
+            'ps_descripcion' => 'required|string|max:1000'
         ]);
-        tbl_expedientes::find($id)->update($request->all());
-        return redirect()->route('pacientes.index')->with('success','Expediente actualizado con éxito');
+
+        tbl_personalessociales::find($id)->update(['ps_Etapa' => $actual->ps_Etapa] + $request->all());
+
+        $personalsocial = DB::table('tbl_personalessociales')->select('tbl_personalessociales.*')
+        ->where('tbl_personalessociales.ps_fkExpediente', $idExp)->get()->toArray();
+        return view('personalsocial.index', compact('personalsocial', 'idExp'))
+        ->with('success','Datos actualizados con éxito');
     }
 
     /**
@@ -103,24 +103,13 @@ class personalsocialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deletePS($id, $idExp)
     {
-        tbl_expedientes::find($id)->delete();
-        return redirect()->route('pacientes.index')->with('success', 'Expediente Eliminado con Exito');
-    }
+        tbl_personalessociales::find($id)->delete();
+        $personalsocial = DB::table('tbl_personalessociales')->select('tbl_personalessociales.*')
+        ->where('tbl_personalessociales.ps_fkExpediente', $idExp)->get()->toArray();
 
-    /**
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function VerAntecedenteGinecologico($idExp){
-        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
-        $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
-        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos'));
-    }
-
-    public function MenuAntecedentes($idExp, $Genero){
-        return view('MenuAntecedentes', compact('idExp','Genero'));
+        return view('personalsocial.index', compact('personalsocial', 'idExp'))
+        ->with('success','Datos actualizados con éxito');
     }
 }

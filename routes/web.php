@@ -96,6 +96,17 @@ Route::post('personalsocial/storePS/{idExp}', [
     'as' => 'storePS', 'uses' => 'personalsocialController@storePS'
 ]);
 
+Route::post('personalsocial/updatePS/{id}/{idExp}', [
+    'as' => 'updatePS', 'uses' => 'personalsocialController@updatePS'
+]);
+
+Route::post('personalsocial/editPS/{id}/{idExp}', [
+    'as' => 'editPS', 'uses' => 'personalsocialController@editPS'
+]);
+
+Route::delete('personalsocial/deletePS/{id}/{idExp}', [
+    'as' => 'deletePS', 'uses' => 'personalsocialController@deletePS'
+]);
 
 Auth::routes();
 

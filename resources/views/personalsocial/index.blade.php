@@ -40,14 +40,18 @@
     <td>{{ $value->ps_Etapa }}</td>
     <td>{{ $value->ps_descripcion }}</td>
     <td>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('personalsocial.edit',$value->ps_id)}}">
+      {!! Form::open(['method' => 'POST','route' => ['editPS', $value->ps_id, $idExp],'style'=>'display:inline']) !!}
+      <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
-      </a>
-      {!! Form::open(['method' => 'DELETE','route' => ['personalsocial.destroy', $value->ps_id],'style'=>'display:inline']) !!}
+      </button>
+      {!! Form::close() !!}
+
+      {!! Form::open(['method' => 'DELETE','route' => ['deletePS', $value->ps_id, $idExp],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>
       {!! Form::close() !!}
+
     </td>
   </tr>
   @endforeach
