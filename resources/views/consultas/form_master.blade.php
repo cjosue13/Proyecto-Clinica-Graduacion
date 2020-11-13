@@ -4,7 +4,7 @@
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_FechaNacimiento') ? 'has-error' : "" }}">
-      {{ Form::date('pac_FechaNacimiento',new DateTime('now'), ['class'=>'form-control', 'id'=>'pac_FechaNacimiento', 'placeholder'=>'YYYY-MM-DD']) }}
+      {{ Form::date('pac_FechaNacimiento',Carbon\Carbon::now(), ['class'=>'form-control', 'id'=>'pac_FechaNacimiento', 'placeholder'=>'YYYY-MM-DD']) }}
       {!! $errors->first('pac_FechaNacimiento', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
@@ -16,7 +16,7 @@
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_Religion') ? 'has-error' : "" }}">
-      {{ Form::time('pac_Religion',new DateTime('today'), ['class'=>'form-control', 'id'=>'pac_Religion', 'placeholder'=> 'Religión']) }}
+      {{ Form::time('pac_Religion',Carbon\Carbon::now(), ['class'=>'form-control', 'id'=>'pac_Religion', 'placeholder'=> 'Religión']) }}
       {!! $errors->first('pac_Religion', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
