@@ -110,6 +110,31 @@ Route::delete('personalsocial/deletePS/{id}/{idExp}', [
     'as' => 'deletePS', 'uses' => 'personalsocialController@deletePS'
 ]);
 
+//--------------------------------------------------------------------------
+
+// Examenes
+
+Route::post('examenes/indexEx/{idCon}', [
+    'as' => 'indexEx', 'uses' => 'examenesController@indexEx'
+]);
+
+Route::post('examenes/storeEx/{idCon}', [
+    'as' => 'storeEx', 'uses' => 'examenesController@storeEx'
+]);
+
+Route::post('examenes/updateEx/{id}/{idCon}', [
+    'as' => 'updateEx', 'uses' => 'examenesController@updateEx'
+]);
+
+Route::post('examenes/editEx/{id}/{idCon}', [
+    'as' => 'editEx', 'uses' => 'examenesController@editEx'
+]);
+
+Route::delete('examenes/deletePS/{id}/{idCon}', [
+    'as' => 'deleteEx', 'uses' => 'examenesController@deleteEx'
+]);
+
+//-----------------------------------------------------------------------
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -129,6 +154,7 @@ Route::resource('antenfermedades', 'antenfermedadesController');
 Route::resource('expediente', 'expedienteController');
 Route::resource('antQuiruTrau', 'antQuiruTrauController');
 Route::resource('personalsocial', 'personalsocialController');
+Route::resource('examenes', 'examenesController');
 Route::resource('antecedentesginecologicos', 'antecedentesginecologicosController');
 Route::get('/agenda', 'agendaController@index');
 Route::get('/agenda/listar', 'agendaController@listar');

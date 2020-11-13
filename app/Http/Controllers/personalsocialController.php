@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\tbl_expedientes;
 use App\tbl_personalessociales;
 use Illuminate\Support\Facades\DB;
 
