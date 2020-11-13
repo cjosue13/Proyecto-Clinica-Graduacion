@@ -46,12 +46,23 @@ Route::get('expediente/VerAntecedenteGinecologico/{id}', 'expedienteController@V
 Route::get('expediente/create/{id}', 'expedienteController@create')->name('createExp');
 Route::get('personalsocial/create/{id}', 'personalsocialController@create')->name('createPS');
 Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosController@create')->name('create');
+
+
+//Direcciones de las consultas
 Route::get('consultas/index/{id}', 'consultasController@index')->name('indexConsulta');
 Route::get('consultas/create/{id}', 'consultasController@create')->name('createConsulta');
+Route::get('consultas/edit/{id}/{idExp}', 'consultasController@edit')->name('editConsulta');
+Route::delete('consultas/delete/{id}/{idExp}', 'consultasController@destroy')->name('deleteConsulta');
+Route::post('consultas/store/{id}', 'consultasController@store')->name('storeConsulta');
+Route::patch('consultas/update/{id}/{idExp}', 'consultasController@update')->name('updateConsulta');
+
+
 
 Route::post('expediente/store/{id}', [
     'as' => 'store', 'uses' => 'expedienteController@store'
 ]);
+
+
 
 Route::post('antQuiruTrau/index/{idExp}/{Tipo}', [
     'as' => 'index', 'uses' => 'antQuiruTrauController@index'
