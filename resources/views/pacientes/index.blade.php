@@ -51,16 +51,28 @@
     <td>{{ $value->	pac_Residencia }}</td>
     <td>{{ $value->	pac_Correo }}</td>
     <td>{{ $value->	pac_Profesion_Oficio }}</td>
-    <td>{{ $value->	pac_EstadoCivil }}</td>
+    <?php if($value->pac_EstadoCivil == "ST"){ ?>
+      <td>Soltero</td>
+    <?php }else if($value->pac_EstadoCivil == "CO"){ ?>
+      <td>Comprometido</td>
+    <?php }else if($value->pac_EstadoCivil == "ER"){ ?>
+      <td>En una relación</td>
+    <?php }else if($value->pac_EstadoCivil == "CA"){ ?>
+      <td>Casado</td>
+    <?php }else if($value->pac_EstadoCivil == "UL"){ ?>
+      <td>Unión Libre</td>
+    <?php }else if($value->pac_EstadoCivil == "SP"){ ?>
+      <td>Separado</td>
+    <?php }else if($value->pac_EstadoCivil == "DV"){ ?>
+      <td>Divorciado</td>
+    <?php }else if($value->pac_EstadoCivil == "VD"){ ?>
+      <td>Viudo/Viuda</td>
+    <?php } ?>
     <td>{{ $value->	pac_Religion }}</td>
     <td>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('pacientes.show',$value->pac_id)}}">
-        <i style="color: #ffffff;" class="fas fa-bars"></i>
-      </a>
       <a class="btn btn-hover btn-sm black-background" href="{{route('pacientes.edit',$value->pac_id)}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>
-
       {!! Form::open(['method' => 'DELETE','route' => ['pacientes.destroy', $value->pac_id],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
