@@ -125,6 +125,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('usuarios', 'usuariosController');
 Route::resource('experiencias', 'experienciasController');
 Route::resource('pacientes', 'pacientesController');
+Route::resource('antenfermedades', 'antenfermedadesController');
 Route::resource('expediente', 'expedienteController');
 Route::resource('antQuiruTrau', 'antQuiruTrauController');
 Route::resource('personalsocial', 'personalsocialController');
