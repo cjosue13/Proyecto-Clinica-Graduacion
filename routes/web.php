@@ -94,6 +94,10 @@ Route::post('personalsocial/indexPS/{idExp}', [
     'as' => 'indexPS', 'uses' => 'personalsocialController@indexPS'
 ]);
 
+Route::post('antNoPatologicos/indexNP/{idExp}', [
+    'as' => 'indexNP', 'uses' => 'antNoPatologicosController@indexNP'
+]);
+
 Route::post('personalsocial/storePS/{idExp}', [
     'as' => 'storePS', 'uses' => 'personalsocialController@storePS'
 ]);
@@ -126,6 +130,7 @@ Route::resource('usuarios', 'usuariosController');
 Route::resource('experiencias', 'experienciasController');
 Route::resource('pacientes', 'pacientesController');
 Route::resource('antenfermedades', 'antenfermedadesController');
+Route::resource('antNoPatologicos', 'antNoPatologicosController');
 Route::resource('expediente', 'expedienteController');
 Route::resource('antQuiruTrau', 'antQuiruTrauController');
 Route::resource('personalsocial', 'personalsocialController');
