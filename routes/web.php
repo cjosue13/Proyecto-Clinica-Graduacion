@@ -63,9 +63,11 @@ Route::post('antecedentesginecologicos/store/{id}', [
 
 // Antecedentes Quirúrgicos Traumáticos -------------------------------------------------------------------------
 Route::get('antQuiruTrau/createQT/{idExp}/{Tipo}', 'antQuiruTrauController@createQT')->name('createQT');
+
 Route::post('antQuiruTrau/storeQT/{idExp}/{Tipo}', [
     'as' => 'storeQT', 'uses' => 'antQuiruTrauController@storeQT'
 ]);
+
 
 Route::post('antQuiruTrau/editQT/{id}/{idExp}/{Tipo}', [
     'as' => 'editQT', 'uses' => 'antQuiruTrauController@editQT'
@@ -88,14 +90,36 @@ Route::delete('antecedentesginecologicos/eliminar/{id}/{idExp}', [
     'as' => 'eliminar', 'uses' => 'antecedentesginecologicosController@eliminar'
 ]);
 
+//Antecentes Enfermedades
+
+Route::post('antNoPatologicos/indexNP/{idExp}', [
+    'as' => 'indexNP', 'uses' => 'antNoPatologicosController@indexNP'
+]);
+
+Route::get('antNoPatologicos/createNP/{idExp}', 'antNoPatologicosController@createNP')->name('createNP');
+
+Route::post('antNoPatologicos/storeNP/{idExp}', [
+    'as' => 'storeNP', 'uses' => 'antNoPatologicosController@storeNP'
+]);
+
+Route::post('antNoPatologicos/updateNP/{id}/{idExp}', [
+    'as' => 'updateNP', 'uses' => 'antNoPatologicosController@updateNP'
+]);
+
+Route::post('antNoPatologicos/editNP/{id}/{idExp}', [
+    'as' => 'editNP', 'uses' => 'antNoPatologicosController@editNP'
+]);
+
+Route::delete('antNoPatologicos/deleteNP/{id}/{idExp}', [
+    'as' => 'deleteNP', 'uses' => 'antNoPatologicosController@deleteNP'
+]);
+
+
+
 //------------------------------------------------------------------------------------
 // Personal Social
 Route::post('personalsocial/indexPS/{idExp}', [
     'as' => 'indexPS', 'uses' => 'personalsocialController@indexPS'
-]);
-
-Route::post('antNoPatologicos/indexNP/{idExp}', [
-    'as' => 'indexNP', 'uses' => 'antNoPatologicosController@indexNP'
 ]);
 
 Route::post('personalsocial/storePS/{idExp}', [

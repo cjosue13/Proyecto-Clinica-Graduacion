@@ -7,7 +7,7 @@
 </div>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    {{ Form::open(['route'=>'antNoPatologicos.store', 'method'=>'POST']) }}
+    {{ Form::open(['route'=>['storeNP', $idExp], 'method'=>'POST']) }}
     @include('antNoPatologicos.form_master')
     {{ form::close() }}
   </div>

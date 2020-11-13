@@ -15,6 +15,44 @@ class antNoPatologicosController extends Controller
      */
     public function indexNP($idExp)
     {
+        $antNoPatologicos = DB::table('tbl_expedientes_antecedecentes')
+                ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
+                ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
+                ->select(
+                    'ea_id',
+                    'ea_expediente',
+                    'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
+                    'ea_Descripcion',
+                )->get()->toArray();
+        return view('antNoPatologicos.index', compact('idExp','antNoPatologicos'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createNP($idExp)
+    {
+        $enfermedades = DB::table('tbl_antenfermedades')->orderBy('atpnp_id', 'asc')->where('atpnp_tipo', 'N')->get()->toArray();
+        return view('antNoPatologicos.create', compact('idExp','enfermedades'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeNP(Request $request,$idExp)
+    {
+        
+        $this->validate($request, [
+            'ea_Descripcion' => 'required|string|max:1000',
+            'ea_enfermedad' => 'required|int',
+            ]);
+        tbl_expedientes_antecedecentes::create($request->all()+['ea_expediente' => $idExp]);
+
         $antNoPatologicos = DB::table('tbl_expedientes_antecedecentes')->orderBy('ea_id', 'asc')->get()->toArray();
         $antNoPatologicosAux = array();
         $antNoPatologicos = DB::table('tbl_expedientes_antecedecentes')
@@ -26,34 +64,9 @@ class antNoPatologicosController extends Controller
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
-        return view('antNoPatologicos.index', compact('antNoPatologicos'));
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-        return view('antNoPatologicos.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-
-        $this->validate($request, [
-            'ea_Descripcion' => 'required|string|max:1000',
-        ]);
-        tbl_expedientes_antecedecentes::create($request->all());
-        return redirect()->route('antNoPatologicos.index')->with('success','Antecedente creado con éxito');
+        //return redirect()->route('antNoPatologicos.indexNP')->with('success','Antecedente creado con éxito')->with(compact('idExp','antNoPatologicos'));
+        return view('antNoPatologicos.index', compact('idExp','antNoPatologicos'));
     }
 
     /**
@@ -74,10 +87,11 @@ class antNoPatologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editNP($id, $idExp)
     {
+        $enfermedades = DB::table('tbl_antenfermedades')->orderBy('atpnp_id', 'asc')->where('atpnp_tipo', 'N')->get()->toArray();
         $antNoPatologicos = tbl_expedientes_antecedecentes::find($id);
-        return view('antNoPatologicos.edit', compact('antNoPatologicos'));
+        return view('antNoPatologicos.edit', compact('antNoPatologicos','idExp','enfermedades'));
     }
 
     /**
@@ -87,14 +101,23 @@ class antNoPatologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateNP(Request $request, $id, $idExp)
     {
         $this->validate($request, [
             'ea_Descripcion' => 'required|string|max:1000',
+            'ea_enfermedad' => 'required|int',
         ]);
-       
+        $antNoPatologicos = DB::table('tbl_expedientes_antecedecentes')
+                ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
+                ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
+                ->select(
+                    'ea_id',
+                    'ea_expediente',
+                    'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
+                    'ea_Descripcion',
+                )->get()->toArray();
         tbl_expedientes_antecedecentes::find($id)->update($request->all());
-        return redirect()->route('antNoPatologicos.index')->with('success','Antecedente actualizado con éxito');
+        return view('antNoPatologicos.index', compact('idExp','antNoPatologicos'))->with('success','Antecedente Eliminado');
     }
 
     /**
@@ -103,9 +126,19 @@ class antNoPatologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteNP($id,$idExp)
     {
         tbl_expedientes_antecedecentes::find($id)->delete();
-        return redirect()->route('antNoPatologicos.index')->with('success','Antecedente Eliminado');
+        $antNoPatologicos = DB::table('tbl_expedientes_antecedecentes')
+                ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
+                ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
+                ->select(
+                    'ea_id',
+                    'ea_expediente',
+                    'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
+                    'ea_Descripcion',
+                )->get()->toArray();
+        //return redirect()->route('antNoPatologicos.index')->with('success','Antecedente Eliminado');
+        return view('antNoPatologicos.index', compact('idExp','antNoPatologicos'))->with('success','Antecedente Eliminado');
     }
 }

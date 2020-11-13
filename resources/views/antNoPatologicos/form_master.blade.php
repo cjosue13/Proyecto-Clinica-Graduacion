@@ -1,14 +1,12 @@
-
-
 <div class="row">
     <div class="col-sm-2">
-        {!! form::label('ea_enfermedad','Categoría:') !!}
+        {!! form::label('ea_enfermedad','Enfermedad:') !!}
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ea_enfermedad') ? 'has-error' : "" }}">
             <select name="ea_enfermedad" class="form-control">
                 @foreach($enfermedades as $key =>$value)
-                <option value='{{$value->cgID}}'>{{$value->atpnp_nombre}}</option>
+                <option value='{{$value->atpnp_id}}'>{{$value->atpnp_nombre}}</option>
                 @endforeach
             </select>
             {!! $errors->first('ea_enfermedad', '<p class="help-block">:message</p>') !!}
@@ -27,7 +25,6 @@
     </div>
   </div>
 </div>
-
 
 
 <div class="form-group">
