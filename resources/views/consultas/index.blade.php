@@ -42,6 +42,7 @@
   </tr>
   @foreach ($consultas as $key => $value)
   <tr>
+    
     <td>{{ $value->c_tipo }}</td>
     <td>{{ $value->c_motivo }}</td>
     <td>{{ $value->c_Diagnostico }}</td>
@@ -53,18 +54,15 @@
     <td>{{ $value->c_Fecha }}</td>
     <td>{{ $value->c_Acompanante }}</td>
     <td>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('consultas.show',$value->c_id )}}">
-        <i style="color: #ffffff;" class="fas fa-bars"></i>
-      </a>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('consultas.edit',$value->c_id )}}">
+      
+      <a class="btn btn-hover btn-sm black-background" href="{{route('editConsulta', ['id'=>$value->c_id, 'idExp'=>$expediente[0]->exp_id])}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>
-      {!! Form::open(['method' => 'DELETE','route' => ['consultas.destroy', $value->c_id],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'DELETE','route' => ['deleteConsulta', $value->c_id, $expediente[0]->exp_id],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>
       {!! Form::close() !!}
-     
     </td>
   </tr>
   @endforeach
