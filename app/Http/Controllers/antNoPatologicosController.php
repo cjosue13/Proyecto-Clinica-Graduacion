@@ -22,6 +22,7 @@ class antNoPatologicosController extends Controller
                 ->select(
                     'ea_id',
                     'ea_expediente',
+                    'ea_enfermedad',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
@@ -36,7 +37,18 @@ class antNoPatologicosController extends Controller
     public function createNP($idExp)
     {
         $enfermedades = DB::table('tbl_antenfermedades')->where('atpnp_tipo', 'N')->get()->toArray();
-        return view('antNoPatologicos.create', compact('idExp','enfermedades'));
+        $antNoPatologicos = DB::table('tbl_expedientes_antecedecentes')
+                ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
+                ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
+                ->where('tbl_antenfermedades.atpnp_tipo', 'N')
+                ->select(
+                    'ea_id',
+                    'ea_expediente',
+                    'ea_enfermedad',
+                    'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
+                    'ea_Descripcion',
+                )->get()->toArray();
+        return view('antNoPatologicos.create', compact('idExp','enfermedades','antNoPatologicos'));
     }
 
     /**
@@ -61,6 +73,7 @@ class antNoPatologicosController extends Controller
                 ->select(
                     'ea_id',
                     'ea_expediente',
+                    'ea_enfermedad',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
@@ -114,6 +127,7 @@ class antNoPatologicosController extends Controller
                 ->select(
                     'ea_id',
                     'ea_expediente',
+                    'ea_enfermedad',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
@@ -137,6 +151,7 @@ class antNoPatologicosController extends Controller
                 ->select(
                     'ea_id',
                     'ea_expediente',
+                    'ea_enfermedad',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();

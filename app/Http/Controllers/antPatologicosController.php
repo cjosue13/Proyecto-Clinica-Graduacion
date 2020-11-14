@@ -22,6 +22,7 @@ class antPatologicosController extends Controller
                 ->select(
                     'ea_id',
                     'ea_expediente',
+                    'ea_enfermedad',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
@@ -61,6 +62,7 @@ class antPatologicosController extends Controller
                 ->select(
                     'ea_id',
                     'ea_expediente',
+                    'ea_enfermedad',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
@@ -114,6 +116,7 @@ class antPatologicosController extends Controller
                 ->select(
                     'ea_id',
                     'ea_expediente',
+                    'ea_enfermedad',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
@@ -137,6 +140,7 @@ class antPatologicosController extends Controller
                 ->select(
                     'ea_id',
                     'ea_expediente',
+                    'ea_enfermedad',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();

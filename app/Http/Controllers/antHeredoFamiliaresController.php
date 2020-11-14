@@ -22,6 +22,7 @@ class antHeredoFamiliaresController extends Controller
                 ->select(
                     'he_id',
                     'exp_fk',
+                    'he_enfermedad_fk',
                     'he_Parentesco',
                     'he_Descripcion',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
@@ -62,6 +63,7 @@ class antHeredoFamiliaresController extends Controller
                     'he_id',
                     'exp_fk',
                     'he_Parentesco',
+                    'he_enfermedad_fk',
                     'he_Descripcion',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                 )->get()->toArray();
@@ -115,6 +117,7 @@ class antHeredoFamiliaresController extends Controller
                     'he_id',
                     'exp_fk',
                     'he_Parentesco',
+                    'he_enfermedad_fk',
                     'he_Descripcion',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                 )->get()->toArray();
@@ -139,6 +142,7 @@ class antHeredoFamiliaresController extends Controller
                     'he_id',
                     'exp_fk',
                     'he_Parentesco',
+                    'he_enfermedad_fk',
                     'he_Descripcion',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                 )->get()->toArray();

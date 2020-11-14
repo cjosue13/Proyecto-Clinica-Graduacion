@@ -1,12 +1,19 @@
 <div class="row">
     <div class="col-sm-2">
         {!! form::label('he_enfermedad_fk','Enfermedad:') !!}
+        @isset($antHeredoFamiliares)
+        <?php $ea_enfermedadAux = $antHeredoFamiliares->he_enfermedad_fk; ?>
+        @endisset
+
+        @empty($antHeredoFamiliares)
+        <?php $ea_enfermedadAux = ''; ?>
+        @endempty
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('he_enfermedad_fk') ? 'has-error' : "" }}">
             <select name="he_enfermedad_fk" class="form-control">
                 @foreach($enfermedades as $key =>$value)
-                <option value="{{$value->atpnp_id}}" {{ $antHeredoFamiliares->he_enfermedad_fk == $value->atpnp_id ? 'selected' : '' }}>{{$value->atpnp_nombre}}</option>
+                <option value="{{$value->atpnp_id}}" {{ $ea_enfermedadAux == $value->atpnp_id ? 'selected' : '' }}>{{$value->atpnp_nombre}}</option>
                 @endforeach
             </select>
             {!! $errors->first('he_enfermedad_fk', '<p class="help-block">:message</p>') !!}

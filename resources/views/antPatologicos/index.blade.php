@@ -53,9 +53,6 @@
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>
       {!! Form::close() !!}
-      
-      <a class="btn btn-info btn-sm btn-block" style="margin-top: 5px;" href="{{route('VerExpediente',$value->ea_id)}}">
-        <i class=""></i>Expediente</a>
     </td>
   </tr>
   @endforeach
