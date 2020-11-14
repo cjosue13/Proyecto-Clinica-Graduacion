@@ -111,9 +111,15 @@ Route::post('antPatologicos/indexP/{idExp}', [
     'as' => 'indexP', 'uses' => 'antPatologicosController@indexP'
 ]);
 
+Route::post('antHeredoFamiliares/indexHF/{idExp}', [
+    'as' => 'indexHF', 'uses' => 'antHeredoFamiliaresController@indexHF'
+]);
+
 Route::get('antNoPatologicos/createNP/{idExp}', 'antNoPatologicosController@createNP')->name('createNP');
 
 Route::get('antPatologicos/createP/{idExp}', 'antPatologicosController@createP')->name('createP');
+
+Route::get('antHeredoFamiliares/createHF/{idExp}', 'antHeredoFamiliaresController@createHF')->name('createHF');
 
 Route::post('antNoPatologicos/storeNP/{idExp}', [
     'as' => 'storeNP', 'uses' => 'antNoPatologicosController@storeNP'
@@ -123,6 +129,9 @@ Route::post('antPatologicos/storeP/{idExp}', [
     'as' => 'storeP', 'uses' => 'antPatologicosController@storeP'
 ]);
 
+Route::post('antHeredoFamiliares/storeHF/{idExp}', [
+    'as' => 'storeHF', 'uses' => 'antHeredoFamiliaresController@storeHF'
+]);
 
 Route::post('antNoPatologicos/updateNP/{id}/{idExp}', [
     'as' => 'updateNP', 'uses' => 'antNoPatologicosController@updateNP'
@@ -130,6 +139,10 @@ Route::post('antNoPatologicos/updateNP/{id}/{idExp}', [
 
 Route::post('antPatologicos/updateP/{id}/{idExp}', [
     'as' => 'updateP', 'uses' => 'antPatologicosController@updateP'
+]);
+
+Route::post('antHeredoFamiliares/updateHF/{id}/{idExp}', [
+    'as' => 'updateHF', 'uses' => 'antHeredoFamiliaresController@updateHF'
 ]);
 
 Route::post('antNoPatologicos/editNP/{id}/{idExp}', [
@@ -140,6 +153,10 @@ Route::post('antPatologicos/editP/{id}/{idExp}', [
     'as' => 'editP', 'uses' => 'antPatologicosController@editP'
 ]);
 
+Route::post('antHeredoFamiliares/editHF/{id}/{idExp}', [
+    'as' => 'editHF', 'uses' => 'antHeredoFamiliaresController@editHF'
+]);
+
 Route::delete('antNoPatologicos/deleteNP/{id}/{idExp}', [
     'as' => 'deleteNP', 'uses' => 'antNoPatologicosController@deleteNP'
 ]);
@@ -148,6 +165,9 @@ Route::delete('antPatologicos/deleteP/{id}/{idExp}', [
     'as' => 'deleteP', 'uses' => 'antPatologicosController@deleteP'
 ]);
 
+Route::delete('antHeredoFamiliares/deleteHF/{id}/{idExp}', [
+    'as' => 'deleteHF', 'uses' => 'antHeredoFamiliaresController@deleteHF'
+]);
 
 //------------------------------------------------------------------------------------
 // Personal Social
@@ -214,6 +234,7 @@ Route::resource('pacientes', 'pacientesController');
 Route::resource('antenfermedades', 'antenfermedadesController');
 Route::resource('antNoPatologicos', 'antNoPatologicosController');
 Route::resource('antPatologicos', 'antPatologicosController');
+Route::resource('antHeredoFamiliares', 'antHeredoFamiliaresController');
 Route::resource('expediente', 'expedienteController');
 Route::resource('antQuiruTrau', 'antQuiruTrauController');
 Route::resource('personalsocial', 'personalsocialController');

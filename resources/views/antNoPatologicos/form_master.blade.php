@@ -6,7 +6,7 @@
         <div class="form-group {{ $errors->has('ea_enfermedad') ? 'has-error' : "" }}">
             <select name="ea_enfermedad" class="form-control">
                 @foreach($enfermedades as $key =>$value)
-                <option value='{{$value->atpnp_id}}'>{{$value->atpnp_nombre}}</option>
+                <option value="{{$value->atpnp_id}}" {{ $antNoPatologicos->ea_enfermedad == $value->atpnp_id ? 'selected' : '' }}>{{$value->atpnp_nombre}}</option>
                 @endforeach
             </select>
             {!! $errors->first('ea_enfermedad', '<p class="help-block">:message</p>') !!}
