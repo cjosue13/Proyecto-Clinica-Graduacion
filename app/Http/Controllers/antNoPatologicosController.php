@@ -77,7 +77,6 @@ class antNoPatologicosController extends Controller
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
-
         //return redirect()->route('antNoPatologicos.indexNP')->with('success','Antecedente creado con éxito')->with(compact('idExp','antNoPatologicos'));
         return view('antNoPatologicos.index', compact('idExp','antNoPatologicos'));
     }
@@ -120,6 +119,7 @@ class antNoPatologicosController extends Controller
             'ea_Descripcion' => 'required|string|max:1000',
             'ea_enfermedad' => 'required|int',
         ]);
+        tbl_expedientes_antecedecentes::find($id)->update($request->all());
         $antNoPatologicos = DB::table('tbl_expedientes_antecedecentes')
                 ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
                 ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
@@ -131,7 +131,6 @@ class antNoPatologicosController extends Controller
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
-        tbl_expedientes_antecedecentes::find($id)->update($request->all());
         return view('antNoPatologicos.index', compact('idExp','antNoPatologicos'))->with('success','Antecedente Eliminado');
     }
 
@@ -155,7 +154,6 @@ class antNoPatologicosController extends Controller
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
-        //return redirect()->route('antNoPatologicos.index')->with('success','Antecedente Eliminado');
         return view('antNoPatologicos.index', compact('idExp','antNoPatologicos'))->with('success','Antecedente Eliminado');
     }
 }

@@ -54,7 +54,6 @@ class antPatologicosController extends Controller
             'ea_enfermedad' => 'required|int',
             ]);
         tbl_expedientes_antecedecentes::create($request->all()+['ea_expediente' => $idExp]);
-
         $antPatologicos = DB::table('tbl_expedientes_antecedecentes')
                 ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
                 ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
@@ -66,8 +65,6 @@ class antPatologicosController extends Controller
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
-
-        //return redirect()->route('antPatologicos.indexP')->with('success','Antecedente creado con éxito')->with(compact('idExp','antPatologicos'));
         return view('antPatologicos.index', compact('idExp','antPatologicos'));
     }
 
@@ -109,6 +106,7 @@ class antPatologicosController extends Controller
             'ea_Descripcion' => 'required|string|max:1000',
             'ea_enfermedad' => 'required|int',
         ]);
+        tbl_expedientes_antecedecentes::find($id)->update($request->all());
         $antPatologicos = DB::table('tbl_expedientes_antecedecentes')
                 ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
                 ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
@@ -120,7 +118,6 @@ class antPatologicosController extends Controller
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
-        tbl_expedientes_antecedecentes::find($id)->update($request->all());
         return view('antPatologicos.index', compact('idExp','antPatologicos'))->with('success','Antecedente Eliminado');
     }
 
@@ -144,7 +141,6 @@ class antPatologicosController extends Controller
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
-        //return redirect()->route('antPatologicos.index')->with('success','Antecedente Eliminado');
         return view('antPatologicos.index', compact('idExp','antPatologicos'))->with('success','Antecedente Eliminado');
     }
 }

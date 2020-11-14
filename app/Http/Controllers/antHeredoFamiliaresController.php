@@ -109,6 +109,7 @@ class antHeredoFamiliaresController extends Controller
         $this->validate($request, [
             'he_Descripcion' => 'required|string|max:50',
             ]);
+        tbl_heredofamiliares_expedientes::find($id)->update($request->all());
         $antHeredoFamiliares = DB::table('tbl_heredofamiliares_expedientes')
                 ->join('tbl_antenfermedades', 'tbl_heredofamiliares_expedientes.he_enfermedad_fk', '=', 'tbl_antenfermedades.atpnp_id')
                 ->where('tbl_heredofamiliares_expedientes.exp_fk', $idExp)
@@ -121,7 +122,6 @@ class antHeredoFamiliaresController extends Controller
                     'he_Descripcion',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                 )->get()->toArray();
-        tbl_heredofamiliares_expedientes::find($id)->update($request->all());
         return view('antHeredoFamiliares.index', compact('idExp','antHeredoFamiliares'))->with('success','Antecedente Eliminado');
     }
 
