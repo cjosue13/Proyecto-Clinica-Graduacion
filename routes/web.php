@@ -96,24 +96,46 @@ Route::post('antNoPatologicos/indexNP/{idExp}', [
     'as' => 'indexNP', 'uses' => 'antNoPatologicosController@indexNP'
 ]);
 
+Route::post('antPatologicos/indexP/{idExp}', [
+    'as' => 'indexP', 'uses' => 'antPatologicosController@indexP'
+]);
+
 Route::get('antNoPatologicos/createNP/{idExp}', 'antNoPatologicosController@createNP')->name('createNP');
+
+Route::get('antPatologicos/createP/{idExp}', 'antPatologicosController@createP')->name('createP');
 
 Route::post('antNoPatologicos/storeNP/{idExp}', [
     'as' => 'storeNP', 'uses' => 'antNoPatologicosController@storeNP'
 ]);
 
+Route::post('antPatologicos/storeP/{idExp}', [
+    'as' => 'storeP', 'uses' => 'antPatologicosController@storeP'
+]);
+
+
 Route::post('antNoPatologicos/updateNP/{id}/{idExp}', [
     'as' => 'updateNP', 'uses' => 'antNoPatologicosController@updateNP'
+]);
+
+Route::post('antPatologicos/updateP/{id}/{idExp}', [
+    'as' => 'updateP', 'uses' => 'antPatologicosController@updateP'
 ]);
 
 Route::post('antNoPatologicos/editNP/{id}/{idExp}', [
     'as' => 'editNP', 'uses' => 'antNoPatologicosController@editNP'
 ]);
 
+Route::post('antPatologicos/editP/{id}/{idExp}', [
+    'as' => 'editP', 'uses' => 'antPatologicosController@editP'
+]);
+
 Route::delete('antNoPatologicos/deleteNP/{id}/{idExp}', [
     'as' => 'deleteNP', 'uses' => 'antNoPatologicosController@deleteNP'
 ]);
 
+Route::delete('antPatologicos/deleteP/{id}/{idExp}', [
+    'as' => 'deleteP', 'uses' => 'antPatologicosController@deleteP'
+]);
 
 
 //------------------------------------------------------------------------------------
@@ -180,6 +202,7 @@ Route::resource('experiencias', 'experienciasController');
 Route::resource('pacientes', 'pacientesController');
 Route::resource('antenfermedades', 'antenfermedadesController');
 Route::resource('antNoPatologicos', 'antNoPatologicosController');
+Route::resource('antPatologicos', 'antPatologicosController');
 Route::resource('expediente', 'expedienteController');
 Route::resource('antQuiruTrau', 'antQuiruTrauController');
 Route::resource('personalsocial', 'personalsocialController');

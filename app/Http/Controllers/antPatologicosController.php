@@ -6,26 +6,26 @@ use Illuminate\Http\Request;
 use App\tbl_expedientes_antecedecentes;
 use Illuminate\Support\Facades\DB;
 
-class antNoPatologicosController extends Controller
+class antPatologicosController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexNP($idExp)
+    public function indexP($idExp)
     {
-        $antNoPatologicos = DB::table('tbl_expedientes_antecedecentes')
+        $antPatologicos = DB::table('tbl_expedientes_antecedecentes')
                 ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
                 ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
-                ->where('tbl_antenfermedades.atpnp_tipo', 'N')
+                ->where('tbl_antenfermedades.atpnp_tipo', 'P')
                 ->select(
                     'ea_id',
                     'ea_expediente',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
-        return view('antNoPatologicos.index', compact('idExp','antNoPatologicos'));
+        return view('antPatologicos.index', compact('idExp','antPatologicos'));
     }
 
     /**
@@ -33,10 +33,10 @@ class antNoPatologicosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createNP($idExp)
+    public function createP($idExp)
     {
-        $enfermedades = DB::table('tbl_antenfermedades')->where('atpnp_tipo', 'N')->get()->toArray();
-        return view('antNoPatologicos.create', compact('idExp','enfermedades'));
+        $enfermedades = DB::table('tbl_antenfermedades')->where('atpnp_tipo', 'P')->get()->toArray();
+        return view('antPatologicos.create', compact('idExp','enfermedades'));
     }
 
     /**
@@ -45,7 +45,7 @@ class antNoPatologicosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeNP(Request $request,$idExp)
+    public function storeP(Request $request,$idExp)
     {
         
         $this->validate($request, [
@@ -54,10 +54,10 @@ class antNoPatologicosController extends Controller
             ]);
         tbl_expedientes_antecedecentes::create($request->all()+['ea_expediente' => $idExp]);
 
-        $antNoPatologicos = DB::table('tbl_expedientes_antecedecentes')
+        $antPatologicos = DB::table('tbl_expedientes_antecedecentes')
                 ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
                 ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
-                ->where('tbl_antenfermedades.atpnp_tipo', 'N')
+                ->where('tbl_antenfermedades.atpnp_tipo', 'P')
                 ->select(
                     'ea_id',
                     'ea_expediente',
@@ -65,8 +65,8 @@ class antNoPatologicosController extends Controller
                     'ea_Descripcion',
                 )->get()->toArray();
 
-        //return redirect()->route('antNoPatologicos.indexNP')->with('success','Antecedente creado con éxito')->with(compact('idExp','antNoPatologicos'));
-        return view('antNoPatologicos.index', compact('idExp','antNoPatologicos'));
+        //return redirect()->route('antPatologicos.indexP')->with('success','Antecedente creado con éxito')->with(compact('idExp','antPatologicos'));
+        return view('antPatologicos.index', compact('idExp','antPatologicos'));
     }
 
     /**
@@ -77,8 +77,8 @@ class antNoPatologicosController extends Controller
      */
     public function show($id)
     {
-        $antNoPatologicos = tbl_expedientes_antecedecentes::find($id);
-        return view('antNoPatologicos.show', compact('antNoPatologicos'));
+        $antPatologicos = tbl_expedientes_antecedecentes::find($id);
+        return view('antPatologicos.show', compact('antPatologicos'));
     }
 
     /**
@@ -87,11 +87,11 @@ class antNoPatologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editNP($id, $idExp)
+    public function editP($id, $idExp)
     {
-        $enfermedades = DB::table('tbl_antenfermedades')->where('atpnp_tipo', 'N')->get()->toArray();
-        $antNoPatologicos = tbl_expedientes_antecedecentes::find($id);
-        return view('antNoPatologicos.edit', compact('antNoPatologicos','idExp','enfermedades'));
+        $enfermedades = DB::table('tbl_antenfermedades')->where('atpnp_tipo', 'P')->get()->toArray();
+        $antPatologicos = tbl_expedientes_antecedecentes::find($id);
+        return view('antPatologicos.edit', compact('antPatologicos','idExp','enfermedades'));
     }
 
     /**
@@ -101,16 +101,16 @@ class antNoPatologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateNP(Request $request, $id, $idExp)
+    public function updateP(Request $request, $id, $idExp)
     {
         $this->validate($request, [
             'ea_Descripcion' => 'required|string|max:1000',
             'ea_enfermedad' => 'required|int',
         ]);
-        $antNoPatologicos = DB::table('tbl_expedientes_antecedecentes')
+        $antPatologicos = DB::table('tbl_expedientes_antecedecentes')
                 ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
                 ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
-                ->where('tbl_antenfermedades.atpnp_tipo', 'N')
+                ->where('tbl_antenfermedades.atpnp_tipo', 'P')
                 ->select(
                     'ea_id',
                     'ea_expediente',
@@ -118,7 +118,7 @@ class antNoPatologicosController extends Controller
                     'ea_Descripcion',
                 )->get()->toArray();
         tbl_expedientes_antecedecentes::find($id)->update($request->all());
-        return view('antNoPatologicos.index', compact('idExp','antNoPatologicos'))->with('success','Antecedente Eliminado');
+        return view('antPatologicos.index', compact('idExp','antPatologicos'))->with('success','Antecedente Eliminado');
     }
 
     /**
@@ -127,20 +127,20 @@ class antNoPatologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteNP($id,$idExp)
+    public function deleteP($id,$idExp)
     {
         tbl_expedientes_antecedecentes::find($id)->delete();
-        $antNoPatologicos = DB::table('tbl_expedientes_antecedecentes')
+        $antPatologicos = DB::table('tbl_expedientes_antecedecentes')
                 ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
                 ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
-                ->where('tbl_antenfermedades.atpnp_tipo', 'N')
+                ->where('tbl_antenfermedades.atpnp_tipo', 'P')
                 ->select(
                     'ea_id',
                     'ea_expediente',
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
-        //return redirect()->route('antNoPatologicos.index')->with('success','Antecedente Eliminado');
-        return view('antNoPatologicos.index', compact('idExp','antNoPatologicos'))->with('success','Antecedente Eliminado');
+        //return redirect()->route('antPatologicos.index')->with('success','Antecedente Eliminado');
+        return view('antPatologicos.index', compact('idExp','antPatologicos'))->with('success','Antecedente Eliminado');
     }
 }
