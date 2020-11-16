@@ -30,7 +30,7 @@
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('c_Hora') ? 'has-error' : "" }}">
-      {{ Form::time('c_Hora', null, ['class'=>'form-control', 'id'=>'c_Hora', 'format'=>'g:i A']) }}
+      {{ Form::time('c_Hora', isset($model)? null : $fecha  , ['class'=>'form-control', 'id'=>'c_Hora', 'format'=>'g:i A']) }}
       {!! $errors->first('c_Hora', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
