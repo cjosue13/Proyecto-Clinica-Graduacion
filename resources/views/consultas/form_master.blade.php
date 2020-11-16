@@ -1,14 +1,10 @@
 @isset($consulta)
   <?php 
-  echo $consulta->c_hora. " HOLISS            ";
   $fecha = $consulta->c_fecha; 
-  $hora = '12:33';
-  
-  ?>
+  $hora = $consulta->c_Hora; ?>
 @endisset
 @empty($consulta)
   <?php 
-    echo "HOLIS";
     date_default_timezone_set('America/Costa_Rica');
     $fecha = Carbon\Carbon::now(); 
     $hora = Carbon\Carbon::now()->format('g:i A');
@@ -79,10 +75,11 @@
 <div class="row">
   <div class="col-sm-2">
     {!! form::label('c_tipo','Tipo de Examen') !!}
-    @isset($consultas)
-    <?php $tipo = $consultas->c_tipo; ?>
+    @isset($consulta)
+    <?php $tipo = $consulta->c_tipo; 
+    ?>
     @endisset
-    @empty($consultas)
+    @empty($consulta)
     <?php $tipo = ''; ?>
     @endempty
   </div>
