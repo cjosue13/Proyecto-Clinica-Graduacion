@@ -26,7 +26,9 @@ class antPatologicosController extends Controller
                     'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
                     'ea_Descripcion',
                 )->get()->toArray();
-        return view('antPatologicos.index', compact('idExp','antPatologicos'));
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();           
+        return view('antPatologicos.index', compact('idExp','antPatologicos', 'paciente'));
     }
 
     /**

@@ -55,7 +55,7 @@
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>
       {!! Form::close() !!}
-      {!! Form::open(['method' => 'POST','route' => ['MenuAntecedentes', $value->exp_id,$paciente[0]->pac_Genero ],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'POST','route' => ['MenuAntecedentes', $value->exp_id,$paciente[0]->pac_Genero, $paciente[0]->pac_pNombre,$paciente[0]->pac_pApellido ],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;">Antecedentes</i>
       </button>

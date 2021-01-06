@@ -93,7 +93,7 @@ Route::delete('antQuiruTrau/deleteQT/{id}/{idExp}/{tipo}', [
 ]);
 // ------------------------------------------------------------------------------------------------------------
 
-Route::post('expediente/MenuAntecedentes/{id}/{Genero}', [
+Route::post('expediente/MenuAntecedentes/{id}/{Genero}/{Nombre}/{Apellido}', [
     'as' => 'MenuAntecedentes', 'uses' => 'expedienteController@MenuAntecedentes'
 ]);
 

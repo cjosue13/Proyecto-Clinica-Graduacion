@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header" style=" text-align:center; color: #209f85; font-size: 20px; cursor: pointer;" >Menú Antecedentes</div>
+                <div class="card-header" style=" text-align:center; color: #209f85; font-size: 20px; cursor: pointer;" >Menú Datos de {{$Nombre}} {{$Apellido}}</div>
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">

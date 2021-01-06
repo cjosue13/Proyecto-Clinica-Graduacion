@@ -126,7 +126,7 @@ class expedienteController extends Controller
         return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos'));
     }
 
-    public function MenuAntecedentes($idExp, $Genero){
-        return view('MenuAntecedentes', compact('idExp','Genero'));
+    public function MenuAntecedentes($idExp, $Genero, $Nombre, $Apellido){
+        return view('MenuAntecedentes', compact('idExp','Genero','Nombre','Apellido'));
     }
 }
