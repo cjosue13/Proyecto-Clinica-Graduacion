@@ -97,6 +97,14 @@ Route::post('expediente/MenuAntecedentes/{id}/{Genero}/{Nombre}/{Apellido}', [
     'as' => 'MenuAntecedentes', 'uses' => 'expedienteController@MenuAntecedentes'
 ]);
 
+Route::post('consultas/ExamenesClinicos/{id}', [
+    'as' => 'ExamenesClinicos', 'uses' => 'examenesclinicosController@ExamenesClinicos'
+]);
+
+Route::post('consultas/Examenes/{id}', [
+    'as' => 'Examenes', 'uses' => 'examenesController@Examenes'
+]);
+
 Route::delete('antecedentesginecologicos/eliminar/{id}/{idExp}', [
     'as' => 'eliminar', 'uses' => 'antecedentesginecologicosController@eliminar'
 ]);
