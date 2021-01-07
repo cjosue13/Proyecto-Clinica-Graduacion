@@ -97,7 +97,7 @@ Route::post('expediente/MenuAntecedentes/{id}/{Genero}/{Nombre}/{Apellido}', [
     'as' => 'MenuAntecedentes', 'uses' => 'expedienteController@MenuAntecedentes'
 ]);
 
-Route::post('examenesclinicos/indexEC/{id}', [
+Route::post('examenesclinicos/indexEC/{idCon}', [
     'as' => 'ExamenesClinicos', 'uses' => 'examenesclinicosController@indexEC'
 ]);
 
