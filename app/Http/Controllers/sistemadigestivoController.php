@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\tbl_antenfermedades;
+use App\tbl_sistemadigestivos;
 use Illuminate\Support\Facades\DB;
 
-class antenfermedadesController extends Controller
+class sistemadigestivoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class antenfermedadesController extends Controller
      */
     public function index()
     {
-        $antenfermedades = DB::table('tbl_antenfermedades')->orderBy('atpnp_tipo', 'asc')->get()->toArray();
-        return view('antenfermedades.index', compact('antenfermedades'));
+        $sistemadigestivos = DB::table('tbl_sistemadigestivos')->orderBy('sd_id', 'asc')->get()->toArray();
+        return view('sistemadigestivos.index', compact('sistemadigestivos'));
     }
 
     /**
@@ -27,7 +27,7 @@ class antenfermedadesController extends Controller
     public function create()
     {
 
-        return view('antenfermedades.create');
+        return view('sistemadigestivos.create');
     }
 
     /**
@@ -40,11 +40,10 @@ class antenfermedadesController extends Controller
     {
 
         $this->validate($request, [
-            'atpnp_nombre' => 'required|string|max:50',
-            'atpnp_tipo' => 'required|string|max:50',
+            'sg_nombre' => 'required|string|max:50',
         ]);
-        tbl_antenfermedades::create($request->all());
-        return redirect()->route('antenfermedades.index')->with('success','Enfermedad creada con éxito');
+        tbl_sistemadigestivos::create($request->all());
+        return redirect()->route('sistemadigestivos.index')->with('success','Dato en sistema digestivo creado con éxito');
     }
 
     /**
@@ -55,8 +54,8 @@ class antenfermedadesController extends Controller
      */
     public function show($id)
     {
-        $antenfermedades = tbl_antenfermedades::find($id);
-        return view('antenfermedades.show', compact('antenfermedades'));
+        $sistemadigestivos = tbl_sistemadigestivos::find($id);
+        return view('sistemadigestivos.show', compact('sistemadigestivos'));
     }
 
     /**
@@ -67,8 +66,8 @@ class antenfermedadesController extends Controller
      */
     public function edit($id)
     {
-        $antenfermedades = tbl_antenfermedades::find($id);
-        return view('antenfermedades.edit', compact('antenfermedades'));
+        $sistemadigestivos = tbl_sistemadigestivos::find($id);
+        return view('sistemadigestivos.edit', compact('sistemadigestivos'));
     }
 
     /**
@@ -81,12 +80,11 @@ class antenfermedadesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'atpnp_nombre' => 'required|string|max:50',
-            'atpnp_tipo' => 'required|string|max:50',
+            'sg_nombre' => 'required|string|max:50',
         ]);
        
-        tbl_antenfermedades::find($id)->update($request->all());
-        return redirect()->route('antenfermedades.index')->with('success','Enfermedad actualizada con éxito');
+        tbl_sistemadigestivos::find($id)->update($request->all());
+        return redirect()->route('sistemadigestivos.index')->with('success','Dato de sistema digestivo actualizado con éxito');
     }
 
     /**
@@ -97,7 +95,7 @@ class antenfermedadesController extends Controller
      */
     public function destroy($id)
     {
-        tbl_antenfermedades::find($id)->delete();
-        return redirect()->route('antenfermedades.index')->with('success','Enfermedad Eliminada');
+        tbl_sistemadigestivos::find($id)->delete();
+        return redirect()->route('sistemadigestivos.index')->with('success','Dato de sistema digestivo eliminado');
     }
 }
