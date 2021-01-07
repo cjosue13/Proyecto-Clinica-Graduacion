@@ -97,11 +97,11 @@ Route::post('expediente/MenuAntecedentes/{id}/{Genero}/{Nombre}/{Apellido}', [
     'as' => 'MenuAntecedentes', 'uses' => 'expedienteController@MenuAntecedentes'
 ]);
 
-Route::post('consultas/ExamenesClinicos/{id}', [
+Route::post('examenesclinicos/ExamenesClinicos/{id}', [
     'as' => 'ExamenesClinicos', 'uses' => 'examenesclinicosController@ExamenesClinicos'
 ]);
 
-Route::post('consultas/Examenes/{id}', [
+Route::post('examenes/Examenes/{id}', [
     'as' => 'Examenes', 'uses' => 'examenesController@Examenes'
 ]);
 
@@ -248,6 +248,11 @@ Route::resource('antQuiruTrau', 'antQuiruTrauController');
 Route::resource('personalsocial', 'personalsocialController');
 Route::resource('examenes', 'examenesController');
 Route::resource('antecedentesginecologicos', 'antecedentesginecologicosController');
+
+
+Route::resource('examenesclinicos', 'examenesclinicosController');
+Route::resource('examenes', 'examenesController');
+
 Route::get('/agenda', 'agendaController@index');
 Route::get('/agenda/listar', 'agendaController@listar');
 Route::post('/agenda/guardar', 'agendaController@guardar');
