@@ -98,10 +98,6 @@ Route::post('expediente/MenuAntecedentes/{id}/{Genero}/{Nombre}/{Apellido}', [
     'as' => 'MenuAntecedentes', 'uses' => 'expedienteController@MenuAntecedentes'
 ]);
 
-Route::post('examenesclinicos/indexEC/{idCon}', [
-    'as' => 'ExamenesClinicos', 'uses' => 'examenesclinicosController@indexEC'
-]);
-
 Route::delete('antecedentesginecologicos/eliminar/{id}/{idExp}', [
     'as' => 'eliminar', 'uses' => 'antecedentesginecologicosController@eliminar'
 ]);
@@ -216,8 +212,34 @@ Route::post('examenes/editEx/{id}/{idCon}', [
     'as' => 'editEx', 'uses' => 'examenesController@editEx'
 ]);
 
-Route::delete('examenes/deletePS/{id}/{idCon}', [
+Route::delete('examenes/deleteEx/{id}/{idCon}', [
     'as' => 'deleteEx', 'uses' => 'examenesController@deleteEx'
+]);
+//--------------------------------------------------
+
+//Examenes Clínicos
+
+Route::post('examenesclinicos/createEC/{idCon}', [
+    'as' => 'createEC', 'uses' => 'examenesclinicosController@createEC'
+]);
+Route::post('examenesclinicos/indexEC/{idCon}', [
+    'as' => 'indexEC', 'uses' => 'examenesclinicosController@indexEC'
+]);
+
+Route::post('examenesclinicos/storeEC/{idCon}', [
+    'as' => 'storeEC', 'uses' => 'examenesclinicosController@storeEC'
+]);
+
+Route::post('examenesclinicos/updateEx/{id}/{idCon}', [
+    'as' => 'updateEC', 'uses' => 'examenesclinicosController@updateEC'
+]);
+
+Route::post('examenesclinicos/editEx/{id}/{idCon}', [
+    'as' => 'editEC', 'uses' => 'examenesclinicosController@editEC'
+]);
+
+Route::delete('examenes/deleteEC/{id}/{idCon}', [
+    'as' => 'deleteEC', 'uses' => 'examenesController@deleteEC'
 ]);
 
 //-----------------------------------------------------------------------
