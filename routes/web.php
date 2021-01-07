@@ -47,6 +47,7 @@ Route::get('expediente/create/{id}', 'expedienteController@create')->name('creat
 Route::get('personalsocial/create/{id}', 'personalsocialController@create')->name('createPS');
 Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosController@create')->name('create');
 
+Route::get('examenes/create/{idCon}', 'examenesController@create')->name('createEx');
 
 //Direcciones de las consultas
 Route::get('consultas/index/{id}', 'consultasController@index')->name('indexConsulta');

@@ -81,8 +81,8 @@ class examenesController extends Controller
 
         tbl_examenes::find($id)->update( $request->all());
 
-        $examenes = DB::table('examenes')->select('examenes.*')
-        ->where('tbl_personalessociales.exmm_fkConsulta', $idCon)->get()->toArray();
+        $examenes = DB::table('tbl_examenes')->select('tbl_examenes.*')
+        ->where('tbl_examenes.exmm_fkConsulta', $idCon)->get()->toArray();
 
         return view('examenes.index', compact('examenes', 'idCon'))
         ->with('success','Datos actualizados con éxito');
@@ -97,10 +97,10 @@ class examenesController extends Controller
     public function deleteEx($id, $idCon)
     {
         tbl_examenes::find($id)->delete();
-        $examenes = DB::table('examenes')->select('examenes.*')
-        ->where('tbl_personalessociales.exmm_fkConsulta', $idCon)->get()->toArray();
+        $examenes = DB::table('tbl_examenes')->select('tbl_examenes.*')
+        ->where('tbl_examenes.exmm_fkConsulta', $idCon)->get()->toArray();
 
         return view('examenes.index', compact('examenes', 'idCon'))
-        ->with('success','Datos actualizados con éxito');
+        ->with('success','Datos eliminados con éxito');
     }
 }

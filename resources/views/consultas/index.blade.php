@@ -64,17 +64,17 @@
       </button>
       {!! Form::close() !!}
 
-      {!! Form::open(['method' => 'POST','route' => ['Examenes',$value->c_id],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'POST','route' => ['indexEx', $value->c_id ],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;">Examenes</i>
       </button>
       {!! Form::close() !!}
 
-      {!! Form::open(['method' => 'POST','route' => ['ExamenesClinicos',$value->c_id],'style'=>'display:inline']) !!}
+      <!--{!! Form::open(['method' => 'POST','route' => ['indexEC', $value->c_id ],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;">Examenes Clinicos</i>
       </button>
-      {!! Form::close() !!}
+      {!! Form::close() !!}-->
 
 
     </td>
