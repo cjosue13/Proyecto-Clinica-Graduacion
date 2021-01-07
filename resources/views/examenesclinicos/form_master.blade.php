@@ -24,7 +24,7 @@
 
 <div class="row">
     <div class="col-sm-2">
-        {!! form::label('exm_FC','Frecuencia Cardiaca:') !!}
+        {!! form::label('exm_FC','Frecuencia Cardiaca(lat/mm):') !!}
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('exm_FC') ? 'has-error' : "" }}">
@@ -36,7 +36,7 @@
 
 <div class="row">
     <div class="col-sm-2">
-        {!! form::label('exm_Temperatura','Temperatura:') !!}
+        {!! form::label('exm_Temperatura','Temperatura(°C):') !!}
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('exm_Temperatura') ? 'has-error' : "" }}">

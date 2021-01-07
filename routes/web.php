@@ -48,6 +48,7 @@ Route::get('personalsocial/create/{id}', 'personalsocialController@create')->nam
 Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosController@create')->name('create');
 
 Route::get('examenes/create/{idCon}', 'examenesController@create')->name('createEx');
+Route::get('examenesclinicos/createEC/{idCon}', 'examenesclinicosController@createEC')->name('createEC');
 
 //Direcciones de las consultas
 Route::get('consultas/index/{id}', 'consultasController@index')->name('indexConsulta');
@@ -218,10 +219,6 @@ Route::delete('examenes/deleteEx/{id}/{idCon}', [
 //--------------------------------------------------
 
 //Examenes Clínicos
-
-Route::post('examenesclinicos/createEC/{idCon}', [
-    'as' => 'createEC', 'uses' => 'examenesclinicosController@createEC'
-]);
 Route::post('examenesclinicos/indexEC/{idCon}', [
     'as' => 'indexEC', 'uses' => 'examenesclinicosController@indexEC'
 ]);
@@ -239,7 +236,7 @@ Route::post('examenesclinicos/editEx/{id}/{idCon}', [
 ]);
 
 Route::delete('examenes/deleteEC/{id}/{idCon}', [
-    'as' => 'deleteEC', 'uses' => 'examenesController@deleteEC'
+    'as' => 'deleteEC', 'uses' => 'examenesclinicosController@deleteEC'
 ]);
 
 //-----------------------------------------------------------------------

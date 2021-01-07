@@ -74,7 +74,7 @@
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;">Examenes Clinicos</i>
       </button>
-      {!! Form::close() !!}-->
+      {!! Form::close() !!}
 
 
     </td>

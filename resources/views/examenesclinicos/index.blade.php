@@ -27,7 +27,6 @@
       <th>Peso</th>
       <th>Estatura</th>
       <th>IMC</th>
-      <th>Estatura</th>
       <th>Frecuencia Cardiaca</th>
       <th>Temperatura</th>
       <th>Sistólica</th>

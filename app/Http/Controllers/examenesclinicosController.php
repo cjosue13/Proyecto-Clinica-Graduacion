@@ -42,14 +42,14 @@ class examenesclinicosController extends Controller
     {
         
         $this->validate($request, [
-            'exm_peso' => 'required|float|max:3',
-            'exm_altura' => 'required|float|max:3',
-            'exm_FC' => 'required|float|max:3',
-            'exm_Temperatura' => 'required|float|max:3',
-            'exm_sistolica' => 'required|float|max:5',
-            'exm_diastolica' => 'required|float|max:5'
+            'exm_peso' => 'required|int',
+            'exm_altura' => 'required|int',
+            'exm_FC' => 'required|int',
+            'exm_Temperatura' => 'required|int',
+            'exm_sistolica' => 'required|int',
+            'exm_diastolica' => 'required|int'
         ]);
-        tbl_examenesclinicos::create(['exm_imc' => $request['exm_peso']/$request['exm_altura']] + ['exm_consulta' => $idCon] + $request->all());
+        tbl_examenesclinicos::create(['exm_imc' => round(($request['exm_peso']/pow($request['exm_altura'],2))*10000,1)] + ['exm_consulta' => $idCon] + $request->all());
 
         $examenesclinicos = DB::table('tbl_examenesclinicos')->select('tbl_examenesclinicos.*')
         ->where('tbl_examenesclinicos.exm_consulta', $idCon)->get()->toArray();
@@ -80,15 +80,15 @@ class examenesclinicosController extends Controller
     {
 
         $this->validate($request, [
-            'exm_peso' => 'required|float|max:3',
-            'exm_altura' => 'required|float|max:3',
-            'exm_FC' => 'required|float|max:3',
-            'exm_Temperatura' => 'required|float|max:3',
-            'exm_sistolica' => 'required|float|max:5',
-            'exm_diastolica' => 'required|float|max:5'
+            'exm_peso' => 'required|int',
+            'exm_altura' => 'required|int',
+            'exm_FC' => 'required|int',
+            'exm_Temperatura' => 'required|int',
+            'exm_sistolica' => 'required|int',
+            'exm_diastolica' => 'required|int'
         ]);
 
-        tbl_examenesclinicos::find($id)->update(['exm_imc' => $request['exm_peso']/$request['exm_altura']] + $request->all());
+        tbl_examenesclinicos::find($id)->update(['exm_imc' => round(($request['exm_peso']/pow($request['exm_altura'],2))*10000,1)] + $request->all());
 
         $examenesclinicos = DB::table('tbl_examenesclinicos')->select('tbl_examenesclinicos.*')
         ->where('tbl_examenesclinicos.exm_consulta', $idCon)->get()->toArray();
@@ -106,7 +106,7 @@ class examenesclinicosController extends Controller
     public function deleteEC($id, $idCon)
     {
         tbl_examenesclinicos::find($id)->delete();
-        $examenes = DB::table('tb_examenesclinicos')->select('tbl_examenesclinicos.*')
+        $examenesclinicos = DB::table('tbl_examenesclinicos')->select('tbl_examenesclinicos.*')
         ->where('tbl_examenesclinicos.exm_consulta', $idCon)->get()->toArray();
 
         return view('examenesclinicos.index', compact('examenesclinicos', 'idCon'))
