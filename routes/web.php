@@ -238,6 +238,7 @@ Route::resource('experiencias', 'experienciasController');
 Route::resource('pacientes', 'pacientesController');
 Route::resource('antenfermedades', 'antenfermedadesController');
 Route::resource('sistemadigestivos', 'sistemadigestivoController');
+Route::resource('sistemanerviosos', 'sistemanerviosoController');
 Route::resource('antNoPatologicos', 'antNoPatologicosController');
 Route::resource('antPatologicos', 'antPatologicosController');
 Route::resource('antHeredoFamiliares', 'antHeredoFamiliaresController');

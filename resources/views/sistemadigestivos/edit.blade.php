@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('PageTitle', 'Pacientes')
+@section('PageTitle', 'Sistema Digestivo')
 @section('content')
   <div class="row">
     <div class="col-md-6 col-md-offset-3">

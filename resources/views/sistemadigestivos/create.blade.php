@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('PageTitle', 'Pacientes')
+@section('PageTitle', 'Sistema Digestivo')
 @section('content')
 <div class="pull-right">
   <br />
