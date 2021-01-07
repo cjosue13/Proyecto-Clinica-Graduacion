@@ -246,7 +246,6 @@ Route::resource('antHeredoFamiliares', 'antHeredoFamiliaresController');
 Route::resource('expediente', 'expedienteController');
 Route::resource('antQuiruTrau', 'antQuiruTrauController');
 Route::resource('personalsocial', 'personalsocialController');
-Route::resource('examenes', 'examenesController');
 Route::resource('antecedentesginecologicos', 'antecedentesginecologicosController');
 
 
