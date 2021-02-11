@@ -76,7 +76,7 @@ class examenesclinicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateEC(Request $request, $id,$idCon)
+    public function updateEC(Request $request, $id, $idCon)
     {
 
         $this->validate($request, [
