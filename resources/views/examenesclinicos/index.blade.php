@@ -72,6 +72,12 @@
       </button>
       {!! Form::close() !!}
 
+      {!! Form::open(['method' => 'POST','route' => ['indexEDIS',$value->exm_id],'style'=>'display:inline']) !!}
+      <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
+        <i style="color: #ffffff;">Exámenes Digestivos</i>
+      </button>
+      {!! Form::close() !!}
+
     </td>
   </tr>
   @endforeach

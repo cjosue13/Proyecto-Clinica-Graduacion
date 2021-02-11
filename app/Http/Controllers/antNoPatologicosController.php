@@ -51,7 +51,6 @@ class antNoPatologicosController extends Controller
      */
     public function storeNP(Request $request,$idExp)
     {
-        
         $this->validate($request, [
             'ea_Descripcion' => 'required|string|max:1000',
             'ea_enfermedad' => 'required|int',

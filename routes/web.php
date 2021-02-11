@@ -50,6 +50,8 @@ Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosCo
 Route::get('examenes/create/{idCon}', 'examenesController@create')->name('createEx');
 Route::get('examenesclinicos/createEC/{idCon}', 'examenesclinicosController@createEC')->name('createEC');
 Route::get('exmcardiovasculares/createECAR/{exm_id}', 'exmCardioController@createECAR')->name('createECAR');
+Route::get('exmsistemasdigestivos/createEDIS/{exm_id}', 'exmDigestivoController@createEDIS')->name('createEDIS');
+
 
 //Direcciones de las consultas
 Route::get('consultas/index/{id}', 'consultasController@index')->name('indexConsulta');
@@ -228,6 +230,10 @@ Route::post('exmcardiovasculares/indexECAR/{exm_id}', [
     'as' => 'indexECAR', 'uses' => 'exmCardioController@indexECAR'
 ]);
 
+Route::post('exmsistemasdigestivos/indexEDIS/{exm_id}', [
+    'as' => 'indexEDIS', 'uses' => 'exmDigestivoController@indexEDIS'
+]);
+
 Route::post('examenesclinicos/storeEC/{idCon}', [
     'as' => 'storeEC', 'uses' => 'examenesclinicosController@storeEC'
 ]);
@@ -236,8 +242,16 @@ Route::post('exmcardiovasculares/storeECAR/{exm_id}', [
     'as' => 'storeECAR', 'uses' => 'exmCardioController@storeECAR'
 ]);
 
+Route::post('exmsistemasdigestivos/storeEDIS/{exm_id}', [
+    'as' => 'storeEDIS', 'uses' => 'exmDigestivoController@storeEDIS'
+]);
+
 Route::post('examenesclinicos/updateEx/{id}/{idCon}', [
     'as' => 'updateEC', 'uses' => 'examenesclinicosController@updateEC'
+]);
+
+Route::post('exmsistemasdigestivos/updateEDIS/{id}/{exm_id}', [
+    'as' => 'updateEDIS', 'uses' => 'exmDigestivoController@updateEDIS'
 ]);
 
 Route::post('exmcardiovasculares/updateECAR/{id}/{exm_id}', [
@@ -245,20 +259,29 @@ Route::post('exmcardiovasculares/updateECAR/{id}/{exm_id}', [
 ]);
 
 
+
 Route::post('examenesclinicos/editEx/{id}/{idCon}', [
     'as' => 'editEC', 'uses' => 'examenesclinicosController@editEC'
 ]);
 
-Route::post('exmcardiovasculares/editECAR/{id}/{exm_id}', [
-    'as' => 'editECAR', 'uses' => 'exmCardioController@editECAR'
+Route::post('exmsistemasdigestivos/editEDIS/{id}/{exm_id}', [
+    'as' => 'editEDIS', 'uses' => 'exmDigestivoController@editEDIS'
 ]);
 
 Route::delete('examenes/deleteEC/{id}/{idCon}', [
     'as' => 'deleteEC', 'uses' => 'examenesclinicosController@deleteEC'
 ]);
 
-Route::delete('examenes/deleteECAR/{id}/{exm_id}', [
+Route::post('exmcardiovasculares/editECAR/{id}/{exm_id}', [
+    'as' => 'editECAR', 'uses' => 'exmCardioController@editECAR'
+]);
+
+Route::delete('exmcardiovasculares/deleteECAR/{id}/{exm_id}', [
     'as' => 'deleteECAR', 'uses' => 'exmCardioController@deleteECAR'
+]);
+
+Route::delete('exmsistemasdigestivos/deleteEDIS/{id}/{exm_id}', [
+    'as' => 'deleteEDIS', 'uses' => 'exmDigestivoController@deleteEDIS'
 ]);
 
 //-----------------------------------------------------------------------
