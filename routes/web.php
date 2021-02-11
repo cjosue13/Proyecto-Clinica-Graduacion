@@ -51,6 +51,7 @@ Route::get('examenes/create/{idCon}', 'examenesController@create')->name('create
 Route::get('examenesclinicos/createEC/{idCon}', 'examenesclinicosController@createEC')->name('createEC');
 Route::get('exmcardiovasculares/createECAR/{exm_id}', 'exmCardioController@createECAR')->name('createECAR');
 Route::get('exmsistemasdigestivos/createEDIS/{exm_id}', 'exmDigestivoController@createEDIS')->name('createEDIS');
+Route::get('exmsistemasnerviosos/createESN/{exm_id}', 'exmNerviosoController@createESN')->name('createESN');
 
 
 //Direcciones de las consultas
@@ -234,6 +235,10 @@ Route::post('exmsistemasdigestivos/indexEDIS/{exm_id}', [
     'as' => 'indexEDIS', 'uses' => 'exmDigestivoController@indexEDIS'
 ]);
 
+Route::post('exmsistemasnerviosos/indexESN/{exm_id}', [
+    'as' => 'indexESN', 'uses' => 'exmNerviosoController@indexESN'
+]);
+
 Route::post('examenesclinicos/storeEC/{idCon}', [
     'as' => 'storeEC', 'uses' => 'examenesclinicosController@storeEC'
 ]);
@@ -246,12 +251,21 @@ Route::post('exmsistemasdigestivos/storeEDIS/{exm_id}', [
     'as' => 'storeEDIS', 'uses' => 'exmDigestivoController@storeEDIS'
 ]);
 
+Route::post('exmsistemasnerviosos/storeESN/{exm_id}', [
+    'as' => 'storeESN', 'uses' => 'exmNerviosoController@storeESN'
+]);
+
+
 Route::post('examenesclinicos/updateEx/{id}/{idCon}', [
     'as' => 'updateEC', 'uses' => 'examenesclinicosController@updateEC'
 ]);
 
 Route::post('exmsistemasdigestivos/updateEDIS/{id}/{exm_id}', [
     'as' => 'updateEDIS', 'uses' => 'exmDigestivoController@updateEDIS'
+]);
+
+Route::post('exmsistemasnerviosos/updateESN/{id}/{exm_id}', [
+    'as' => 'updateESN', 'uses' => 'exmNerviosoController@updateESN'
 ]);
 
 Route::post('exmcardiovasculares/updateECAR/{id}/{exm_id}', [
@@ -268,6 +282,10 @@ Route::post('exmsistemasdigestivos/editEDIS/{id}/{exm_id}', [
     'as' => 'editEDIS', 'uses' => 'exmDigestivoController@editEDIS'
 ]);
 
+Route::post('exmsistemasnerviosos/editESN/{id}/{exm_id}', [
+    'as' => 'editESN', 'uses' => 'exmNerviosoController@editESN'
+]);
+
 Route::delete('examenes/deleteEC/{id}/{idCon}', [
     'as' => 'deleteEC', 'uses' => 'examenesclinicosController@deleteEC'
 ]);
@@ -282,6 +300,10 @@ Route::delete('exmcardiovasculares/deleteECAR/{id}/{exm_id}', [
 
 Route::delete('exmsistemasdigestivos/deleteEDIS/{id}/{exm_id}', [
     'as' => 'deleteEDIS', 'uses' => 'exmDigestivoController@deleteEDIS'
+]);
+
+Route::delete('exmsistemasnerviosos/deleteESN/{id}/{exm_id}', [
+    'as' => 'deleteESN', 'uses' => 'exmNerviosoController@deleteESN'
 ]);
 
 //-----------------------------------------------------------------------
