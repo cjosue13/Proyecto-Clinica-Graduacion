@@ -84,6 +84,12 @@
       </button>
       {!! Form::close() !!}
 
+      {!! Form::open(['method' => 'POST','route' => ['indexAPAR',$value->exm_id],'style'=>'display:inline']) !!}
+      <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
+        <i style="color: #ffffff;">Apariencia</i>
+      </button>
+      {!! Form::close() !!}
+
     </td>
   </tr>
   @endforeach
