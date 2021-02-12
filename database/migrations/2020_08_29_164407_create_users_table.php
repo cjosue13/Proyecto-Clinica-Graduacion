@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('phone');
             $table->string('tipoUsuario');
-            $table->string('cedula');
+            $table->string('cedula')->unique();
             $table->rememberToken();
             $table->timestamps();
         });

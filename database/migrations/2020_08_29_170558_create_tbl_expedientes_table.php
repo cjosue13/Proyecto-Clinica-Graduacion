@@ -15,10 +15,10 @@ class CreateTblExpedientesTable extends Migration
     {
         Schema::create('tbl_expedientes', function (Blueprint $table) {
             $table->increments('exp_id');
-            $table->unsignedInteger('exp_fkAntGin');
-            $table->foreign('exp_fkAntGin')->references('ag_id')->on('tbl_antecedentesginecologicos');
+            $table->unsignedInteger('exp_paciente');
+            $table->foreign('exp_paciente')->references('pac_id')->on('tbl_pacientes');
             $table->string('exp_Metas', 1000);
-            $table->string('exp_Historiabiopatografica', 1000);
+            $table->string('exp_Historiabiopatografica', 500);
             $table->timestamps();
         });
     }

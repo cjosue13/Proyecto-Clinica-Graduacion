@@ -24,7 +24,7 @@
   <tr>
     <thead>
       <th with="80px">No</th>
-      <th>Tipos de Palpidos</th>
+      <th>Palpitaciones</th>
       <th>Detalle</th>
         <th width="140px" class="text-center">
           <a href="{{route('createECAR', $exm_id)}}" class="btn btn-success btn-sm">
