@@ -42,6 +42,9 @@ class personalsocialController extends Controller
      */
     public function storePS(Request $request, $idExp)
     {
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+      
         $personalsocial = DB::table('tbl_personalessociales')->select('tbl_personalessociales.*')
         ->where('tbl_personalessociales.ps_fkExpediente', $idExp)->get()->toArray();
 
@@ -56,10 +59,10 @@ class personalsocialController extends Controller
             tbl_personalessociales::create(['ps_fkExpediente' => $idExp] + $request->all());
             $personalsocial = DB::table('tbl_personalessociales')->select('tbl_personalessociales.*')
         ->where('tbl_personalessociales.ps_fkExpediente', $idExp)->get()->toArray();
-            return view('personalsocial.index', compact('personalsocial', 'idExp'))->with('success','Datos guardados con éxito');
+            return view('personalsocial.index', compact('personalsocial', 'idExp', 'paciente'))->with('success','Datos guardados con éxito');
         }
         else{
-            return view('personalsocial.index', compact('personalsocial', 'idExp'))->with('warning','Esta etapa ya existe');
+            return view('personalsocial.index', compact('personalsocial', 'idExp', 'paciente'))->with('warning','Esta etapa ya existe');
         }
     }
 
