@@ -17,9 +17,9 @@ class antQuiruTrauController extends Controller
     {
         $antecedentes = DB::table('tbl_antquirutrau')->select('tbl_antquirutrau.*')->where('tbl_antquirutrau.atqt_fkExpediente', $idExp)->where('tbl_antquirutrau.atqt_tipo',$tipo)->get()->toArray();
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
-        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
-      
-        return view('antQuiruTrau.index', compact('idExp','tipo','antecedentes','paciente'));
+        $Paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+
+        return view('antQuiruTrau.index', compact('idExp','tipo','antecedentes','Paciente'));
     }
 
     /**
