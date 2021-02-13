@@ -129,7 +129,11 @@ class antHeredoFamiliaresController extends Controller
                 'he_Descripcion',
                 'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
             )->get()->toArray();
-        return view('antHeredoFamiliares.index', compact('idExp', 'antHeredoFamiliares'))->with('success', 'Antecedente Eliminado');
+
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+
+        return view('antHeredoFamiliares.index', compact('idExp', 'antHeredoFamiliares', 'paciente'))->with('success', 'Antecedente Eliminado');
     }
 
     /**
@@ -154,6 +158,11 @@ class antHeredoFamiliaresController extends Controller
                 'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
             )->get()->toArray();
         //return redirect()->route('antHeredoFamiliares.index')->with('success','Antecedente Eliminado');
-        return view('antHeredoFamiliares.index', compact('idExp', 'antHeredoFamiliares'))->with('success', 'Antecedente Eliminado');
+
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+
+
+        return view('antHeredoFamiliares.index', compact('idExp', 'antHeredoFamiliares', 'paciente'))->with('success', 'Antecedente Eliminado');
     }
 }

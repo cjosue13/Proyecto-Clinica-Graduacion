@@ -88,6 +88,10 @@ class personalsocialController extends Controller
      */
     public function updatePS(Request $request, $id,$idExp)
     {
+
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+      
         $actual = tbl_personalessociales::find($id);
 
         $this->validate($request, [
@@ -98,7 +102,7 @@ class personalsocialController extends Controller
 
         $personalsocial = DB::table('tbl_personalessociales')->select('tbl_personalessociales.*')
         ->where('tbl_personalessociales.ps_fkExpediente', $idExp)->get()->toArray();
-        return view('personalsocial.index', compact('personalsocial', 'idExp'))
+        return view('personalsocial.index', compact('personalsocial', 'idExp', 'paciente'))
         ->with('success','Datos actualizados con éxito');
     }
 
@@ -110,11 +114,16 @@ class personalsocialController extends Controller
      */
     public function deletePS($id, $idExp)
     {
+
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+      
+
         tbl_personalessociales::find($id)->delete();
         $personalsocial = DB::table('tbl_personalessociales')->select('tbl_personalessociales.*')
         ->where('tbl_personalessociales.ps_fkExpediente', $idExp)->get()->toArray();
 
-        return view('personalsocial.index', compact('personalsocial', 'idExp'))
+        return view('personalsocial.index', compact('personalsocial', 'idExp', 'paciente'))
         ->with('success','Datos actualizados con éxito');
     }
 }
