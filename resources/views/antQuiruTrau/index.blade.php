@@ -9,9 +9,9 @@
   <div class="col-sm-12">
     <div class="full-right">
     <?php if($tipo == 'q') {?>
-      <h2>Antecedentes Quirúrgicos de  {{$Paciente[0]->pac_pApellido}} {{$Paciente[0]->pac_sApellido}} {{$Paciente[0]->pac_pNombre}}</h2>
+      <h2>Antecedentes Quirúrgicos de  {{$paciente[0]->pac_pApellido}} {{$paciente[0]->pac_sApellido}} {{$paciente[0]->pac_pNombre}}</h2>
       <?php } else {?>
-        <h2>Antecedentes Traumáticos de  {{$Paciente[0]->pac_pApellido}} {{$Paciente[0]->pac_sApellido}} {{$Paciente[0]->pac_pNombre}}</h2>
+        <h2>Antecedentes Traumáticos de  {{$paciente[0]->pac_pApellido}} {{$paciente[0]->pac_sApellido}} {{$paciente[0]->pac_pNombre}}</h2>
         <?php }?>
     </div>
   </div>
