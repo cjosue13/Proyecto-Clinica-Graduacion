@@ -22,7 +22,6 @@ class CreateTblExpedientesTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
