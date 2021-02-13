@@ -18,6 +18,7 @@ class CreateTblExamenesclinicosTable extends Migration
 			$table->unsignedInteger('exm_consulta');
             $table->foreign('exm_consulta')->references('c_id')->on('tbl_consultas');
 			$table->float('exm_peso',3,3);
+			$table->float('exm_altura',3,0);
 			$table->float('exm_imc',3,6);
 			$table->float('exm_FC',3,3);
 			$table->float('exm_Temperatura',3,3);
@@ -26,7 +27,6 @@ class CreateTblExamenesclinicosTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
