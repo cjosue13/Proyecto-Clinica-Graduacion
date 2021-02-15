@@ -16,19 +16,19 @@ class antPatologicosController extends Controller
     public function indexP($idExp)
     {
         $antPatologicos = DB::table('tbl_expedientes_antecedecentes')
-                ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
-                ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
-                ->where('tbl_antenfermedades.atpnp_tipo', 'P')
-                ->select(
-                    'ea_id',
-                    'ea_expediente',
-                    'ea_enfermedad',
-                    'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
-                    'ea_Descripcion',
-                )->get()->toArray();
+            ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
+            ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
+            ->where('tbl_antenfermedades.atpnp_tipo', 'P')
+            ->select(
+                'ea_id',
+                'ea_expediente',
+                'ea_enfermedad',
+                'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
+                'ea_Descripcion',
+            )->get()->toArray();
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
-        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();           
-        return view('antPatologicos.index', compact('idExp','antPatologicos', 'paciente'));
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+        return view('antPatologicos.index', compact('idExp', 'antPatologicos', 'paciente'));
     }
 
     /**
@@ -39,7 +39,7 @@ class antPatologicosController extends Controller
     public function createP($idExp)
     {
         $enfermedades = DB::table('tbl_antenfermedades')->where('atpnp_tipo', 'P')->get()->toArray();
-        return view('antPatologicos.create', compact('idExp','enfermedades'));
+        return view('antPatologicos.create', compact('idExp', 'enfermedades'));
     }
 
     /**
@@ -48,26 +48,28 @@ class antPatologicosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeP(Request $request,$idExp)
+    public function storeP(Request $request, $idExp)
     {
-        
+
         $this->validate($request, [
             'ea_Descripcion' => 'required|string|max:1000',
             'ea_enfermedad' => 'required|int',
-            ]);
-        tbl_expedientes_antecedecentes::create($request->all()+['ea_expediente' => $idExp]);
+        ]);
+        tbl_expedientes_antecedecentes::create($request->all() + ['ea_expediente' => $idExp]);
         $antPatologicos = DB::table('tbl_expedientes_antecedecentes')
-                ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
-                ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
-                ->where('tbl_antenfermedades.atpnp_tipo', 'P')
-                ->select(
-                    'ea_id',
-                    'ea_expediente',
-                    'ea_enfermedad',
-                    'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
-                    'ea_Descripcion',
-                )->get()->toArray();
-        return view('antPatologicos.index', compact('idExp','antPatologicos'));
+            ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
+            ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
+            ->where('tbl_antenfermedades.atpnp_tipo', 'P')
+            ->select(
+                'ea_id',
+                'ea_expediente',
+                'ea_enfermedad',
+                'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
+                'ea_Descripcion',
+            )->get()->toArray();
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+        return view('antPatologicos.index', compact('idExp', 'antPatologicos', 'paciente'));
     }
 
     /**
@@ -92,7 +94,7 @@ class antPatologicosController extends Controller
     {
         $enfermedades = DB::table('tbl_antenfermedades')->where('atpnp_tipo', 'P')->get()->toArray();
         $antPatologicos = tbl_expedientes_antecedecentes::find($id);
-        return view('antPatologicos.edit', compact('antPatologicos','idExp','enfermedades'));
+        return view('antPatologicos.edit', compact('antPatologicos', 'idExp', 'enfermedades'));
     }
 
     /**
@@ -110,17 +112,19 @@ class antPatologicosController extends Controller
         ]);
         tbl_expedientes_antecedecentes::find($id)->update($request->all());
         $antPatologicos = DB::table('tbl_expedientes_antecedecentes')
-                ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
-                ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
-                ->where('tbl_antenfermedades.atpnp_tipo', 'P')
-                ->select(
-                    'ea_id',
-                    'ea_expediente',
-                    'ea_enfermedad',
-                    'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
-                    'ea_Descripcion',
-                )->get()->toArray();
-        return view('antPatologicos.index', compact('idExp','antPatologicos'))->with('success','Antecedente Eliminado');
+            ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
+            ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
+            ->where('tbl_antenfermedades.atpnp_tipo', 'P')
+            ->select(
+                'ea_id',
+                'ea_expediente',
+                'ea_enfermedad',
+                'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
+                'ea_Descripcion',
+            )->get()->toArray();
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+        return view('antPatologicos.index', compact('idExp', 'antPatologicos', 'paciente'))->with('success', 'Antecedente Eliminado');
     }
 
     /**
@@ -129,20 +133,22 @@ class antPatologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteP($id,$idExp)
+    public function deleteP($id, $idExp)
     {
         tbl_expedientes_antecedecentes::find($id)->delete();
         $antPatologicos = DB::table('tbl_expedientes_antecedecentes')
-                ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
-                ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
-                ->where('tbl_antenfermedades.atpnp_tipo', 'P')
-                ->select(
-                    'ea_id',
-                    'ea_expediente',
-                    'ea_enfermedad',
-                    'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
-                    'ea_Descripcion',
-                )->get()->toArray();
-        return view('antPatologicos.index', compact('idExp','antPatologicos'))->with('success','Antecedente Eliminado');
+            ->join('tbl_antenfermedades', 'tbl_expedientes_antecedecentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
+            ->where('tbl_expedientes_antecedecentes.ea_expediente', $idExp)
+            ->where('tbl_antenfermedades.atpnp_tipo', 'P')
+            ->select(
+                'ea_id',
+                'ea_expediente',
+                'ea_enfermedad',
+                'tbl_antenfermedades.atpnp_nombre as eaNomEnfermedad',
+                'ea_Descripcion',
+            )->get()->toArray();
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+        return view('antPatologicos.index', compact('idExp', 'antPatologicos','paciente'))->with('success', 'Antecedente Eliminado');
     }
 }
