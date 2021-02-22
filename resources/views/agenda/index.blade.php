@@ -207,10 +207,11 @@
             if (respuesta && respuesta.ok) {
                 calendar.refetchEvents();
                 limpiar();
+                alert("Se registró la cita en la agenda");
             } else {
+                alert("Ya hay una cita en esta fecha");
             }
         });
-
     }
 
     function limpiar() {
