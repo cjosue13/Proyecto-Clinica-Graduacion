@@ -202,6 +202,7 @@
             processData: false,
             contentType: false,
             jsonp: false,
+            headers: {"Access-Control-Allow-Origin": "*"},
         }).done(function(respuesta) {
             if (respuesta && respuesta.ok) {
                 calendar.refetchEvents();
