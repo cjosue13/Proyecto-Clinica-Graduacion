@@ -201,6 +201,7 @@
             type: "POST",
             processData: false,
             contentType: false,
+            jsonp: false,
         }).done(function(respuesta) {
             if (respuesta && respuesta.ok) {
                 calendar.refetchEvents();
