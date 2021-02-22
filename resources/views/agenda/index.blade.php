@@ -204,10 +204,8 @@
         }).done(function(respuesta) {
             if (respuesta && respuesta.ok) {
                 calendar.refetchEvents();
-                alert("Se registró la cita en la agenda");
                 limpiar();
             } else {
-                alert("La agenda ya contiene la fecha seleccionada");
             }
         });
 
