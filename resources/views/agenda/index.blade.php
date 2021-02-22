@@ -190,7 +190,6 @@
             fd.append("agn_NombreCompletoAnt", NombreCompletoAnt);
             fd.append("agn_fechaAnt", FechaAnt);
             fd.append("agn_telefonoAnt", telefonoAnt);
-            fd.append("agn_estado", 1);
             fd.append("agn_descripcionAnt", descripcionAnt);
             fd.append("agn_TiempoAnt", tiempoAnt);
         }

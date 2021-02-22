@@ -20,7 +20,6 @@ class CreateTblAgendaTable extends Migration
             $table->date('agn_fecha');
             $table->string('agn_HoraInicio', 10);
             $table->string('agn_HoraFinal', 10);
-            $table->double('agn_estado', 11, 0);
             $table->double('agn_Tiempo', 10, 0);
             $table->string('agn_descripcion', 500);
             $table->timestamps();

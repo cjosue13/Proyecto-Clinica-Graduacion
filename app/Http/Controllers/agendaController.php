@@ -28,7 +28,7 @@ class agendaController extends Controller
                 "start" => $value->agn_fecha . " " . $value->agn_HoraInicio,
                 "end" => $value->agn_fecha . " " . $value->agn_HoraFinal,
                 "title" => $value->agn_NombreCompleto . " " . $value->agn_descripcion,
-                "backgroundColor" => $value->agn_estado == 1 ? "#71f587" : "#ff0000",
+                "backgroundColor" => "#71f587",
                 "textColor" => "#fff",
                 "extendedProps" => [
                     "agn_NombreCompleto" => $value->agn_NombreCompleto,
@@ -36,7 +36,6 @@ class agendaController extends Controller
                     "agn_fecha" => $value->agn_fecha,
                     "agn_HoraInicio" => $value->agn_HoraInicio,
                     "agn_HoraFinal" => $value->agn_HoraFinal,
-                    "agn_estado" => $value->agn_estado,
                     "agn_Tiempo" => $value->agn_Tiempo,
                     "agn_descripcion" => $value->agn_descripcion
                 ]
@@ -90,7 +89,10 @@ class agendaController extends Controller
     public function guardar(Request $request)
     {
         $input = $request->all();
-
+        if (
+            $this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
+            && $this->validarFecha2($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
+        ) { //validamos  que no existe una
             tbl_agendas::create([
                 'agn_NombreCompleto' => $input["agn_NombreCompleto"],
                 'agn_telefono' => $input["agn_telefono"],
@@ -101,7 +103,9 @@ class agendaController extends Controller
                 'agn_descripcion' => $input["agn_descripcion"]
             ]);
             return response()->json(["ok" => true]); // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
-
+        } else {
+            return response()->json(["ok" => false]);
+        }
     }
 
     public function editar(Request $request)
