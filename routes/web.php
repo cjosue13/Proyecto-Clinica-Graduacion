@@ -361,8 +361,8 @@ Route::resource('antecedentesginecologicos', 'antecedentesginecologicosControlle
 Route::resource('examenesclinicos', 'examenesclinicosController');
 Route::resource('examenes', 'examenesController');
 
-Route::get('/agenda', 'agendaController@index');
+Route::get('/agenda', 'agendaController@index')->name('agenda');
 Route::get('/agenda/listar', 'agendaController@listar');
-Route::post('/agenda/guardar', 'agendaController@guardar');
+Route::post('/guardarCalendar', 'agendaController@guardar')->name('guardarCalendar');
 Route::post('/agenda/editar', 'agendaController@editar');
 Route::post('/agenda/eliminar', 'agendaController@eliminar');

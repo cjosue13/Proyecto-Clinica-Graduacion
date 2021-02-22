@@ -196,7 +196,7 @@
 
         //enviamos por ajax
         $.ajax({
-            url: (ID == null) ? "/agenda/guardar" : "/agenda/editar", //si ID es nulo entonces guardamos, sino, editamos
+            url: (ID == null) ? "/guardarCalendar" : "/agenda/editar", //si ID es nulo entonces guardamos, sino, editamos
             data: fd,
             type: "POST",
             processData: false,
