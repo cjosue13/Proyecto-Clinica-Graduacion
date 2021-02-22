@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\tbl_expedientes_antecedecentes;
+use App\tbl_expedientes_antecedentes;
 use Illuminate\Support\Facades\DB;
 
 class antPatologicosController extends Controller
@@ -55,7 +55,7 @@ class antPatologicosController extends Controller
             'ea_Descripcion' => 'required|string|max:1000',
             'ea_enfermedad' => 'required|int',
         ]);
-        DB::table('tbl_expedientes_antecedentes')->create($request->all() + ['ea_expediente' => $idExp]);
+        tbl_expedientes_antecedentes::create($request->all() + ['ea_expediente' => $idExp]);
         $antPatologicos = DB::table('tbl_expedientes_antecedentes')
             ->join('tbl_antenfermedades', 'tbl_expedientes_antecedentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
             ->where('tbl_expedientes_antecedentes.ea_expediente', $idExp)
@@ -80,7 +80,7 @@ class antPatologicosController extends Controller
      */
     public function show($id)
     {
-        $antPatologicos = DB::table('tbl_expedientes_antecedentes')->find($id);
+        $antPatologicos = tbl_expedientes_antecedentes::find($id);
         return view('antPatologicos.show', compact('antPatologicos'));
     }
 
@@ -93,7 +93,7 @@ class antPatologicosController extends Controller
     public function editP($id, $idExp)
     {
         $enfermedades = DB::table('tbl_antenfermedades')->where('atpnp_tipo', 'P')->get()->toArray();
-        $antPatologicos = DB::table('tbl_expedientes_antecedentes')->find($id);
+        $antPatologicos = tbl_expedientes_antecedentes::find($id);
         return view('antPatologicos.edit', compact('antPatologicos', 'idExp', 'enfermedades'));
     }
 
@@ -110,7 +110,7 @@ class antPatologicosController extends Controller
             'ea_Descripcion' => 'required|string|max:1000',
             'ea_enfermedad' => 'required|int',
         ]);
-        DB::table('tbl_expedientes_antecedentes')->find($id)->update($request->all());
+        tbl_expedientes_antecedentes::find($id)->update($request->all());
         $antPatologicos = DB::table('tbl_expedientes_antecedentes')
             ->join('tbl_antenfermedades', 'tbl_expedientes_antecedentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
             ->where('tbl_expedientes_antecedentes.ea_expediente', $idExp)
@@ -135,7 +135,7 @@ class antPatologicosController extends Controller
      */
     public function deleteP($id, $idExp)
     {
-        DB::table('tbl_expedientes_antecedentes')->find($id)->delete();
+        tbl_expedientes_antecedentes::find($id)->delete();
         $antPatologicos = DB::table('tbl_expedientes_antecedentes')
             ->join('tbl_antenfermedades', 'tbl_expedientes_antecedentes.ea_enfermedad', '=', 'tbl_antenfermedades.atpnp_id')
             ->where('tbl_expedientes_antecedentes.ea_expediente', $idExp)
