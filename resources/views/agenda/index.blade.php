@@ -196,19 +196,22 @@
 
         //enviamos por ajax
         $.ajax({
-            url: (ID == null) ? "/agenda/guardar" : "/agenda/editar", //si ID es nulo entonces guardamos, sino, editamos
+            url: (ID == null) ? "/guardarCalendar" : "/agenda/editar", //si ID es nulo entonces guardamos, sino, editamos
             data: fd,
             type: "POST",
             processData: false,
             contentType: false,
+            jsonp: false,
+            headers: {"Access-Control-Allow-Origin": "*"},
         }).done(function(respuesta) {
             if (respuesta && respuesta.ok) {
                 calendar.refetchEvents();
                 limpiar();
+                alert("Se registró la cita en la agenda");
             } else {
+                alert("Ya hay una cita en esta fecha");
             }
         });
-
     }
 
     function limpiar() {

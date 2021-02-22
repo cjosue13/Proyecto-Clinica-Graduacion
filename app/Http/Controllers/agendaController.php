@@ -28,7 +28,7 @@ class agendaController extends Controller
                 "start" => $value->agn_fecha . " " . $value->agn_HoraInicio,
                 "end" => $value->agn_fecha . " " . $value->agn_HoraFinal,
                 "title" => $value->agn_NombreCompleto . " " . $value->agn_descripcion,
-                "backgroundColor" => $value->agn_estado == 1 ? "#71f587" : "#ff0000",
+                "backgroundColor" => "#71f587",
                 "textColor" => "#fff",
                 "extendedProps" => [
                     "agn_NombreCompleto" => $value->agn_NombreCompleto,
@@ -36,7 +36,6 @@ class agendaController extends Controller
                     "agn_fecha" => $value->agn_fecha,
                     "agn_HoraInicio" => $value->agn_HoraInicio,
                     "agn_HoraFinal" => $value->agn_HoraFinal,
-                    "agn_estado" => $value->agn_estado,
                     "agn_Tiempo" => $value->agn_Tiempo,
                     "agn_descripcion" => $value->agn_descripcion
                 ]
