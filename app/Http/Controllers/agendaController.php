@@ -90,10 +90,7 @@ class agendaController extends Controller
     public function guardar(Request $request)
     {
         $input = $request->all();
-        if (
-            $this->validarFecha($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
-            && $this->validarFecha2($input["agn_fecha"], $input["agn_HoraInicio"], $input["agn_HoraFinal"])
-        ) { //validamos  que no existe una
+
             tbl_agendas::create([
                 'agn_NombreCompleto' => $input["agn_NombreCompleto"],
                 'agn_telefono' => $input["agn_telefono"],
@@ -104,9 +101,7 @@ class agendaController extends Controller
                 'agn_descripcion' => $input["agn_descripcion"]
             ]);
             return response()->json(["ok" => true]); // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json
-        } else {
-            return response()->json(["ok" => false]);
-        }
+
     }
 
     public function editar(Request $request)
