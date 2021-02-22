@@ -3,7 +3,6 @@
 @section('content')
 
 <div id='calendar'></div>
-
 <div id="agenda_modal" class="modal" tabindex="-1" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -23,7 +22,6 @@
                                 <input type="date" class="form-control" id="agn_fecha" name="agn_fecha">
                             </div>
                         </div>
-
                     </div>
                     <div class="input-group">
                         <div class="col">
@@ -73,11 +71,8 @@
 </div>
 
 @endsection
-
 @section('body')
-
 @endsection
-
 
 <script>
     var ID = null;
@@ -87,7 +82,6 @@
     var horaInicioAnt = null;
     var tiempoAnt = null;
     var descripcionAnt = null;
-
     var calendar = null;
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
@@ -113,8 +107,6 @@
         };
 
         calendar = new FullCalendar.Calendar(calendarEl, {
-            /*plugins: ['momentTimezone'],
-            timeZone: 'America/Costa_Rica',*/
             schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
             locale: es,
             headerToolbar: {
@@ -128,7 +120,6 @@
             select: function(arg) {
                 let fechaConFomato = moment(arg.start).format("YYYY-MM-DD"); //para convertirlo
                 let horaInicial = moment(arg.start).format("HH:mm:ss");
-
                 let horaFinal = moment(arg.end).format("HH:mm:ss");
                 //valores por defecto
                 $("#agn_fecha").val(fechaConFomato);
@@ -153,12 +144,6 @@
                 horaInicioAnt = info.event.extendedProps['agn_HoraInicio'];
                 ID = info.event.id;
             },
-            /*
-                        eventClick: function(arg) {
-                            if (confirm('Are you sure you want to delete this event?')) {
-                                arg.event.remove()
-                            }
-                        },*/
             editable: false,
             dayMaxEvents: true, // allow "more" link when too many events
             events: {
@@ -169,7 +154,6 @@
                 }
             }
         });
-
         calendar.render();
     })
 
@@ -193,7 +177,6 @@
             fd.append("agn_descripcionAnt", descripcionAnt);
             fd.append("agn_TiempoAnt", tiempoAnt);
         }
-
         //enviamos por ajax
         $.ajax({
             url: (ID == null) ? "/guardarCalendar" : "/agenda/editar", //si ID es nulo entonces guardamos, sino, editamos
@@ -202,7 +185,9 @@
             processData: false,
             contentType: false,
             jsonp: false,
-            headers: {"Access-Control-Allow-Origin": "*"},
+            headers: {
+                "Access-Control-Allow-Origin": "*"
+            },
         }).done(function(respuesta) {
             if (respuesta && respuesta.ok) {
                 calendar.refetchEvents();
@@ -261,7 +246,6 @@
         font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
         font-size: 14px;
     }
-
     #calendar {
         max-width: 1100px;
         margin: 0 auto;
