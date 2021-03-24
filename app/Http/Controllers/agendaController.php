@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\tbl_agendas;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class agendaController extends Controller
 {
@@ -148,5 +149,22 @@ class agendaController extends Controller
         tbl_agendas::find($input["agn_id"])->delete();
         return response()->json(["ok" => true]);
         // como estamos haciendo una petición por ajax, la respuesta tiene que ser un json, retornamos este cada vez que sea necesario
+    }
+
+
+    public function createPDF(Request $request)
+    {
+
+        $agenda = DB::table('tbl_agendas')
+            ->whereBetween('agn_fecha', array($request->input('agn_fecha_inicio'), $request->input('agn_fecha_final')))
+            ->get();
+
+        // share data to view
+        view()->share('agenda', $agenda);
+
+        $pdf = PDF::loadView('reporteAgenda');
+
+        // download PDF file with download method
+        return $pdf->stream();
     }
 }

@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-
+use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Http\Request;
 
 /*
@@ -20,19 +21,27 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/Reportes', function () {
-    return view('Reportes');
-})->name('reportes');
+
+/*Route::get('/reportes', function () {
+    return view('reportes');
+})->name('reportes');*/
 
 Route::get('/auth', function () {
     return view('auth.register');
 })->name('auth');
 
-Route::get('pdf/{user}', 'ReportGeneratorController@ReporteCurriculum')->name('pdf');//Reportecurriculum
-Route::get('pdf2', 'ReportGeneratorController@ReporteEmpleos')->name('pdf2');//ReporteEmpresa
-Route::get('pdf3/{user}', 'ReportGeneratorController@ReporteEmpresa')->name('pdf3');//ReporteEmpresa
-Route::get('pdf4/{user}', 'ReportGeneratorController@ReporteOferta')->name('pdf4');//Reporteoferta
-Route::get('pdf5', 'ReportGeneratorController@ReporteGrafico')->name('pdf5');//ReporteGrafico
+//Reportes PDF
+Route::get('pacientes/pdf/{id}', 'pacientesController@createPDF')->name('pacientePDF');
+Route::get('consultas/pdf/{id}', 'consultasController@createPDF')->name('consultaPDF');
+Route::get('agenda/pdf', 'agendaController@createPDF')->name('agendaPDF');
+Route::get('reportes', 'reportesController@index')->name('reportes'); 
+Route::get('reportes/consultas', 'reportesController@consultas')->name('reporteConsultas');
+
+
+Route::get('pdf2', 'ReportGeneratorController@ReporteEmpleos')->name('pdf2'); //ReporteEmpresa
+Route::get('pdf3/{user}', 'ReportGeneratorController@ReporteEmpresa')->name('pdf3'); //ReporteEmpresa
+Route::get('pdf4/{user}', 'ReportGeneratorController@ReporteOferta')->name('pdf4'); //Reporteoferta
+Route::get('pdf5', 'ReportGeneratorController@ReporteGrafico')->name('pdf5'); //ReporteGrafico
 
 Route::post('usuarios/save', 'usuariosController@save');
 
@@ -41,9 +50,14 @@ Route::get('usuarios/filtro/', [
 ]);
 
 
+
+
 Route::get('pacientes/VerExpediente/{id}', 'pacientesController@VerExpediente')->name('VerExpediente');
+
+Route::get('pdf5', 'ReportGeneratorController@ReporteGrafico')->name('pdf5'); //ReporteGrafico
 Route::get('expediente/VerAntecedenteGinecologico/{id}', 'expedienteController@VerAntecedenteGinecologico')->name('VerAntecedenteGinecologico');
 Route::get('expediente/create/{id}', 'expedienteController@create')->name('createExp');
+
 Route::get('personalsocial/create/{id}', 'personalsocialController@create')->name('createPS');
 Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosController@create')->name('create');
 

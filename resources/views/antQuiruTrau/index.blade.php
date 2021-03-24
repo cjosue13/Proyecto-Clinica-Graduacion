@@ -38,7 +38,7 @@
       <th width="140px" class="text-center">
       {!! Form::open(['method' => 'GET','route' => ['createQT', $idExp, $tipo],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-success btn-sm">
-          <i class="glyphicon glyphicon-plus"></i>
+          <i class="fas fa-plus"></i>
       </button>
       {!! Form::close() !!}
       </th>

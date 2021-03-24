@@ -22,7 +22,7 @@
       <td>Descripción</td>
       <th with="140px" class="text-center">
         <a href="{{route('create',$rqOfertaTrabajo)}}" class="btn btn-success btn-sm">
-          <i class="glyphicon glyphicon-plus"></i>
+          <i class="fas fa-plus"></i>
         </a>
       </th>
     </tr>

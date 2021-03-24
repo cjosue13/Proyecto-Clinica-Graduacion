@@ -1,4 +1,3 @@
-<div class="TituloLogin">Registro</div>
 <div class="card-body">
   <div class="row">
     <div class="col-sm-10">
@@ -28,19 +27,19 @@
   </div>
 
   <div class="form-group row">
-    <div class="col-md-6">
-        <input id="password" type="password" placeholder="Contraseña" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-        @error('password')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
+    <div class="col-sm-10">
+      <input id="password" type="password" placeholder="Contraseña" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+      @error('password')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+      @enderror
     </div>
   </div>
 
   <div class="form-group row">
-    <div class="col-md-6">
-        <input id="password-confirm" placeholder="Confirmar Contraseña" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+    <div class="col-sm-10">
+      <input id="password-confirm" placeholder="Confirmar Contraseña" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
     </div>
   </div>
 
@@ -62,14 +61,12 @@
     </div>
   </div>
 
-  <div class="form-group row">
+  <div class="row">
     <div class="col-sm-0">
       <label for="tipoUsuario" class="columnaRadio">{{ __('Tipo de Usuario:') }}</label>
       <div class="radio ">
-          <label class="textaa"><input id="columnaRadio" name="tipoUsuario" type="radio" value="D">Doctor</label>
-      </div>
-      <div class="radio ">
-          <label class="textaa"><input id="columnaRadio" checked="checked" name="tipoUsuario" type="radio" value="S">Secretaria/o</label>
+        <label class="textaa"><input id="columnaRadio" name="tipoUsuario" type="radio" value="D">Doctor</label>
+        <label class="textaa"><input id="columnaRadio" checked="checked" name="tipoUsuario" type="radio" value="S">Secretaria/o</label>
       </div>
     </div>
   </div>

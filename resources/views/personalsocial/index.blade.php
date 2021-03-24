@@ -28,7 +28,7 @@
       <th>Descripción</th>
         <th width="140px" class="text-center">
           <a href="{{route('createPS', $idExp)}}" class="btn btn-success btn-sm">
-            <i class="glyphicon glyphicon-plus"></i>
+            <i class="fas fa-plus"></i>
           </a>
         </th>
     </thead>

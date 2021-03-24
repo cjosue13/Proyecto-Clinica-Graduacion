@@ -40,7 +40,7 @@
     <?php if (sizeof($antecedentesginecologicos) == 0) {?>
       <th width="140px" class="text-center">
         <a href="{{route('create', $expediente[0]->exp_id)}}" class="btn btn-success btn-sm">
-          <i class="glyphicon glyphicon-plus"></i>
+          <i class="fas fa-plus"></i>
         </a>
       </th>
     <?php } else { ?>

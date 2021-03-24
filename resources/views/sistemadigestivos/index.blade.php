@@ -27,7 +27,7 @@
       <th>Nombre</th>
       <th width="140px" class="text-center">
         <a href="{{route('sistemadigestivos.create')}}" class="btn btn-success btn-sm">
-          <i class="glyphicon glyphicon-plus"></i>
+          <i class="fas fa-plus"></i>
         </a>
       </th>
     </thead>

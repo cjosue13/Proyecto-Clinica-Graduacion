@@ -35,7 +35,7 @@
       <th>Religión</th>
       <th width="140px" class="text-center">
         <a href="{{route('pacientes.create')}}" class="btn btn-success btn-sm">
-          <i class="glyphicon glyphicon-plus"></i>
+          <i class="fas fa-plus"></i>
         </a>
       </th>
     </thead>
@@ -70,6 +70,7 @@
     <?php } ?>
     <td>{{ $value->	pac_Religion }}</td>
     <td>
+      
       <a class="btn btn-hover btn-sm black-background" href="{{route('pacientes.edit',$value->pac_id)}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>
@@ -78,6 +79,9 @@
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>
       {!! Form::close() !!}
+      <a class="btn btn-hover btn-sm black-background" href="{{route('pacientePDF',$value->pac_id)}}">
+        <i style="color: #ffffff;" >PDF</i>
+      </a>
       <a class="btn btn-info btn-sm btn-block" style="margin-top: 5px;" href="{{route('VerExpediente',$value->pac_id)}}">
         <i class=""></i>Expediente</a>
     </td>

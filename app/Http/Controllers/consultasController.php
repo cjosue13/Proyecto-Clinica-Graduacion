@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\tbl_consultas;
 use Illuminate\Http\Request;
-use App\tbl_expedientes;
 use App\tbl_pacientes;
 use Illuminate\Support\Facades\DB;
-
+use Barryvdh\DomPDF\Facade as PDF;
 
 class consultasController extends Controller
 {
@@ -20,12 +19,12 @@ class consultasController extends Controller
     {
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
         $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
-        
-        $consultas = DB::table('tbl_consultas')->where('tbl_consultas.c_fkExpediente', $expediente[0]->exp_id )->orderBy('c_id', 'desc')->get()->toArray();
-        
+
+        $consultas = DB::table('tbl_consultas')->where('tbl_consultas.c_fkExpediente', $expediente[0]->exp_id)->orderBy('c_id', 'desc')->get()->toArray();
+
         return view('consultas.index', compact('consultas', 'paciente', 'expediente'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -44,9 +43,10 @@ class consultasController extends Controller
      */
     public function store(Request $request, $idExp)
     {
-        
+
         $this->validate($request, [
             'c_HistoriaPadecimientoAct' => 'required|string|max:1000',
+            'c_motivo' => 'required|string|max:1000',
             'c_sintomaPsiquico' => 'required|string|max:1000',
             'c_Diagnostico' => 'required|string|max:1000',
             'c_Problemas' => 'required|string|max:1000',
@@ -55,12 +55,20 @@ class consultasController extends Controller
             'c_tipo' => 'required|string|max:1',
             'c_Fecha' => 'required|date|before_or_equal:today',
             'c_Acompanante' => 'required|string|max:100'
-        ]);   
+        ]);
 
         tbl_consultas::create(['c_fkExpediente' => $idExp] + $request->all());
-        
-        return redirect()->route('indexConsulta', $idExp)->with('success','Consulta creada con éxito');
-        
+
+        $consultas = tbl_consultas::all();
+        $consulta = $consultas->last();
+
+
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+
+        $consultas = DB::table('tbl_consultas')->where('tbl_consultas.c_fkExpediente', $expediente[0]->exp_id)->orderBy('c_id', 'desc')->get()->toArray();
+
+        return view('consultas.index', compact('consultas', 'paciente', 'expediente', 'consulta'));
     }
 
 
@@ -72,7 +80,7 @@ class consultasController extends Controller
      */
     public function show($id)
     {
-        
+
         $consulta = tbl_consultas::find($id);
         return view('consultas.show', compact('consulta'));
     }
@@ -103,6 +111,7 @@ class consultasController extends Controller
     {
         $this->validate($request, [
             'c_HistoriaPadecimientoAct' => 'required|string|max:1000',
+            'c_motivo' => 'required|string|max:1000',
             'c_sintomaPsiquico' => 'required|string|max:1000',
             'c_Diagnostico' => 'required|string|max:1000',
             'c_Problemas' => 'required|string|max:1000',
@@ -114,8 +123,8 @@ class consultasController extends Controller
         ]);
 
         tbl_consultas::find($id)->update($request->all());
-        
-        return redirect()->route('indexConsulta', $idExp)->with('success','Consulta actualizada con éxito');
+
+        return redirect()->route('indexConsulta', $idExp)->with('success', 'Consulta actualizada con éxito');
     }
 
     /**
@@ -128,10 +137,37 @@ class consultasController extends Controller
     {
         tbl_consultas::find($id)->delete();
 
-        return redirect()->route('indexConsulta', $idExp)->with('success','Consulta eliminada con éxito');
+        return redirect()->route('indexConsulta', $idExp)->with('success', 'Consulta eliminada con éxito');
     }
 
-    public function MenuAntecedentes($idExp, $Genero){
-        return view('MenuAntecedentes', compact('idExp','Genero'));
+    public function MenuAntecedentes($idExp, $Genero)
+    {
+        return view('MenuAntecedentes', compact('idExp', 'Genero'));
+    }
+
+    public function createPDF($id)
+    {
+        // retreive all records from db
+        $consulta = tbl_consultas::find($id);;
+
+        // share data to view
+        view()->share('consulta', $consulta);
+        $pdf = PDF::loadView('reporteConsulta');
+
+        // download PDF file with download method
+        return $pdf->stream();
+    }
+
+    public function downloadPDF($id)
+    {
+        // retreive all records from db
+        $consulta = tbl_consultas::find($id);;
+
+        // share data to view
+        view()->share('consulta', $consulta);
+        $pdf = PDF::loadView('reporteConsulta');
+
+        // download PDF file with download method
+        return $pdf->download('consulta' . $consulta->c_id . 'pdf');
     }
 }

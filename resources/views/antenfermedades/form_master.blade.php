@@ -17,7 +17,7 @@
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('atpnp_tipo') ? 'has-error' : "" }}">
       <div class="form-group">
-        <div class="radio " style="left: 0%;">
+        <div class="radio " >
           <label><input id="columnaRadio" name="atpnp_tipo" type="radio" value="P" @isset($antenfermedades) @if($antenfermedades->atpnp_tipo == 'P')
             {{"checked='checked'"}}
             @endif

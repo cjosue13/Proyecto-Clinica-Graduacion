@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\tbl_pacientes;
+use App\tbl_expedientes;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class pacientesController extends Controller
 {
@@ -54,7 +56,7 @@ class pacientesController extends Controller
             'pac_Religion' => 'required|string|max:50'
         ]);
         tbl_pacientes::create($request->all());
-        return redirect()->route('pacientes.index')->with('success','Paciente creado con éxito');
+        return redirect()->route('pacientes.index')->with('success', 'Paciente creado con éxito');
     }
 
     /**
@@ -87,7 +89,8 @@ class pacientesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function VerExpediente($idPac){
+    public function VerExpediente($idPac)
+    {
         $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $idPac)->get()->toArray();
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_paciente', $paciente[0]->pac_id)->get()->toArray();
         return view('expediente.index', compact('expediente', 'paciente'));
@@ -116,9 +119,9 @@ class pacientesController extends Controller
             'pac_EstadoCivil' => 'required|string|max:2',
             'pac_Religion' => 'required|string|max:50'
         ]);
-       
+
         tbl_pacientes::find($id)->update($request->all());
-        return redirect()->route('pacientes.index')->with('success','Paciente actualizado con éxito');
+        return redirect()->route('pacientes.index')->with('success', 'Paciente actualizado con éxito');
     }
 
     /**
@@ -130,6 +133,23 @@ class pacientesController extends Controller
     public function destroy($id)
     {
         tbl_pacientes::find($id)->delete();
-        return redirect()->route('pacientes.index')->with('success','Paciente Eliminado');
+        return redirect()->route('pacientes.index')->with('success', 'Paciente Eliminado');
+    }
+
+    // Generate PDF
+    public function createPDF($id)
+    {
+
+        $pacientes = tbl_pacientes::find($id);
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_paciente', $pacientes->pac_id)->get();
+        // retreive all records from db
+       
+        // share data to view
+        view()->share('pacientes', $pacientes);
+        //view()->share('expediente', $expediente);
+        $pdf = PDF::loadView('reporteExpediente', compact('expediente'));
+
+        // download PDF file with download method
+        return $pdf->stream();
     }
 }

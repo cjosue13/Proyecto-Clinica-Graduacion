@@ -123,14 +123,14 @@
                     @empty($pacientes) 
                       {{"checked='checked'"}} 
                     @endempty
-                    >Si</label>
+                    >  Si</label>
                     <label><input id="columnaRadio" name="ag_PF" type="radio" value="F" 
                     @isset($pacientes)
                       @if($pacientes->ag_PF == 'F')
                         {{"checked='checked'"}}
                       @endif 
                     @endisset 
-                    >No</label>
+                    >  No</label>
                 </div>
             </div>
         </div>
