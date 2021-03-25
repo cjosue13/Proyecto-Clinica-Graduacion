@@ -34,7 +34,7 @@ Route::get('/auth', function () {
 Route::get('pacientes/pdf/{id}', 'pacientesController@createPDF')->name('pacientePDF');
 Route::get('consultas/pdf/{id}', 'consultasController@createPDF')->name('consultaPDF');
 Route::get('agenda/pdf', 'agendaController@createPDF')->name('agendaPDF');
-Route::get('reportes', 'reportesController@index')->name('reportes'); 
+Route::get('reportes', 'reportesController@index')->name('reportes');
 Route::get('reportes/consultas', 'reportesController@consultas')->name('reporteConsultas');
 
 
@@ -45,12 +45,9 @@ Route::get('pdf5', 'ReportGeneratorController@ReporteGrafico')->name('pdf5'); //
 
 Route::post('usuarios/save', 'usuariosController@save');
 
-Route::get('usuarios/filtro/', [
-    'as' => 'filtro', 'uses' => 'usuariosController@filtro'
+Route::get('pacientes/filtro/', [
+    'as' => 'filtro', 'uses' => 'pacientesController@filtro'
 ]);
-
-
-
 
 Route::get('pacientes/VerExpediente/{id}', 'pacientesController@VerExpediente')->name('VerExpediente');
 

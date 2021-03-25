@@ -68,7 +68,7 @@ class pacientesController extends Controller
     public function show($id)
     {
         $pacientes = tbl_pacientes::find($id);
-        return view('pacientes.show', compact('pacientes'));
+        return view('pacientes.index', compact('pacientes'));
     }
 
     /**
@@ -143,7 +143,7 @@ class pacientesController extends Controller
         $pacientes = tbl_pacientes::find($id);
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_paciente', $pacientes->pac_id)->get();
         // retreive all records from db
-       
+
         // share data to view
         view()->share('pacientes', $pacientes);
         //view()->share('expediente', $expediente);
@@ -151,5 +151,25 @@ class pacientesController extends Controller
 
         // download PDF file with download method
         return $pdf->stream();
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filtro(Request $request)
+    {
+        $nombre = $request->request->get('txt_nombre');
+
+        $pacientes = DB::table('tbl_pacientes')->orderBy('pac_id', 'asc')
+            ->where('tbl_pacientes.pac_pNombre', 'LIKE', '%' . $nombre . '%')->get()->toArray();
+
+        if ($pacientes == null) {
+            $pacientes = DB::table('tbl_pacientes')->orderBy('pac_id', 'asc')
+                ->where('tbl_pacientes.pac_Cedula', 'LIKE', '%' . $nombre . '%')->get()->toArray();
+        }
+
+        return view('pacientes.index', compact('pacientes'));
     }
 }

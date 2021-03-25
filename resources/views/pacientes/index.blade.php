@@ -6,6 +6,15 @@
     <div class="full-right">
       <h2>Pacientes</h2>
     </div>
+    <br>
+    <div class="col-lg-12">
+      <div class="form-group" style="display: flex;">
+        {{ Form::open(['route'=>['filtro'], 'method'=>'GET']) }}
+        <input name="txt_nombre" class="form-control" style="width: 100%;" type="text" placeholder="Nombre/Cédula del paciente">
+        <button type="submit" style="margin-left: 10px; margin-right: auto; justify-content: center;" class="btn btn-info btn-sm" style="font-size: 20px;" class="fa fa-floppy-o">Buscar</i></button>
+        {{ form::close() }}
+      </div>
+    </div>
   </div>
 </div>
 
@@ -19,6 +28,7 @@
   <p>{{ $message }}</p>
 </div>
 @endif
+
 
 <table class="table table-hover">
   <tr>
@@ -51,26 +61,26 @@
     <td>{{ $value->	pac_Residencia }}</td>
     <td>{{ $value->	pac_Correo }}</td>
     <td>{{ $value->	pac_Profesion_Oficio }}</td>
-    <?php if($value->pac_EstadoCivil == "ST"){ ?>
+    <?php if ($value->pac_EstadoCivil == "ST") { ?>
       <td>Soltero</td>
-    <?php }else if($value->pac_EstadoCivil == "CO"){ ?>
+    <?php } else if ($value->pac_EstadoCivil == "CO") { ?>
       <td>Comprometido</td>
-    <?php }else if($value->pac_EstadoCivil == "ER"){ ?>
+    <?php } else if ($value->pac_EstadoCivil == "ER") { ?>
       <td>En una relación</td>
-    <?php }else if($value->pac_EstadoCivil == "CA"){ ?>
+    <?php } else if ($value->pac_EstadoCivil == "CA") { ?>
       <td>Casado</td>
-    <?php }else if($value->pac_EstadoCivil == "UL"){ ?>
+    <?php } else if ($value->pac_EstadoCivil == "UL") { ?>
       <td>Unión Libre</td>
-    <?php }else if($value->pac_EstadoCivil == "SP"){ ?>
+    <?php } else if ($value->pac_EstadoCivil == "SP") { ?>
       <td>Separado</td>
-    <?php }else if($value->pac_EstadoCivil == "DV"){ ?>
+    <?php } else if ($value->pac_EstadoCivil == "DV") { ?>
       <td>Divorciado</td>
-    <?php }else if($value->pac_EstadoCivil == "VD"){ ?>
+    <?php } else if ($value->pac_EstadoCivil == "VD") { ?>
       <td>Viudo/Viuda</td>
     <?php } ?>
     <td>{{ $value->	pac_Religion }}</td>
     <td>
-      
+
       <a class="btn btn-hover btn-sm black-background" href="{{route('pacientes.edit',$value->pac_id)}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>
@@ -80,7 +90,7 @@
       </button>
       {!! Form::close() !!}
       <a class="btn btn-hover btn-sm black-background" href="{{route('pacientePDF',$value->pac_id)}}">
-        <i style="color: #ffffff;" >PDF</i>
+        <i style="color: #ffffff;">PDF</i>
       </a>
       <a class="btn btn-info btn-sm btn-block" style="margin-top: 5px;" href="{{route('VerExpediente',$value->pac_id)}}">
         <i class=""></i>Expediente</a>
