@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('PageTitle', 'Requisitos')
 @section('content')
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-md-6 col-md-offset-3">
       {{ Form::model($requisitos,['route'=>['update',$requisitos->rqID, $rqOfertaTrabajo],'method'=>'PATCH']) }}
       @include('requisitos.form_master')
