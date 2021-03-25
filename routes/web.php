@@ -30,6 +30,8 @@ Route::get('/auth', function () {
     return view('auth.register');
 })->name('auth');
 
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 //Reportes PDF
 Route::get('pacientes/pdf/{id}', 'pacientesController@createPDF')->name('pacientePDF');
 Route::get('consultas/pdf/{id}', 'consultasController@createPDF')->name('consultaPDF');
