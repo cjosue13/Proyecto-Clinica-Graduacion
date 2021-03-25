@@ -5,10 +5,12 @@ namespace Illuminate\Testing;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Mockery;
 use Mockery\Exception\NoMatchingExpectationException;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -132,6 +134,27 @@ class PendingCommand
     }
 
     /**
+     * Specify a table that should be printed when the command runs.
+     *
+     * @param  array  $headers
+     * @param  \Illuminate\Contracts\Support\Arrayable|array  $rows
+     * @param  string  $tableStyle
+     * @param  array  $columnStyles
+     * @return $this
+     */
+    public function expectsTable($headers, $rows, $tableStyle = 'default', array $columnStyles = [])
+    {
+        $this->test->expectedTables[] = [
+            'headers' => (array) $headers,
+            'rows' => $rows instanceof Arrayable ? $rows->toArray() : $rows,
+            'tableStyle' => $tableStyle,
+            'columnStyles' => $columnStyles,
+        ];
+
+        return $this;
+    }
+
+    /**
      * Assert that the command has the given exit code.
      *
      * @param  int  $exitCode
@@ -158,6 +181,8 @@ class PendingCommand
      * Execute the command.
      *
      * @return int
+     *
+     * @throws \Mockery\Exception\NoMatchingExpectationException
      */
     public function run()
     {
@@ -262,6 +287,8 @@ class PendingCommand
                 ->shouldAllowMockingProtectedMethods()
                 ->shouldIgnoreMissing();
 
+        $this->applyTableOutputExpectations($mock);
+
         foreach ($this->test->expectedOutput as $i => $output) {
             $mock->shouldReceive('doWrite')
                 ->once()
@@ -273,6 +300,36 @@ class PendingCommand
         }
 
         return $mock;
+    }
+
+    /**
+     * Apply the output table expectations to the mock.
+     *
+     * @param  \Mockery\MockInterface  $mock
+     * @return void
+     */
+    private function applyTableOutputExpectations($mock)
+    {
+        foreach ($this->test->expectedTables as $consoleTable) {
+            $table = (new Table($output = new BufferedOutput))
+                ->setHeaders($consoleTable['headers'])
+                ->setRows($consoleTable['rows'])
+                ->setStyle($consoleTable['tableStyle']);
+
+            foreach ($consoleTable['columnStyles'] as $columnIndex => $columnStyle) {
+                $table->setColumnStyle($columnIndex, $columnStyle);
+            }
+
+            $table->render();
+
+            $lines = array_filter(
+                preg_split("/\n/", $output->fetch())
+            );
+
+            foreach ($lines as $line) {
+                $this->expectsOutput($line);
+            }
+        }
     }
 
     /**

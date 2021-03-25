@@ -47,14 +47,14 @@ class PrettyPageHandler extends Handler
     /**
      * The name of the custom css file.
      *
-     * @var string
+     * @var string|null
      */
     private $customCss = null;
 
     /**
      * The name of the custom js file.
      *
-     * @var string
+     * @var string|null
      */
     private $customJs = null;
 
@@ -349,11 +349,12 @@ class PrettyPageHandler extends Handler
      * @param string $label
      * @param array  $data
      *
-     * @return void
+     * @return static
      */
     public function addDataTable($label, array $data)
     {
         $this->extraTables[$label] = $data;
+        return $this;
     }
 
     /**
@@ -368,7 +369,7 @@ class PrettyPageHandler extends Handler
      *
      * @throws InvalidArgumentException If $callback is not callable
      *
-     * @return void
+     * @return static
      */
     public function addDataTableCallback($label, /* callable */ $callback)
     {
@@ -387,6 +388,8 @@ class PrettyPageHandler extends Handler
                 return [];
             }
         };
+
+        return $this;
     }
 
     /**
@@ -418,7 +421,7 @@ class PrettyPageHandler extends Handler
      *
      * @param bool|null $value
      *
-     * @return bool|null
+     * @return bool|static
      */
     public function handleUnconditionally($value = null)
     {
@@ -427,6 +430,7 @@ class PrettyPageHandler extends Handler
         }
 
         $this->handleUnconditionally = (bool) $value;
+        return $this;
     }
 
     /**
@@ -447,11 +451,12 @@ class PrettyPageHandler extends Handler
      * @param string          $identifier
      * @param string|callable $resolver
      *
-     * @return void
+     * @return static
      */
     public function addEditor($identifier, $resolver)
     {
         $this->editors[$identifier] = $resolver;
+        return $this;
     }
 
     /**
@@ -469,7 +474,7 @@ class PrettyPageHandler extends Handler
      *
      * @throws InvalidArgumentException If invalid argument identifier provided
      *
-     * @return void
+     * @return static
      */
     public function setEditor($editor)
     {
@@ -481,6 +486,7 @@ class PrettyPageHandler extends Handler
         }
 
         $this->editor = $editor;
+        return $this;
     }
 
     /**
@@ -518,8 +524,8 @@ class PrettyPageHandler extends Handler
     /**
      * Determine if the editor link should act as an Ajax request.
      *
-     * @param string  $filePath
-     * @param int     $line
+     * @param string $filePath
+     * @param int    $line
      *
      * @throws UnexpectedValueException If editor resolver does not return a boolean
      *
@@ -591,11 +597,12 @@ class PrettyPageHandler extends Handler
      *
      * @param string $title
      *
-     * @return void
+     * @return static
      */
     public function setPageTitle($title)
     {
         $this->pageTitle = (string) $title;
+        return $this;
     }
 
     /**
@@ -611,11 +618,11 @@ class PrettyPageHandler extends Handler
     /**
      * Adds a path to the list of paths to be searched for resources.
      *
-     * @param  string $path
+     * @param string $path
      *
      * @throws InvalidArgumentException If $path is not a valid directory
      *
-     * @return void
+     * @return static
      */
     public function addResourcePath($path)
     {
@@ -626,29 +633,33 @@ class PrettyPageHandler extends Handler
         }
 
         array_unshift($this->searchPaths, $path);
+        return $this;
     }
 
     /**
      * Adds a custom css file to be loaded.
      *
-     * @param string $name
+     * @param string|null $name
      *
-     * @return void
+     * @return static
      */
     public function addCustomCss($name)
     {
         $this->customCss = $name;
+        return $this;
     }
 
     /**
      * Adds a custom js file to be loaded.
      *
-     * @param  string $name
-     * @return void
+     * @param string|null $name
+     *
+     * @return static
      */
     public function addCustomJs($name)
     {
         $this->customJs = $name;
+        return $this;
     }
 
     /**
@@ -666,7 +677,7 @@ class PrettyPageHandler extends Handler
      * way back to the first, enabling a cascading-type system of overrides for
      * all resources.
      *
-     * @param  string $resource
+     * @param string $resource
      *
      * @throws RuntimeException If resource cannot be found in any of the available paths
      *
@@ -717,11 +728,12 @@ class PrettyPageHandler extends Handler
      *
      * @param string $resourcesPath
      *
-     * @return void
+     * @return static
      */
     public function setResourcesPath($resourcesPath)
     {
         $this->addResourcePath($resourcesPath);
+        return $this;
     }
 
     /**
@@ -760,15 +772,30 @@ class PrettyPageHandler extends Handler
 
     /**
      * blacklist a sensitive value within one of the superglobal arrays.
+     * Alias for the hideSuperglobalKey method.
      *
      * @param string $superGlobalName The name of the superglobal array, e.g. '_GET'
      * @param string $key             The key within the superglobal
+     * @see hideSuperglobalKey
      *
-     * @return void
+     * @return static
      */
     public function blacklist($superGlobalName, $key)
     {
         $this->blacklist[$superGlobalName][] = $key;
+        return $this;
+    }
+
+    /**
+     * Hide a sensitive value within one of the superglobal arrays.
+     *
+     * @param string $superGlobalName The name of the superglobal array, e.g. '_GET'
+     * @param string $key             The key within the superglobal
+     * @return static
+     */
+    public function hideSuperglobalKey($superGlobalName, $key)
+    {
+        return $this->blacklist($superGlobalName, $key);
     }
 
     /**
@@ -778,7 +805,7 @@ class PrettyPageHandler extends Handler
      * only '*' characters. We intentionally dont rely on $GLOBALS as it
      * depends on the 'auto_globals_jit' php.ini setting.
      *
-     * @param array $superGlobal      One of the superglobal arrays
+     * @param array  $superGlobal     One of the superglobal arrays
      * @param string $superGlobalName The name of the superglobal array, e.g. '_GET'
      *
      * @return array $values without sensitive data

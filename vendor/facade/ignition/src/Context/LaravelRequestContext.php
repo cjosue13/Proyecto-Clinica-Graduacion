@@ -19,7 +19,7 @@ class LaravelRequestContext extends RequestContext
     {
         try {
             $user = $this->request->user();
-    
+
             if (! $user) {
                 return [];
             }
@@ -52,6 +52,18 @@ class LaravelRequestContext extends RequestContext
             'controllerAction' => optional($route)->getActionName(),
             'middleware' => array_values(optional($route)->gatherMiddleware() ?? []),
         ];
+    }
+
+    public function getRequest(): array
+    {
+        $properties = parent::getRequest();
+
+
+        if ($this->request->hasHeader('x-livewire') && $this->request->hasHeader('referer')) {
+            $properties['url'] = $this->request->header('referer');
+        }
+
+        return $properties;
     }
 
     protected function getRouteParameters(): array
