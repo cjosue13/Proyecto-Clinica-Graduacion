@@ -162,7 +162,7 @@
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
-            navLinks: true, // can click day/week names to navigate views
+            navLinks: true,
             selectable: true,
             selectMirror: true,
             select: function(arg) {
