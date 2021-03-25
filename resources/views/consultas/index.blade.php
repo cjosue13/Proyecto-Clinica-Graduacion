@@ -70,7 +70,13 @@
   @foreach ($consultas as $key => $value)
   <tr>
 
-    <td>{{ $value->c_tipo }}</td>
+    <?php if ($value->c_tipo == "P") { ?>
+      <td>Psiquico</td>
+    <?php } else if ($value->c_tipo == "G") { ?>
+      <td>General</td>
+    <?php } else if ($value->c_tipo == "F") { ?>
+      <td>Físico</td>
+    <?php }  ?>
     <td>{{ $value->c_motivo }}</td>
     <td>{{ $value->c_Diagnostico }}</td>
     <td>{{ $value->c_Problemas }}</td>
