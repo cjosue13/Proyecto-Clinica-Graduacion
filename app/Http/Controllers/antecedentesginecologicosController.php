@@ -121,7 +121,10 @@ class antecedentesginecologicosController extends Controller
         ]);
        
         tbl_antecedentesginecologicos::find($id)->update($request->all());
-        return redirect()->route('antecedentesginecologicos.index')->with('success','Antecedentes Ginecologicos actualizados con éxito');
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $id)->get()->toArray();
+        $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente'));
     }
 
     /**
