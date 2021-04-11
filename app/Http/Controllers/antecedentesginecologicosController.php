@@ -85,10 +85,10 @@ class antecedentesginecologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,$idExp)
     {
         $antecedentesginecologicos = tbl_antecedentesginecologicos::find($id);
-        return view('antecedentesginecologicos.edit', compact('antecedentesginecologicos'));
+        return view('antecedentesginecologicos.edit', compact('antecedentesginecologicos','idExp'));
     }
 
     /**
