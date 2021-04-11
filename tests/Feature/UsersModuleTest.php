@@ -10,15 +10,14 @@ use App\User;
 class UsersModuleTest extends TestCase
 {
     /**
-     * Ver la lista de usuarios
+     * el Registro de los usuarios
      *
      * @return test
      */
-    function test_user_list()
+    function test_Auth()
     {
-        $response = $this->get('/usuarios');
-
-        $response->assertStatus(500);
+        $response = $this->get('/auth');
+        $response->assertStatus(200);
 
     }
 
@@ -32,27 +31,4 @@ class UsersModuleTest extends TestCase
         $response = $this->get('/usuarios/create');
         $response->assertStatus(200);
     }
-
-    /**
-     * Ver usuarios específicos por ID
-     *
-     * @return test
-     */
-    function test_edit_user()
-    {
-        $response = $this->get('/usuarios/1/edit');
-        $response->assertStatus(500);
-    }
-
-    /**
-     * Ver usuarios específicos por ID
-     *
-     * @return test
-     */
-    function test_show_user()
-    {
-        $response = $this->get('/usuarios/1');
-        $response->assertStatus(500);
-    }
-    
 }

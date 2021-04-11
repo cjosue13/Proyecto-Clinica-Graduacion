@@ -6,18 +6,17 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class PacienteModuleTest extends TestCase
+class AgendaModuleTest extends TestCase
 {
-     /**
-     * Crear paciente
+    /**
+     * Ver agenda, desde acá se guarda, edita elimina
      *
      * @return test
      */
-    public function test_CrearPaciente()
+    public function test_VerAgenda()
     {
-        $response = $this->get('/pacientes/create');
+        $response = $this->get('/agenda');
+
         $response->assertStatus(200);
     }
-
-
 }

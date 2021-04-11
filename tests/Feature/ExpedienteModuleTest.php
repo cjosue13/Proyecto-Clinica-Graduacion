@@ -6,18 +6,16 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class PacienteModuleTest extends TestCase
+class ExpedienteModuleTest extends TestCase
 {
-     /**
-     * Crear paciente
+        /**
+     * Crear Expediente de paciente
      *
      * @return test
      */
-    public function test_CrearPaciente()
+    public function test_ExpedientePaciente()
     {
-        $response = $this->get('/pacientes/create');
+        $response = $this->get('/expediente/create/1');
         $response->assertStatus(200);
     }
-
-
 }
