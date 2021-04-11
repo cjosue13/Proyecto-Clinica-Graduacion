@@ -4,7 +4,6 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="full-right">
-      <h2>Antecedentes Ginecologicos de {{$paciente[0]->pac_pApellido}} {{$paciente[0]->pac_sApellido}} {{$paciente[0]->pac_pNombre}}</h2>
     </div>
   </div>
 </div>

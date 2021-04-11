@@ -30,7 +30,18 @@ class AntecedentesModuleTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * Crear antecedentes traumáticos para expediente
+     *
+     * @return test
+     */
+    public function test_AntecedentesPersonalSocial()
+    {
+        $response = $this->get('personalsocial/create/7');
+        $response->assertStatus(200);
+    }
+
     
 
-    //antPatologicos/createP/8?
+    ///personalsocial/create/7
 }

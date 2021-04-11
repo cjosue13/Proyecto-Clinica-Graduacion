@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\tbl_antecedentesginecologicos;
 use App\tbl_expedientes;
+use App\tbl_pacientes;
 use Illuminate\Support\Facades\DB;
 
 class antecedentesginecologicosController extends Controller
@@ -41,7 +42,7 @@ class antecedentesginecologicosController extends Controller
     {
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
         $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
-
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
         if(sizeof($antecedentesginecologicos)==0){
             $this->validate($request, [
                 'ag_Menarca' => 'required|string|max:10',
@@ -62,11 +63,11 @@ class antecedentesginecologicosController extends Controller
             
             $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
             $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
-    
-            return redirect()->route('antecedentesginecologicos.index',compact('expediente','antecedentesginecologicos'))->with('success','Antecedente Ginecologico creado con éxito');    
+            $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+            return redirect()->route('antecedentesginecologicos.index',compact('paciente', 'expediente','antecedentesginecologicos' ))->with('success','Antecedente Ginecologico creado con éxito');    
         }
         else{
-            return redirect()->route('antecedentesginecologicos.index',compact('expediente','antecedentesginecologicos'))->with('warning','Ya existen antecedentes para este paciente');    
+            return redirect()->route('antecedentesginecologicos.index',compact('paciente', 'expediente','antecedentesginecologicos'))->with('warning','Ya existen antecedentes para este paciente');    
         }
     }
 
@@ -134,6 +135,7 @@ class antecedentesginecologicosController extends Controller
         tbl_antecedentesginecologicos::find($id)->delete();
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
         $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
-        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos'));
+        $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente'));
     }
 }
