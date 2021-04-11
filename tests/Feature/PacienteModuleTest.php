@@ -52,4 +52,15 @@ class PacienteModuleTest extends TestCase
         $response = $this->get('/pacientes/pdf/1');
         $response->assertStatus(500);
     }
+
+    /**
+     * Filtro de pacientes
+     *
+     * @return test
+     */
+    public function test_FiltroPaciente()
+    {
+        $response = $this->get('/pacientes/filtro?txt_nombre=Pedro');
+        $response->assertStatus(500);
+    }
 }
