@@ -122,12 +122,12 @@ Route::delete('antecedentesginecologicos/eliminar/{id}/{idExp}', [
     'as' => 'eliminar', 'uses' => 'antecedentesginecologicosController@eliminar'
 ]);
 
-Route::post('antecedentesginecologicos/updateAG/{id}/{idExp}', [
+Route::post('antecedentesginecologicos/edit/{id}/{idExp}', [
     'as' => 'edit', 'uses' => 'antecedentesginecologicosController@edit'
 ]);
 
 Route::post('antecedentesginecologicos/updateAG/{id}/{idExp}', [
-    'as' => 'edit', 'updateAg' => 'antecedentesginecologicosController@updateAg'
+    'as' => 'updateAG', 'uses' => 'antecedentesginecologicosController@updateAG'
 ]);
 
 //Antecentes Enfermedades
