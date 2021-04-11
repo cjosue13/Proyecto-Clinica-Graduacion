@@ -66,12 +66,12 @@
     <td>{{ $value->	ag_PRS }}</td>	
     <td>{{ $value->	ag_NoCS }}</td>
     <td width='150px'>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('antecedentesginecologicos.show',$value->ag_id)}}">
-        <i style="color: #ffffff;"  class="fas fa-bars"></i>
-      </a>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('antecedentesginecologicos.edit',$value->ag_id)}}">
+      {!! Form::open(['method' => 'POST','route' => ['updateAG', $value->ag_id, $value->ag_expediente],'style'=>'display:inline']) !!}
+      <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
-      </a>
+      </button>
+      {!! Form::close() !!}
+
       {!! Form::open(['method' => 'DELETE','route' => ['eliminar', $value->ag_id, $value->ag_expediente],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>

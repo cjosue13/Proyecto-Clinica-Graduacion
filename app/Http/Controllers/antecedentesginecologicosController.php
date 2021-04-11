@@ -59,11 +59,7 @@ class antecedentesginecologicosController extends Controller
                 'ag_PRS' => 'required|string|max:10',
                 'ag_NoCS' => 'required|int|max:999'
             ]);
-            tbl_antecedentesginecologicos::create(['ag_expediente' => $idExp] + $request->all());
-            
-            $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
-            $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
-            $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
+            tbl_antecedentesginecologicos::create(['ag_expediente' => $idExp] + $request->all()); 
             return redirect()->route('antecedentesginecologicos.index',compact('paciente', 'expediente','antecedentesginecologicos' ))->with('success','Antecedente Ginecologico creado con éxito');    
         }
         else{
@@ -102,7 +98,7 @@ class antecedentesginecologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateAG(Request $request, $id, $idExp)
     {
         $this->validate($request, [
             'ag_Menarca' => 'required|string|max:10',
@@ -124,7 +120,7 @@ class antecedentesginecologicosController extends Controller
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $id)->get()->toArray();
         $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
         $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
-        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente'));
+        return redirect()->route('antecedentesginecologicos.index',compact('paciente', 'expediente','antecedentesginecologicos' ))->with('success','Antecedente Ginecologico creado con éxito');    
     }
 
     /**
