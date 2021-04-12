@@ -100,8 +100,8 @@
   @endforeach
 </table>
 @else
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<script>
+document.getElementById('logout-form').submit();
+</script>
 @endif
-
-
 @endsection
