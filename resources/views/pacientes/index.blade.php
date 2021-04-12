@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('PageTitle', 'Pacientes')
 @section('content')
+@if (session('status'))
+<div class="alert alert-success" role="alert">
+    {{ session('status') }}
+</div>
+@endif
 <div class="row">
   <div class="col-sm-12">
     <div class="full-right">
@@ -17,11 +22,7 @@
     </div>
   </div>
 </div>
-@if (session('status'))
-<div class="alert alert-success" role="alert">
-    {{ session('status') }}
-</div>
-@endif
+
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
   <p>{{ $message }}</p>
