@@ -1,11 +1,7 @@
 @extends('layouts.app')
 @section('PageTitle', 'Pacientes')
 @section('content')
-@if (!session('status'))
-<div class="alert alert-success" role="alert">
-    {{ session('status') }}
-</div>
-@endif
+@if (session('status'))
 <div class="row">
   <div class="col-sm-12">
     <div class="full-right">
@@ -103,4 +99,6 @@
   </tr>
   @endforeach
 </table>
+@endif
+
 @endsection
