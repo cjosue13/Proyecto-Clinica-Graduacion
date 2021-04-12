@@ -15,6 +15,13 @@ class usuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
         $user = auth()->user();
@@ -25,7 +32,7 @@ class usuariosController extends Controller
     public function subirImagen(Request $request)
     {
         $filename = $request->photo->getClientOriginalName();
-        $request->photo->storeAs('images',$filename, 'public');
+        $request->photo->storeAs('images', $filename, 'public');
         User::find(auth()->user()->id)->update(['photo' => $filename]);
         return redirect()->route('usuarios.edit', auth()->user()->id)->with('success', 'Usuario actualizado con exito');
     }
@@ -64,7 +71,7 @@ class usuariosController extends Controller
         $usuarios = user::find($id);
         return view('usuarios.edit', compact('usuarios'));
     }
- /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -73,20 +80,20 @@ class usuariosController extends Controller
     public function store(Request $request)
     {
 
-        
+
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:50','unique:users'],
+            'username' => ['required', 'string', 'max:50', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'address' => ['required', 'string', 'max:50'],
             'phone' => ['required', 'string', 'max:50'],
             'tipoUsuario' => ['required', 'string', 'max:1'],
-            'cedula' => ['required', 'string', 'max:50','unique:users']
+            'cedula' => ['required', 'string', 'max:50', 'unique:users']
         ]);
         $request['password'] = Hash::make($request['password']);
         User::create($request->all());
-        return redirect()->route('home')->with('success','Uusario creado con éxito');
+        return redirect()->route('home')->with('success', 'Uusario creado con éxito');
     }
     /**
      * Update the specified resource in storage.
