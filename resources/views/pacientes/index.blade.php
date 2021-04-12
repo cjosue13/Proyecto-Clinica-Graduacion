@@ -99,6 +99,9 @@
   </tr>
   @endforeach
 </table>
+@else
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @endif
+
 
 @endsection
