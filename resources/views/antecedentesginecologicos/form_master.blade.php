@@ -88,7 +88,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ag_FUR') ? 'has-error' : "" }}">
-            {{ Form::date('ag_FUR',NULL, ['class'=>'form-control', 'id'=>'ag_FUR', 'placeholder'=> 'FUR']) }}
+            {{ Form::date('ag_FUR',NULL, ['class'=>'form-control', 'id'=>'ag_FUR', 'placeholder'=> 'FUR','required']) }}
             {!! $errors->first('ag_FUR', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -100,7 +100,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ag_FUPAP') ? 'has-error' : "" }}">
-            {{ Form::date('ag_FUPAP',NULL, ['class'=>'form-control', 'id'=>'ag_FUPAP', 'placeholder'=> 'FUPAP']) }}
+            {{ Form::date('ag_FUPAP',NULL, ['class'=>'form-control', 'id'=>'ag_FUPAP', 'placeholder'=> 'FUPAP','required']) }}
             {!! $errors->first('ag_FUPAP', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -143,7 +143,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ag_PF_detalle') ? 'has-error' : "" }}">
-            {{ Form::text('ag_PF_detalle',NULL, ['class'=>'form-control', 'id'=>'ag_PF_detalle', 'placeholder'=> 'PF Detalle']) }}
+            {{ Form::text('ag_PF_detalle',NULL, ['class'=>'form-control', 'id'=>'ag_PF_detalle', 'placeholder'=> 'PF Detalle','required']) }}
             {!! $errors->first('ag_PF_detalle', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -155,7 +155,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ag_PRS') ? 'has-error' : "" }}">
-            {{ Form::date('ag_PRS',NULL, ['class'=>'form-control', 'id'=>'ag_PRS', 'placeholder'=> 'YYYY-MM-DD']) }}
+            {{ Form::date('ag_PRS',NULL, ['class'=>'form-control', 'id'=>'ag_PRS', 'placeholder'=> 'YYYY-MM-DD','required']) }}
             {!! $errors->first('ag_PRS', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
