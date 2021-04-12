@@ -16,7 +16,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ag_Edad') ? 'has-error' : "" }}">
-            {{ Form::number('ag_Edad',NULL, ['class'=>'form-control', 'id'=>'ag_Edad', 'placeholder'=>'Edad Primer Ciclo Menstrual', 'max'=>'20']) }}
+            {{ Form::number('ag_Edad',NULL, ['class'=>'form-control', 'id'=>'ag_Edad', 'placeholder'=>'Edad Primer Ciclo Menstrual', 'max'=>'20', 'min'=>'5']) }}
             {!! $errors->first('ag_Edad', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
