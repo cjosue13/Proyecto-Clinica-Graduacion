@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-2">
-    {!! form::label('exm_peso','Peso:') !!}
+    {!! form::label('exm_peso','Peso(kg):') !!}
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('exm_peso') ? 'has-error' : "" }}">
@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-sm-2">
-        {!! form::label('exm_altura','Estatura:') !!}
+        {!! form::label('exm_altura','Estatura(cm):') !!}
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('exm_altura') ? 'has-error' : "" }}">
