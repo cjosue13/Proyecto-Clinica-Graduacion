@@ -102,7 +102,7 @@ class antecedentesginecologicosController extends Controller
     {
         $this->validate($request, [
             'ag_Menarca' => 'required|string|max:10',
-            'ag_Edad' => 'int|max:20|required',
+            'ag_Edad' => 'required|integer|max:20',
             'ag_CiclosMenstruales' => 'required|int|max:999',
             'ag_Embarazos' => 'required|int|max:99',
             'ag_Partos' => 'required|int|max:99',
