@@ -24,11 +24,11 @@
   <tr>
     <thead>
       <th with="80px">No</th>
-      <th>Peso</th>
-      <th>Estatura</th>
+      <th>Peso(kg)</th>
+      <th>Estatura(cm)</th>
       <th>IMC</th>
-      <th>Frecuencia Cardiaca</th>
-      <th>Temperatura</th>
+      <th>Frecuencia Cardiaca(lat/mm)</th>
+      <th>Temperatura(°C)</th>
       <th>Sistólica</th>
       <th>Diastólica</th>
       <?php if (sizeof($examenesclinicos) == 0) {?>
