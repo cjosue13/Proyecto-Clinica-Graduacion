@@ -59,7 +59,9 @@ class antecedentesginecologicosController extends Controller
                 'ag_PRS' => 'required|string|max:10',
                 'ag_NoCS' => 'required|int|max:999'
             ]);
+
             tbl_antecedentesginecologicos::create(['ag_expediente' => $idExp] + $request->all()); 
+            $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
             return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente'));
         }
         else{
@@ -100,9 +102,10 @@ class antecedentesginecologicosController extends Controller
      */
     public function updateAG(Request $request, $id, $idExp)
     {
+
         $this->validate($request, [
             'ag_Menarca' => 'required|string|max:10',
-            'ag_Edad' => 'required|integer|max:20',
+            'ag_Edad' => 'required|int|max:150',
             'ag_CiclosMenstruales' => 'required|int|max:999',
             'ag_Embarazos' => 'required|int|max:99',
             'ag_Partos' => 'required|int|max:99',
@@ -115,6 +118,7 @@ class antecedentesginecologicosController extends Controller
             'ag_PRS' => 'required|string|max:10',
             'ag_NoCS' => 'required|int|max:999'
         ]);
+
        
         tbl_antecedentesginecologicos::find($id)->update($request->all());
         $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();

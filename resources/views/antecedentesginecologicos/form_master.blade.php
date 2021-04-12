@@ -16,7 +16,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ag_Edad') ? 'has-error' : "" }}">
-            {{ Form::text('ag_Edad',NULL, ['class'=>'form-control', 'id'=>'ag_Edad', 'placeholder'=>'Edad Primer Ciclo Menstrual']) }}
+            {{ Form::number('ag_Edad',NULL, ['class'=>'form-control', 'id'=>'ag_Edad', 'placeholder'=>'Edad Primer Ciclo Menstrual']) }}
             {!! $errors->first('ag_Edad', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('aag_CiclosMenstruales') ? 'has-error' : "" }}">
-            {{ Form::text('ag_CiclosMenstruales',NULL, ['class'=>'form-control', 'id'=>'ag_CiclosMenstruales', 'placeholder'=>'Cantidad de Ciclos menstruales']) }}
+            {{ Form::number('ag_CiclosMenstruales',NULL, ['class'=>'form-control', 'id'=>'ag_CiclosMenstruales', 'placeholder'=>'Cantidad de Ciclos menstruales']) }}
             {!! $errors->first('ag_CiclosMenstruales', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -40,7 +40,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ag_Embarazos') ? 'has-error' : "" }}">
-            {{ Form::text('ag_Embarazos',NULL, ['class'=>'form-control', 'id'=>'ag_Embarazos', 'placeholder'=>'Embarazos']) }}
+            {{ Form::number('ag_Embarazos',NULL, ['class'=>'form-control', 'id'=>'ag_Embarazos', 'placeholder'=>'Embarazos']) }}
             {!! $errors->first('ag_Embarazos', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -52,7 +52,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ag_Partos') ? 'has-error' : "" }}">
-            {{ Form::text('ag_Partos',NULL, ['class'=>'form-control', 'id'=>'ag_Partos', 'placeholder'=> 'Partos']) }}
+            {{ Form::number('ag_Partos',NULL, ['class'=>'form-control', 'id'=>'ag_Partos', 'placeholder'=> 'Partos']) }}
             {!! $errors->first('ag_Partos', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -64,7 +64,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ag_Abortos') ? 'has-error' : "" }}">
-            {{ Form::text('ag_Abortos',NULL, ['class'=>'form-control', 'id'=>'ag_Abortos', 'placeholder'=> 'Abortos']) }}
+            {{ Form::number('ag_Abortos',NULL, ['class'=>'form-control', 'id'=>'ag_Abortos', 'placeholder'=> 'Abortos']) }}
             {!! $errors->first('ag_Abortos', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -76,7 +76,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ag_Cesareas') ? 'has-error' : "" }}">
-            {{ Form::text('ag_Cesareas',NULL, ['class'=>'form-control', 'id'=>'ag_Cesareas', 'placeholder'=>'Cesareas']) }}
+            {{ Form::number('ag_Cesareas',NULL, ['class'=>'form-control', 'id'=>'ag_Cesareas', 'placeholder'=>'Cesareas']) }}
             {!! $errors->first('ag_Cesareas', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -167,7 +167,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('ag_NoCS') ? 'has-error' : "" }}">
-            {{ Form::text('ag_NoCS',NULL, ['class'=>'form-control', 'id'=>'ag_NoCS', 'placeholder'=> 'NoCS']) }}
+            {{ Form::number('ag_NoCS',NULL, ['class'=>'form-control', 'id'=>'ag_NoCS', 'placeholder'=> 'NoCS']) }}
             {!! $errors->first('ag_NoCS', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
