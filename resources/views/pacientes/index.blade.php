@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('PageTitle', 'Pacientes')
 @section('content')
-@if (session('status'))
 <div class="row">
   <div class="col-sm-12">
     <div class="full-right">
@@ -99,9 +98,4 @@
   </tr>
   @endforeach
 </table>
-@else
-<script>
-document.getElementById('logout-form').submit();
-</script>
-@endif
 @endsection
