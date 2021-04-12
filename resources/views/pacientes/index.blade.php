@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('PageTitle', 'Pacientes')
 @section('content')
-@if (session('status'))
+@if (!session('status'))
 <div class="alert alert-success" role="alert">
     {{ session('status') }}
 </div>
