@@ -10,7 +10,6 @@ use App;
 
 class usuariosController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -41,14 +40,6 @@ class usuariosController extends Controller
         return view('usuarios.create');
     }
 
-    public function filtro(Request $request){
-        $nombre = $request->request->get('txt_empresa');
-
-        $usuarios = DB::table('users')->orderBy('id', 'asc')
-        ->where('users.tipoUsuario', 'E')
-        ->where('users.name', 'LIKE', '%' . $nombre . '%')->get()->toArray();
-        return view('usuarios.listaEmpresas', compact('usuarios'));
-    }
 
     /**
      * Display the specified resource.
