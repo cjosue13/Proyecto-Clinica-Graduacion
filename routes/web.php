@@ -75,6 +75,12 @@ Route::get('consultas/create/{id}', 'consultasController@create')->name('createC
 Route::get('consultas/edit/{id}/{idExp}', 'consultasController@edit')->name('editConsulta');
 Route::delete('consultas/delete/{id}/{idExp}', 'consultasController@destroy')->name('deleteConsulta');
 Route::post('consultas/store/{id}', 'consultasController@store')->name('storeConsulta');
+
+
+
+Route::get('image-upload', 'ImageUploadController@imageUpload')->name('image.upload');
+Route::post('image-upload', 'ImageUploadController@imageUploadPost')->name('image.upload.post');
+
 Route::patch('consultas/update/{id}/{idExp}', 'consultasController@update')->name('updateConsulta');
 
 

@@ -25,12 +25,13 @@
     <thead>
       <th with="80px">No</th>
       <th>Nombre</th>
+      <th>Imagen</th>
       <th>Descripción</th>
-        <th width="140px" class="text-center">
-          <a href="{{route('createEx', $idCon)}}" class="btn btn-success btn-sm">
-            <i class="fas fa-plus"></i>
-          </a>
-        </th>
+      <th width="140px" class="text-center">
+        <a href="{{route('createEx', $idCon)}}" class="btn btn-success btn-sm">
+          <i class="fas fa-plus"></i>
+        </a>
+      </th>
     </thead>
   </tr>
   <?php $no = 1; ?>
@@ -38,6 +39,7 @@
   <tr>
     <td>{{$no++}}</td>
     <td>{{ $value->exmm_Nombre }}</td>
+    <td><img src="/images/{{ $value->exmm_Imagen }}" width="60"></td>
     <td>{{ $value->exmm_Descripcion }}</td>
     <td>
       {!! Form::open(['method' => 'POST','route' => ['editEx', $value->exmm_id, $idCon],'style'=>'display:inline']) !!}
@@ -53,6 +55,7 @@
       {!! Form::close() !!}
 
     </td>
+    
   </tr>
   @endforeach
 </table>

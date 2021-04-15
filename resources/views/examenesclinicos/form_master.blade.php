@@ -1,13 +1,13 @@
 <div class="row">
-  <div class="col-sm-2">
-    {!! form::label('exm_peso','Peso(kg):') !!}
-  </div>
-  <div class="col-sm-10">
-    <div class="form-group {{ $errors->has('exm_peso') ? 'has-error' : "" }}">
-      {{ Form::number('exm_peso',NULL, ['class'=>'form-control', 'id'=>'exm_peso', 'placeholder'=>'Peso del Paciente','required', 'max'=>'999','min'=>'0']) }}
-      {!! $errors->first('exm_peso', '<p class="help-block">:message</p>') !!}
+    <div class="col-sm-2">
+        {!! form::label('exm_peso','Peso(kg):') !!}
     </div>
-  </div>
+    <div class="col-sm-10">
+        <div class="form-group {{ $errors->has('exm_peso') ? 'has-error' : "" }}">
+            {{ Form::number('exm_peso',NULL, ['class'=>'form-control', 'id'=>'exm_peso', 'placeholder'=>'Peso del Paciente','required', 'max'=>'999','min'=>'0']) }}
+            {!! $errors->first('exm_peso', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -69,6 +69,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="form-group">
     {{ Form::button(isset($model)? 'Actualizar' : 'Guardar' , ['class'=>'btn btn-success', 'type'=>'submit']) }}

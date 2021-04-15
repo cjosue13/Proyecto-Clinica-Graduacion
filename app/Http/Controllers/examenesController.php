@@ -51,8 +51,10 @@ class examenesController extends Controller
         
         $this->validate($request, [
             'exmm_Nombre' => 'required|string|max:50',
-            'exmm_Descripcion' => 'required|string|max:1000'
+            'exmm_Descripcion' => 'required|string|max:1000', 
+            'exmm_Imagen' => 'required|string|max:2048',
         ]);
+        
         tbl_examenes::create(['exmm_fkConsulta' => $idCon] + $request->all());
 
         $examenes = DB::table('tbl_examenes')->select('tbl_examenes.*')
@@ -85,7 +87,8 @@ class examenesController extends Controller
 
         $this->validate($request, [
             'exmm_Nombre' => 'required|string|max:50',
-            'exmm_Descripcion' => 'required|string|max:1000'
+            'exmm_Descripcion' => 'required|string|max:1000', 
+            'exmm_Imagen' => 'required|string|max:2048',
         ]);
 
         tbl_examenes::find($id)->update( $request->all());
