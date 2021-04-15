@@ -19,6 +19,7 @@ class CreateTblExamenesTable extends Migration
             $table->foreign('exmm_fkConsulta')->references('c_id')->on('tbl_consultas');
 			$table->string('exmm_Nombre',50);
 			$table->string('exmm_Descripcion',1000);
+            $table->string('exmm_Imagen',2048);
             $table->timestamps();
         });
     }

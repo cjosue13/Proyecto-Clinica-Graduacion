@@ -109,18 +109,20 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Metas : </strong>
-                    {{ $expediente[0]->exp_Metas}}
+            <?php if(sizeof($expediente) > 0){ ?>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Metas : </strong>
+                        {{ $expediente[0]->exp_Metas}}
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Historia Biopatografica : </strong>
-                    {{ $expediente[0]->exp_Historiabiopatografica}}
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Historia Biopatografica : </strong>
+                        {{ $expediente[0]->exp_Historiabiopatografica}}
+                    </div>
                 </div>
-            </div>
+            <?php } ?>
 
 
         </main>
