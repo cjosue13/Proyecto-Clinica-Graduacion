@@ -16,7 +16,7 @@ class CreateTblAntecedentesginecologicosTable extends Migration
         Schema::create('tbl_antecedentesginecologicos', function (Blueprint $table) {
             $table->increments('ag_id');
 			$table->unsignedInteger('ag_expediente');
-			$table->foreign('ag_expediente')->references('exp_id')->on('tbl_expedientes');
+			$table->foreign('ag_expediente')->references('exp_id')->on('tbl_expedientes')->onDelete('cascade');
             $table->date('ag_Menarca');
             $table->double('ag_Edad', 3, 0);
             $table->double('ag_CiclosMenstruales', 3, 0);
