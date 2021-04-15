@@ -23,7 +23,7 @@ class CreateTblPacientesTable extends Migration
 			$table->string('pac_Genero',1);
 			$table->date('pac_FechaNacimiento',50);
 			$table->string('pac_Residencia',400);
-			$table->string('pac_Correo',50)->unique();
+			$table->string('pac_Correo',50)->nullable()->unique();
 			$table->string('pac_Profesion_Oficio',50);
 			$table->string('pac_EstadoCivil',2);
 			$table->string('pac_Religion',50);

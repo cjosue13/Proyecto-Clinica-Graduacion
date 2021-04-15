@@ -62,7 +62,7 @@ class pacientesController extends Controller
             'pac_Genero' => 'required|string|max:1',
             'pac_FechaNacimiento' => 'required|date|before_or_equal:today',
             'pac_Residencia' => 'required|string|max:400',
-            'pac_Correo' => 'required|string|max:50',
+            'pac_Correo' => 'nullable|string|max:50',
             'pac_Profesion_Oficio' => 'required|string|max:50',
             'pac_EstadoCivil' => 'required|string|max:2',
             'pac_Religion' => 'required|string|max:50'
@@ -126,7 +126,7 @@ class pacientesController extends Controller
             'pac_Genero' => 'required|string|max:1',
             'pac_FechaNacimiento' => 'required|date|before_or_equal:today',
             'pac_Residencia' => 'required|string|max:400',
-            'pac_Correo' => 'required|string|max:50',
+            'pac_Correo' => 'nullable|string|max:50',
             'pac_Profesion_Oficio' => 'required|string|max:50',
             'pac_EstadoCivil' => 'required|string|max:2',
             'pac_Religion' => 'required|string|max:50'
