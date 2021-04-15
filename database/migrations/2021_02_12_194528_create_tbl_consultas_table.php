@@ -16,7 +16,7 @@ class CreateTblConsultasTable extends Migration
         Schema::create('tbl_consultas', function (Blueprint $table) {
             $table->increments('c_id');
 			$table->unsignedInteger('c_fkExpediente');
-            $table->foreign('c_fkExpediente')->references('exp_id')->on('tbl_expedientes');
+            $table->foreign('c_fkExpediente')->references('exp_id')->on('tbl_expedientes')->onDelete('cascade');
 			$table->string('c_tipo',1);
 			$table->string('c_motivo',1000);
 			$table->string('c_HistoriaPadecimientoAct',1000);

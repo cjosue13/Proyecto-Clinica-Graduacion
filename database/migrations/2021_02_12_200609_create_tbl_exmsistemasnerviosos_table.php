@@ -16,9 +16,9 @@ class CreateTblExmsistemasnerviososTable extends Migration
         Schema::create('tbl_exmsistemasnerviosos', function (Blueprint $table) {
             $table->increments('exSn_id');
 			$table->unsignedInteger('exSn_examenClinico');
-            $table->foreign('exSn_examenClinico')->references('exm_id')->on('tbl_examenesclinicos');
+            $table->foreign('exSn_examenClinico')->references('exm_id')->on('tbl_examenesclinicos')->onDelete('cascade');
 			$table->unsignedInteger('exSn_fkSistemaNerviosoC');
-            $table->foreign('exSn_fkSistemaNerviosoC')->references('snc_id')->on('tbl_sistemanerviosos');
+            $table->foreign('exSn_fkSistemaNerviosoC')->references('snc_id')->on('tbl_sistemanerviosos')->onDelete('cascade');
 			$table->string('exSn_detalle',1000);
             $table->timestamps();
         });

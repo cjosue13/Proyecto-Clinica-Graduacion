@@ -16,7 +16,7 @@ class CreateTblExmcardiovascularesTable extends Migration
         Schema::create('tbl_exmcardiovasculares', function (Blueprint $table) {
             $table->increments('car_id');
 			$table->unsignedInteger('car_examenClinico');
-            $table->foreign('car_examenClinico')->references('exm_id')->on('tbl_examenesclinicos');
+            $table->foreign('car_examenClinico')->references('exm_id')->on('tbl_examenesclinicos')->onDelete('cascade');
 			$table->string('car_detalle',1000);
 			$table->string('car_tipo',10);
             $table->timestamps();

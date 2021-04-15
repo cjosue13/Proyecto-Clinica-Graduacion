@@ -17,7 +17,7 @@ class CreateTblPersonalessocialesTable extends Migration
             $table->increments('ps_id');
 			$table->string('ps_Etapa',30);
 			$table->unsignedInteger('ps_fkExpediente');
-            $table->foreign('ps_fkExpediente')->references('exp_id')->on('tbl_expedientes');
+            $table->foreign('ps_fkExpediente')->references('exp_id')->on('tbl_expedientes')->onDelete('cascade');
 			$table->string('ps_descripcion',1000);
             $table->timestamps();
         });

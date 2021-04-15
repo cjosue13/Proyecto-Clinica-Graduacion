@@ -18,9 +18,9 @@ class CreateTblHeredofamiliaresExpedientesTable extends Migration
 			$table->string('he_Parentesco',50);
 			$table->string('he_Descripcion',50);
 			$table->unsignedInteger('he_enfermedad_fk');
-            $table->foreign('he_enfermedad_fk')->references('atpnp_id')->on('tbl_antenfermedades');
+            $table->foreign('he_enfermedad_fk')->references('atpnp_id')->on('tbl_antenfermedades')->onDelete('cascade');
 			$table->unsignedInteger('exp_fk');
-            $table->foreign('exp_fk')->references('exp_id')->on('tbl_expedientes');
+            $table->foreign('exp_fk')->references('exp_id')->on('tbl_expedientes')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class CreateTblExpedientesTable extends Migration
         Schema::create('tbl_expedientes', function (Blueprint $table) {
             $table->increments('exp_id');
             $table->unsignedInteger('exp_paciente');
-            $table->foreign('exp_paciente')->references('pac_id')->on('tbl_pacientes');
+            $table->foreign('exp_paciente')->references('pac_id')->on('tbl_pacientes')->onDelete('cascade');
             $table->string('exp_Metas', 1000);
             $table->string('exp_Historiabiopatografica', 500);
             $table->timestamps();
