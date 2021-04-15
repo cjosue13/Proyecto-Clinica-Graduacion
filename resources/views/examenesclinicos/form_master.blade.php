@@ -64,7 +64,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group {{ $errors->has('exm_diastolica') ? 'has-error' : "" }}">
-            {{ Form::text('exm_diastolica',NULL, ['class'=>'form-control', 'id'=>'exm_diastolica', 'placeholder'=>'Presión Diastólica del Paciente','required']) }}
+            {{ Form::number('exm_diastolica',NULL, ['class'=>'form-control', 'id'=>'exm_diastolica', 'placeholder'=>'Presión Diastólica del Paciente','required']) }}
             {!! $errors->first('exm_diastolica', '<p class="help-block">:message</p>') !!}
         </div>
     </div>

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('PageTitle', 'Expedientes')
+@section('PageTitle', 'Consultas')
 @section('content')
 <div class="row">
   <div class="col-sm-12">
@@ -98,13 +98,13 @@
       <a class="btn btn-hover btn-sm black-background" href="{{route('consultaPDF',$value->c_id)}}">
         <i style="color: #ffffff;">PDF</i>
       </a>
-      {!! Form::open(['method' => 'POST','route' => ['indexEx',$value->c_id],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'POST','route' => ['indexEx',$value->c_id],'style'=>'display:inline-block; margin-top:10px;']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;">Examenes</i>
       </button>
       {!! Form::close() !!}
 
-      {!! Form::open(['method' => 'POST','route' => ['indexEC',$value->c_id],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'POST','route' => ['indexEC',$value->c_id],'style'=>'display:inline-block; margin-top:10px;']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;">Examenes Clinicos</i>
       </button>
