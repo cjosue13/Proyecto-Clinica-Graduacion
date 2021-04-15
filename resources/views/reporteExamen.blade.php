@@ -53,7 +53,14 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Imagen de Examen : </strong>
-                    <img src="{{ asset('images/'.$examen->exmm_Imagen) }}">
+                </div>
+            </div>
+
+            <br>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">   
+                    <img src="../public/images/{{$examen->exmm_Imagen}}" width="200">
                 </div>
             </div>
         </main>
