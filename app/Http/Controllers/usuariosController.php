@@ -112,6 +112,7 @@ class usuariosController extends Controller
             'phone' => ['required', 'string', 'max:50'],
             'cedula' => ['required', 'string', 'max:50']
         ]);
+        $request['password'] = Hash::make($request['password']);
         user::find($id)->update($request->all());
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado con exito');
     }
