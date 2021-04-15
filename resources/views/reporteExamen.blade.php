@@ -60,7 +60,8 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">   
-                    <img src="../public/images/{{$examen->exmm_Imagen}}" width="200">
+                    <img src="../public/images/{{$examen->exmm_Imagen}}" style="max-width: 100%;
+    height: auto;">
                 </div>
             </div>
         </main>
