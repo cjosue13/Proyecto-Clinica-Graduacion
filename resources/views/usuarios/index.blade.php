@@ -46,11 +46,6 @@
       <a class="btn btn-hover btn-sm black-background" href="{{route('usuarios.edit',$value->id)}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>
-      {!! Form::open(['method' => 'DELETE','route' => ['usuarios.destroy', $value->id],'style'=>'display:inline']) !!}
-      <button type="submit" style="display: inline;"  class="btn btn-hover btn-sm black-background">
-        <i style="color: #ffffff;" class="far fa-trash-alt"></i>
-      </button>
-      {!! Form::close() !!}
     </td>
   </tr>
   @endforeach
