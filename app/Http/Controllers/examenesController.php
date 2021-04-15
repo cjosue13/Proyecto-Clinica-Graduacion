@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\tbl_examenes;
 use Illuminate\Support\Facades\DB;
-
+use Barryvdh\DomPDF\Facade as PDF;
 
 class examenesController extends Controller
 {
@@ -54,7 +54,7 @@ class examenesController extends Controller
             'exmm_Descripcion' => 'required|string|max:1000', 
             'exmm_Imagen' => 'required|string|max:2048',
         ]);
-        
+
         tbl_examenes::create(['exmm_fkConsulta' => $idCon] + $request->all());
 
         $examenes = DB::table('tbl_examenes')->select('tbl_examenes.*')
@@ -87,8 +87,7 @@ class examenesController extends Controller
 
         $this->validate($request, [
             'exmm_Nombre' => 'required|string|max:50',
-            'exmm_Descripcion' => 'required|string|max:1000', 
-            'exmm_Imagen' => 'required|string|max:2048',
+            'exmm_Descripcion' => 'required|string|max:1000'
         ]);
 
         tbl_examenes::find($id)->update( $request->all());
@@ -114,5 +113,19 @@ class examenesController extends Controller
 
         return view('examenes.index', compact('examenes', 'idCon'))
         ->with('success','Datos eliminados con éxito');
+    }
+
+
+    public function createPDF($id)
+    {
+        // retreive all records from db
+        $examen = tbl_examenes::find($id);;
+
+        // share data to view
+        view()->share('examen', $examen);
+        $pdf = PDF::loadView('reporteExamen');
+
+        // download PDF file with download method
+        return $pdf->stream();
     }
 }

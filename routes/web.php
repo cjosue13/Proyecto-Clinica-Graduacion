@@ -36,6 +36,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('pacientes/pdf/{id}', 'pacientesController@createPDF')->name('pacientePDF');
 Route::get('consultas/pdf/{id}', 'consultasController@createPDF')->name('consultaPDF');
 Route::get('agenda/pdf', 'agendaController@createPDF')->name('agendaPDF');
+Route::get('examen/pdf/{id}', 'examenesController@createPDF')->name('examenPDF');
 Route::get('reportes', 'reportesController@index')->name('reportes');
 Route::get('reportes/consultas', 'reportesController@consultas')->name('reporteConsultas');
 

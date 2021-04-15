@@ -39,7 +39,7 @@
   <tr>
     <td>{{$no++}}</td>
     <td>{{ $value->exmm_Nombre }}</td>
-    <td><img src="/images/{{ $value->exmm_Imagen }}" width="60"></td>
+    <td><img src="{{ asset('images/'.$value->exmm_Imagen) }}" width="45"></td>
     <td>{{ $value->exmm_Descripcion }}</td>
     <td>
       {!! Form::open(['method' => 'POST','route' => ['editEx', $value->exmm_id, $idCon],'style'=>'display:inline']) !!}
@@ -54,8 +54,12 @@
       </button>
       {!! Form::close() !!}
 
+      <a class="btn btn-hover btn-sm black-background" href="{{route('examenPDF',$value->exmm_id)}}">
+        <i style="color: #ffffff;">PDF</i>
+      </a>
+
     </td>
-    
+
   </tr>
   @endforeach
 </table>
