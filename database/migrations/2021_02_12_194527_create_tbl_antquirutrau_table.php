@@ -16,7 +16,7 @@ class CreateTblAntquirutrauTable extends Migration
         Schema::create('tbl_antquirutrau', function (Blueprint $table) {
             $table->increments('atqt_id');
 			$table->unsignedInteger('atqt_fkExpediente');
-            $table->foreign('atqt_fkExpediente')->references('exp_id')->on('tbl_expedientes');
+            $table->foreign('atqt_fkExpediente')->references('exp_id')->on('tbl_expedientes')->onDelete('cascade');
 			$table->string('atqt_Nombre', 50);
 			$table->string('atqt_descripcion', 100);
 			$table->string('atqt_tipo', 1);

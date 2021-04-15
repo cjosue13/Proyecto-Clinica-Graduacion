@@ -16,7 +16,7 @@ class CreateTblAparienciasTable extends Migration
         Schema::create('tbl_apariencias', function (Blueprint $table) {
             $table->increments('apa_id');
 			$table->unsignedInteger('apa_examenClinico');
-            $table->foreign('apa_examenClinico')->references('exm_id')->on('tbl_examenesclinicos');
+            $table->foreign('apa_examenClinico')->references('exm_id')->on('tbl_examenesclinicos')->onDelete('cascade');
 			$table->string('apa_Piel', 1000);
 			$table->string('apa_Extremidades', 1000);
 			$table->string('apa_SignosRespiratorios', 1000);

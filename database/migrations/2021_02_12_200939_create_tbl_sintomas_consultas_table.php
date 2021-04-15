@@ -16,9 +16,9 @@ class CreateTblSintomasConsultasTable extends Migration
         Schema::create('tbl_sintomas_consultas', function (Blueprint $table) {
             $table->increments('id');
 			$table->unsignedInteger('sf_fk');
-            $table->foreign('sf_fk')->references('sf_id')->on('tbl_sintomas');
+            $table->foreign('sf_fk')->references('sf_id')->on('tbl_sintomas')->onDelete('cascade');
 			$table->unsignedInteger('c_fk');
-            $table->foreign('c_fk')->references('c_id')->on('tbl_consultas');
+            $table->foreign('c_fk')->references('c_id')->on('tbl_consultas')->onDelete('cascade');
 			$table->string('sc_Descripcion',1000);
             $table->timestamps();
         });

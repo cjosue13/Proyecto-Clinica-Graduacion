@@ -16,9 +16,9 @@ class CreateTblExpedientesAntecedentesTable extends Migration
         Schema::create('tbl_expedientes_antecedentes', function (Blueprint $table) {
             $table->increments('ea_id');
 			$table->unsignedInteger('ea_expediente');
-            $table->foreign('ea_expediente')->references('exp_id')->on('tbl_expedientes');
+            $table->foreign('ea_expediente')->references('exp_id')->on('tbl_expedientes')->onDelete('cascade');
             $table->unsignedInteger('ea_enfermedad');
-            $table->foreign('ea_enfermedad')->references('atpnp_id')->on('tbl_antenfermedades');
+            $table->foreign('ea_enfermedad')->references('atpnp_id')->on('tbl_antenfermedades')->onDelete('cascade');
 			$table->string('ea_Descripcion',1000);
 			$table->timestamps();
         });

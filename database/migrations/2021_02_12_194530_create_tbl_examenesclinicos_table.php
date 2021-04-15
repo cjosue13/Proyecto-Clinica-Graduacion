@@ -16,7 +16,7 @@ class CreateTblExamenesclinicosTable extends Migration
         Schema::create('tbl_examenesclinicos', function (Blueprint $table) {
             $table->increments('exm_id');
 			$table->unsignedInteger('exm_consulta');
-            $table->foreign('exm_consulta')->references('c_id')->on('tbl_consultas');
+            $table->foreign('exm_consulta')->references('c_id')->on('tbl_consultas')->onDelete('cascade');
 			$table->float('exm_peso',3,3);
 			$table->float('exm_altura',3,0);
 			$table->float('exm_imc',3,6);

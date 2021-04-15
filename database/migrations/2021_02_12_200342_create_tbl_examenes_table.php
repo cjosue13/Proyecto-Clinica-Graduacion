@@ -16,7 +16,7 @@ class CreateTblExamenesTable extends Migration
         Schema::create('tbl_examenes', function (Blueprint $table) {
             $table->increments('exmm_id');
 			$table->unsignedInteger('exmm_fkConsulta');
-            $table->foreign('exmm_fkConsulta')->references('c_id')->on('tbl_consultas');
+            $table->foreign('exmm_fkConsulta')->references('c_id')->on('tbl_consultas')->onDelete('cascade');
 			$table->string('exmm_Nombre',50);
 			$table->string('exmm_Descripcion',1000);
             $table->string('exmm_Imagen',2048);

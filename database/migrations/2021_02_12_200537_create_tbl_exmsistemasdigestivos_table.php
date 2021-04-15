@@ -16,9 +16,9 @@ class CreateTblExmsistemasdigestivosTable extends Migration
         Schema::create('tbl_exmsistemasdigestivos', function (Blueprint $table) {
             $table->increments('exSg_id');
 			$table->unsignedInteger('exSg_examenClinco');
-            $table->foreign('exSg_examenClinco')->references('exm_id')->on('tbl_examenesclinicos');
+            $table->foreign('exSg_examenClinco')->references('exm_id')->on('tbl_examenesclinicos')->onDelete('cascade');
 			$table->unsignedInteger('exSg_fkSistemaDigestivo');
-            $table->foreign('exSg_fkSistemaDigestivo')->references('sd_id')->on('tbl_sistemadigestivos');
+            $table->foreign('exSg_fkSistemaDigestivo')->references('sd_id')->on('tbl_sistemadigestivos')->onDelete('cascade');
 			$table->string('exSg_Descripcion',1000);
             $table->timestamps();
         });
