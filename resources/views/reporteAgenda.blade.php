@@ -19,12 +19,13 @@
 <body>
     <div>
 
-        <div style="background-color:#209f85;" style="outline:none">
-            <a class="navbar-brand" style="color:white;">
-                CLINICA HAHNEMANN
-                <img border="0" style="float: right; margin: 0px 0px 15px 15px; width: 46px; height: 46px;" src="https://i.ibb.co/FBqQz2b/electrocardiograma.png" width="100" />
-            </a>
-        </div>
+        <nav class="navbar navbar-expand-md navbar-dark bg-green shadow-sm">
+            <div style="background-color:#209f85;" style="outline:none">
+                <a class="navbar-brand">
+                    CLINICA HAHNEMANN
+                </a>
+            </div>
+        </nav>
         <table class="table table-striped" style="padding-top: 60px; text-align:left; margin-left:0px; ">
             <thead class="thead">
                 <tr>

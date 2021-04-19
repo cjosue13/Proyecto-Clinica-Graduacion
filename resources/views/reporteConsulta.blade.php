@@ -22,8 +22,13 @@
             <div style="background-color:#209f85;" style="outline:none">
                 <a class="navbar-brand">
                     CLINICA HAHNEMANN
-                    <img border="0" style="float: right; margin: 0px 0px 15px 15px; width: 46px; height: 46px;" src="https://i.ibb.co/FBqQz2b/electrocardiograma.png" width="100" />
                 </a>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <img src="../public/img/LOGO 2020.png" style="max-width: 100%;
+    height: auto; float: right; margin-top: 50px; width: 180px; height: 150px;">
+                </div>
             </div>
         </nav>
 
