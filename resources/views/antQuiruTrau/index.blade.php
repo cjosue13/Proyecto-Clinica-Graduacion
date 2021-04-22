@@ -7,6 +7,11 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
+  {!! Form::open(['method' => 'POST','route' => ['MenuAntecedentes', $idExp, $paciente[0]->pac_Genero, $paciente[0]->pac_pNombre,$paciente[0]->pac_pApellido, $paciente[0]->pac_id ],'style'=>'display:inline']) !!}
+    <button type="submit" class="btn btn-primary float-right" style="margin-right: 15px;">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+  {!! Form::close() !!}
     <div class="full-right">
     <?php if($tipo == 'q') {?>
       <h2>Antecedentes Quirúrgicos de  {{$paciente[0]->pac_pApellido}} {{$paciente[0]->pac_sApellido}} {{$paciente[0]->pac_pNombre}}</h2>
@@ -52,10 +57,6 @@
     <td>{{ $value->	atqt_descripcion }}</td>
     <td>{{ $value->	atqt_fecha }}</td>
     <td>
-      <!--<a class="btn btn-hover btn-sm black-background" href="{{route('antQuiruTrau.show',$value->atqt_id)}}">
-        <i style="color: #ffffff;" class="fas fa-bars"></i>
-      </a>-->
-
       {!! Form::open(['method' => 'POST','route' => ['editQT', $value->atqt_id, $idExp, $tipo],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
@@ -67,7 +68,6 @@
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>
       {!! Form::close() !!}
-    
     </td>
   </tr>
   @endforeach

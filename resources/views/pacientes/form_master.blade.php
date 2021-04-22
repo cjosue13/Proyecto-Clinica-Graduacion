@@ -88,7 +88,7 @@
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('pac_Correo') ? 'has-error' : "" }}">
-      {{ Form::email('pac_Correo',NULL, ['class'=>'form-control', 'id'=>'pac_Correo', 'placeholder'=> 'Correo', 'required autocomplete'=>'address'] ) }}
+      {{ Form::email('pac_Correo',NULL, ['class'=>'form-control', 'id'=>'pac_Correo', 'placeholder'=> 'Correo'] ) }}
       {!! $errors->first('pac_Correo', '<p class="help-block">:message</p>') !!}
     </div>
   </div>

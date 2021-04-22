@@ -1,3 +1,8 @@
+<div class="row">
+  <div class="col-lg-12">
+    <a class="btn btn-primary float-right" href="{{ url('/home') }}"> <i class="fas fa-arrow-left"></i></a>
+  </div>
+</div>
 <div class="card-body">
   <div class="row">
     <div class="col-sm-10">

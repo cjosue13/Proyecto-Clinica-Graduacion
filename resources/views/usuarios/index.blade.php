@@ -3,6 +3,9 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
+  <div class="col-lg-12">
+    <a class="btn btn-primary float-right" href="{{ url('/home') }}"> <i class="fas fa-arrow-left"></i></a>
+  </div>
     <div class="full-right">
       <h2>Usuario</h2>
     </div>
