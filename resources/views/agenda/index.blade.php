@@ -2,6 +2,10 @@
 @section('PageTitle', 'Agenda')
 @section('content')
 
+<div class="col-lg-20">
+    <a class="btn btn-primary float-right" href="{{ url('/home') }}"> <i class="fas fa-arrow-left"></i></a>
+</div>
+
 <div id='calendar'>
     <button class="btn btn-success" data-toggle="modal" data-target="#modal">
         Generar Reporte
@@ -48,8 +52,6 @@
     </div>
 </div>
 {{ form::close() }}
-
-
 
 <div id="agenda_modal" class="modal" tabindex="-1" data-backdrop="static">
     <div class="modal-dialog">
