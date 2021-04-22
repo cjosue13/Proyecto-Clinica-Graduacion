@@ -37,9 +37,9 @@ class antecedentesginecologicosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($idExp)
+    public function create($exp_id)
     {
-        return view('antecedentesginecologicos.create', compact('idExp'));
+        return view('antecedentesginecologicos.create', compact('exp_id'));
     }
 
     /**
@@ -48,9 +48,9 @@ class antecedentesginecologicosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeAG(Request $request, $idExp)
+    public function storeAG(Request $request, $exp_id)
     {
-        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $exp_id)->get()->toArray();
         $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
         $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
         if(sizeof($antecedentesginecologicos)==0){
@@ -70,12 +70,12 @@ class antecedentesginecologicosController extends Controller
                 'ag_NoCS' => 'required|int|max:999'
             ]);
 
-            tbl_antecedentesginecologicos::create(['ag_expediente' => $idExp] + $request->all()); 
+            tbl_antecedentesginecologicos::create(['ag_expediente' => $exp_id] + $request->all()); 
             $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
-            return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente'));
+            return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente', 'exp_id'));
         }
         else{
-            return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente'));
+            return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente', 'exp_id'));
         }
     }
 
@@ -97,10 +97,10 @@ class antecedentesginecologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id,$idExp)
+    public function edit($id,$exp_id)
     {
         $antecedentesginecologicos = tbl_antecedentesginecologicos::find($id);
-        return view('antecedentesginecologicos.edit', compact('antecedentesginecologicos','idExp'));
+        return view('antecedentesginecologicos.edit', compact('antecedentesginecologicos','exp_id'));
     }
 
     /**
@@ -110,7 +110,7 @@ class antecedentesginecologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateAG(Request $request, $id, $idExp)
+    public function updateAG(Request $request, $id, $exp_id)
     {
 
         $this->validate($request, [
@@ -131,10 +131,10 @@ class antecedentesginecologicosController extends Controller
 
        
         tbl_antecedentesginecologicos::find($id)->update($request->all());
-        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $exp_id)->get()->toArray();
         $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
         $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
-        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente'));
+        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente', 'exp_id'));
     }
 
     /**
@@ -143,12 +143,12 @@ class antecedentesginecologicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function eliminar($id,$idExp)
+    public function eliminar($id,$exp_id)
     {
         tbl_antecedentesginecologicos::find($id)->delete();
-        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $exp_id)->get()->toArray();
         $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
         $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
-        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente'));
+        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos', 'paciente', 'exp_id'));
     }
 }

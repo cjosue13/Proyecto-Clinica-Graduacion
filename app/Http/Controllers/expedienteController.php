@@ -129,11 +129,11 @@ class expedienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function VerAntecedenteGinecologico($idExp){
-        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $idExp)->get()->toArray();
+    public function VerAntecedenteGinecologico($exp_id){
+        $expediente = DB::table('tbl_expedientes')->select('tbl_expedientes.*')->where('tbl_expedientes.exp_id', $exp_id )->get()->toArray();
         $antecedentesginecologicos = DB::table('tbl_antecedentesginecologicos')->select('tbl_antecedentesginecologicos.*')->where('tbl_antecedentesginecologicos.ag_expediente', $expediente[0]->exp_id)->get()->toArray();
         $paciente = DB::table('tbl_pacientes')->select('tbl_pacientes.*')->where('tbl_pacientes.pac_id', $expediente[0]->exp_paciente)->get()->toArray();
-        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos','paciente'));
+        return view('antecedentesginecologicos.index', compact('expediente', 'antecedentesginecologicos','paciente', 'exp_id'));
     }
 
     public function MenuAntecedentes($idExp, $Genero, $Nombre, $Apellido, $pac_id){

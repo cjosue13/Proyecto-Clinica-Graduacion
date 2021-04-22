@@ -3,6 +3,12 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
+  <div class="col-sm-12">
+  {!! Form::open(['method' => 'POST','route' => ['MenuAntecedentes', $exp_id, $paciente[0]->pac_Genero, $paciente[0]->pac_pNombre,$paciente[0]->pac_pApellido, $paciente[0]->pac_id ],'style'=>'display:inline']) !!}
+    <button type="submit" class="btn btn-primary float-right" style="margin-right: 15px;">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+  {!! Form::close() !!}
     <div class="full-right">
       <h2>Antecedentes Ginecologicos de {{$paciente[0]->pac_pApellido}} {{$paciente[0]->pac_sApellido}} {{$paciente[0]->pac_pNombre}}</h2>
     </div>
