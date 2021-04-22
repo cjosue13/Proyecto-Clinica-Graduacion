@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('PageTitle', 'Menú Antecedentes')
 @section('content')
+<div class="col-lg-12">
+    <a class="btn btn-primary float-right" href="{{route('VerExpediente',$pac_id)}}"> <i class="fas fa-arrow-left"></i></a>
+</div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">

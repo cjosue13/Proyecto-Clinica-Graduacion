@@ -2,10 +2,10 @@
 @section('PageTitle', 'Pacientes')
 @section('content')
 <div class="row">
-  <div class="col-lg-12">
-    <a class="btn btn-primary float-right" href="{{ url('/home') }}"> <i class="fas fa-arrow-left"></i></a>
-  </div>
   <div class="col-sm-12">
+    <div class="col-lg-12">
+      <a class="btn btn-primary float-right" href="{{ url('/home') }}"> <i class="fas fa-arrow-left"></i></a>
+    </div>
     <div class="full-right">
       <h2>Pacientes</h2>
     </div>
