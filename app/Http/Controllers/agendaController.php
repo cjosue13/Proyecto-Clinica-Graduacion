@@ -167,7 +167,7 @@ class agendaController extends Controller
 
         $agenda = DB::table('tbl_agendas')
             ->whereBetween('agn_fecha', array($request->input('agn_fecha_inicio'), $request->input('agn_fecha_final')))
-            ->get();
+            ->orderBy('agn_fecha')->get();
 
         // share data to view
         view()->share('agenda', $agenda);

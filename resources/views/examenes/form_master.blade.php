@@ -22,16 +22,16 @@
   </div>
 </div>
 
-@if ($message = Session::get('success'))
+@if ($message = Session::get('success') || isset($examenes))
 <div class="row">
   <div class="col-sm-2">
     {!! form::label('exmm_Imagen','Imagen Cargada:') !!}
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('exmm_Imagen') ? 'has-error' : "" }}">
-      {{ Form::text('exmm_Imagen',Session::get('image'), ['readonly', 'class'=>'form-control', 'id'=>'exmm_Imagen']) }}
+      {{ Form::text('exmm_Imagen', !isset($examenes)? Session::get('image'):NULL, ['readonly', 'class'=>'form-control', 'id'=>'exmm_Imagen']) }}
       <br>
-      <img src="/images/{{ Session::get('image') }}" width="60">
+      <img src="/images/{{ !isset($examenes)? Session::get('image') :$examenes->exmm_Imagen }}" width="60">
       {!! $errors->first('exmm_Imagen', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
