@@ -25,7 +25,7 @@ class CreateTblAntecedentesginecologicosTable extends Migration
             $table->double('ag_Abortos', 3, 0);
             $table->double('ag_Cesareas', 3, 0);
             $table->date('ag_FUR');
-            $table->double('ag_FUPAP', 3, 0);
+            $table->date('ag_FUPAP');
             $table->string('ag_PF', 1);
             $table->string('ag_PF_detalle', 1000);
             $table->date('ag_PRS');
