@@ -19,7 +19,6 @@
             <a href="{{ url('/usuarios') }}">User</a>
             @else
             <a href="{{ route('login') }}">Login</a>
-            <a href="{{ route('register') }}">registro</a>
             @endauth
         </div>
         @endif
