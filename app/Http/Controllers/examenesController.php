@@ -115,6 +115,8 @@ class examenesController extends Controller
         ->with('success','Datos eliminados con éxito');
     }
 
+    
+
 
     public function createPDF($id)
     {
@@ -128,4 +130,25 @@ class examenesController extends Controller
         // download PDF file with download method
         return $pdf->stream();
     }
+
+    public function imageUploadPost(Request $request, $id, $idCon)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+  
+        $imageName = time().'.'.$request->image->extension();  
+   
+        $request->image->move(public_path('images'), $imageName); 
+
+        $examenes = tbl_examenes::find($id);
+        $success = 'You have successfully upload image.';
+        $image = $imageName;
+        return view('examenes.edit', compact('examenes','idCon','success', 'image'));
+        
+   
+    }
+
+
+
 }

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('PageTitle', 'Pacientes')
 @section('content')
+
 <div class="row">
   <div class="col-sm-12">
     <div class="col-lg-12">
@@ -9,17 +10,24 @@
     <div class="full-right">
       <h2>Pacientes</h2>
     </div>
-    <br>
-    <div class="col-lg-12">
-      <div class="form-group" style="display: flex;">
-        {{ Form::open(['route'=>['filtro'], 'method'=>'GET']) }}
-        <input name="txt_nombre" class="form-control" style="width: 100%;" type="text" placeholder="Nombre/Cédula del paciente">
-        <button type="submit" style="margin-left: 10px; margin-right: auto; justify-content: center;" class="btn btn-info btn-sm" style="font-size: 20px;" class="fa fa-floppy-o">Buscar</i></button>
-        {{ form::close() }}
-      </div>
-    </div>
   </div>
 </div>
+
+<div class="row justify-content-md-left">
+  <div class="col-md-6 col-md-offset-3">
+    {{ Form::open(['route'=>['filtro'], 'method'=>'GET']) }}
+    <div class="row">
+      <div class="col-sm-10">
+        <div class="input-group">
+          {{Form::text('txt_nombre',NULL,['type'=>'submit','class'=>'form-control form-control-user', 'placeholder'=> 'Nombre/Cédula del paciente'])}}
+          {{ Form::button('Buscar' , ['class'=>'btn btn-success', 'type'=>'submit']) }}
+        </div>
+      </div>
+    </div>
+    {{ form::close() }}
+  </div>
+</div>
+<br>
 
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
@@ -57,7 +65,9 @@
   @foreach ($pacientes as $key => $value)
   <tr>
     <td>{{$no++}}</td>
-    <td width='150px'>{{ $value->pac_pNombre . " " . $value->pac_sNombre . " " . $value->pac_pApellido . " " . $value->	pac_sApellido }}</td>
+    <td width='150px'>
+      {{ $value->pac_pNombre . " " . $value->pac_sNombre . " " . $value->pac_pApellido . " " . $value->	pac_sApellido }}
+    </td>
     <td>{{ $value->	pac_Cedula }}</td>
     <td>{{ $value->	pac_Genero }}</td>
     <td>{{ $value->	pac_FechaNacimiento }}</td>
@@ -87,7 +97,8 @@
       <a class="btn btn-hover btn-sm black-background" href="{{route('pacientes.edit',$value->pac_id)}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>
-      {!! Form::open(['method' => 'DELETE','route' => ['pacientes.destroy', $value->pac_id],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'DELETE','route' => ['pacientes.destroy',
+      $value->pac_id],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>

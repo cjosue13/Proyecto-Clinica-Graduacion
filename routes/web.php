@@ -80,7 +80,9 @@ Route::post('consultas/store/{id}', 'consultasController@store')->name('storeCon
 
 
 Route::get('image-upload', 'ImageUploadController@imageUpload')->name('image.upload');
+
 Route::post('image-upload', 'ImageUploadController@imageUploadPost')->name('image.upload.post');
+
 
 Route::patch('consultas/update/{id}/{idExp}', 'consultasController@update')->name('updateConsulta');
 
@@ -246,6 +248,8 @@ Route::post('examenes/updateEx/{id}/{idCon}', [
 Route::post('examenes/editEx/{id}/{idCon}', [
     'as' => 'editEx', 'uses' => 'examenesController@editEx'
 ]);
+
+Route::post('image-upload/{id}/{idCon}', 'examenesController@imageUploadPost')->name('upload-image');
 
 Route::delete('examenes/deleteEx/{id}/{idCon}', [
     'as' => 'deleteEx', 'uses' => 'examenesController@deleteEx'

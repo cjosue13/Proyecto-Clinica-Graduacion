@@ -11,7 +11,7 @@
       </div>
       <div class="col-sm-10">
         <div class="form-group">
-          {{ Form::File('image', NULL, ['class'=>'form-control', 'name'=>'image', 'id'=>'image']) }}
+        {{ Form::File('image', ['name'=>'image', 'id'=>'image', 'required' ,'accept'=>'image/*']) }}
           {{ Form::button('Subir imagen' , ['class'=>'btn btn-success', 'type'=>'submit']) }}
         </div>
       </div>
