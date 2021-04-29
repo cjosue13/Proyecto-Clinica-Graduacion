@@ -47,6 +47,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -65,14 +66,20 @@
                         </li>
 
                         @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">Menú de Datos</a>
+                        </li>
+                        
                         <li class="nav-item dropdown">
                             <a id="" class="nav-link dropdown-toggle" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name. ' / Logout' }}
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
+                        
+                        
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                         </li>
                         @endguest
                     </ul>

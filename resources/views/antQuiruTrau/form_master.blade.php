@@ -12,18 +12,6 @@
 
 <div class="row">
   <div class="col-sm-2">
-    {!! form::label('atqt_descripcion','Descripción') !!}
-  </div>
-  <div class="col-sm-10">
-    <div class="form-group {{ $errors->has('pac_sNombre') ? 'has-error' : "" }}">
-      {{ Form::text('atqt_descripcion',NULL, ['class'=>'form-control', 'id'=>'atqt_descripcion', 'placeholder'=>'Descripción']) }}
-      {!! $errors->first('atqt_descripcion', '<p class="help-block">:message</p>') !!}
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-2">
     {!! form::label('atqt_fecha','Fecha') !!}
   </div>
   <div class="col-sm-10">
@@ -33,6 +21,20 @@
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-2">
+    {!! form::label('atqt_descripcion','Descripción') !!}
+  </div>
+  <div class="col-sm-10">
+    <div class="form-group {{ $errors->has('pac_sNombre') ? 'has-error' : "" }}">
+      {{ Form::textarea('atqt_descripcion',NULL, ['class'=>'form-control', 'id'=>'atqt_descripcion', 'placeholder'=>'Descripción']) }}
+      {!! $errors->first('atqt_descripcion', '<p class="help-block">:message</p>') !!}
+    </div>
+  </div>
+</div>
+
+
 
 <div class="form-group">
   {{ Form::button(isset($model)? 'Actualizar' : 'Guardar' , ['class'=>'btn btn-success', 'type'=>'submit']) }}

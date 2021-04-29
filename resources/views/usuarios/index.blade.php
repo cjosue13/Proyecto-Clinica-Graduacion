@@ -43,9 +43,7 @@
     <td>{{ $value->tipoUsuario }}</td>
     <td>{{ $value->cedula }}</td>
     <td>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('usuarios.show',$value->id)}}">
-        <i style="color: #ffffff;" class="fas fa-bars"></i>
-      </a>
+      
       <a class="btn btn-hover btn-sm black-background" href="{{route('usuarios.edit',$value->id)}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>

@@ -27,7 +27,7 @@
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('ea_Descripcion') ? 'has-error' : "" }}">
-      {{ Form::text('ea_Descripcion',NULL, ['class'=>'form-control', 'id'=>'ea_Descripcion', 'placeholder'=>'Descripción']) }}
+      {{ Form::textarea('ea_Descripcion',NULL, ['class'=>'form-control', 'id'=>'ea_Descripcion', 'placeholder'=>'Descripción']) }}
       {!! $errors->first('ea_Descripcion', '<p class="help-block">:message</p>') !!}
     </div>
   </div>

@@ -47,9 +47,6 @@
     <td>{{ $value->exp_Metas }}</td>
     <td>{{ $value->exp_Historiabiopatografica }}</td>
     <td>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('expediente.show',$value->exp_id)}}">
-        <i style="color: #ffffff;" class="fas fa-bars"></i>
-      </a>
       <a class="btn btn-hover btn-sm black-background" href="{{route('expediente.edit',$value->exp_id)}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>
