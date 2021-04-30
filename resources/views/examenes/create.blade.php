@@ -1,7 +1,13 @@
 @extends('layouts.app')
 @section('PageTitle', 'Examenes')
 @section('content')
-
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <a class="btn btn-primary" href="{{route('indexEx',[$idCon, $idExp])}}"> <i class="fas fa-arrow-left"></i></a>
+    </div>
+  </div>
+</div>
 <div class="row justify-content-md-center">
   <div class="col-md-6 col-md-offset-3">
     {{ Form::open(['route'=>['image.upload.post'], 'method'=>'POST', 'enctype' =>'multipart/form-data']) }}
@@ -21,7 +27,7 @@
 </div>
 <div class="row justify-content-md-center">
   <div class="col-md-6 col-md-offset-3">
-    {{ Form::open(['route'=>['storeEx', $idCon], 'method'=>'POST']) }}
+    {{ Form::open(['route'=>['storeEx', $idCon, $idExp], 'method'=>'POST']) }}
     @include('examenes.form_master')
     {{ form::close() }}
   </div>

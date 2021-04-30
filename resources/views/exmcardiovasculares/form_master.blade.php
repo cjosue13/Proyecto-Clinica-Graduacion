@@ -13,7 +13,7 @@
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('car_tipo') ? 'has-error' : "" }}">
-      {{ Form::select('car_tipo', array('' => 'Seleccione una Opción','normales' => 'normales', 'aritmicos' => 'aritmicos'),
+      {{ Form::select('car_tipo', array('' => 'Seleccione una Opción','Normales' => 'Normales', 'Arrítmicos' => 'Arrítmicos'),
             $tipo ,['class'=>'form-control', 'id'=>'car_tipo']) }}
       {!! $errors->first('car_tipo', '<p class="help-block">:message</p>') !!}
     </div>

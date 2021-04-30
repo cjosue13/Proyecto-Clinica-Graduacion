@@ -1,10 +1,8 @@
-<div class="row">
-  <div class="col-lg-12">
-    <a class="btn btn-primary float-right" href="{{ url('/home') }}"> <i class="fas fa-arrow-left"></i></a>
-  </div>
-</div>
-<div class="card-body">
+<div class="container">
   <div class="row">
+    <div class="col-sm-2">
+      {!! form::label('name','Nombre Completo:') !!}
+    </div>
     <div class="col-sm-10">
       <div class="form-group {{ $errors->has('name') ? 'has-error' : "" }}">
         {{ Form::text('name',NULL, ['class'=>'form-control', 'id'=>'name', 'placeholder'=>'Nombre Real']) }}
@@ -14,6 +12,9 @@
   </div>
 
   <div class="row">
+    <div class="col-sm-2">
+      {!! form::label('username','Nombre de Usuario:') !!}
+    </div>
     <div class="col-sm-10">
       <div class="form-group {{ $errors->has('username') ? 'has-error' : "" }}">
         {{ Form::text('username',NULL, ['class'=>'form-control', 'id'=>'username', 'placeholder'=>'Nombre de Usuario']) }}
@@ -23,6 +24,9 @@
   </div>
 
   <div class="row">
+    <div class="col-sm-2">
+      {!! form::label('email','Correo Electrónico:') !!}
+    </div>
     <div class="col-sm-10">
       <div class="form-group {{ $errors->has('email') ? 'has-error' : "" }}">
         {{ Form::text('email',NULL, ['class'=>'form-control', 'id'=>'email', 'placeholder'=>'Correo']) }}
@@ -32,6 +36,9 @@
   </div>
 
   <div class="form-group row">
+    <div class="col-sm-2">
+      {!! form::label('password','Contraseña:') !!}
+    </div>
     <div class="col-sm-10">
       <input id="password" type="password" placeholder="Contraseña" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
       @error('password')
@@ -43,12 +50,18 @@
   </div>
 
   <div class="form-group row">
+    <div class="col-sm-2">
+      {!! form::label('password-confirm','Confirmar Contraseña:') !!}
+    </div>
     <div class="col-sm-10">
       <input id="password-confirm" placeholder="Confirmar Contraseña" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
     </div>
   </div>
 
   <div class="row">
+    <div class="col-sm-2">
+      {!! form::label('address','Dirección:') !!}
+    </div>
     <div class="col-sm-10">
       <div class="form-group {{ $errors->has('address') ? 'has-error' : "" }}">
         {{ Form::text('address',NULL, ['class'=>'form-control', 'id'=>'address', 'placeholder'=>'Direccion']) }}
@@ -58,6 +71,9 @@
   </div>
 
   <div class="row">
+    <div class="col-sm-2">
+      {!! form::label('phone','Teléfono:') !!}
+    </div>
     <div class="col-sm-10">
       <div class="form-group {{ $errors->has('phone') ? 'has-error' : "" }}">
         {{ Form::text('phone',NULL, ['class'=>'form-control', 'id'=>'phone', 'placeholder'=>'Telefono']) }}
@@ -67,6 +83,9 @@
   </div>
 
   <div class="row">
+    <div class="col-sm-2">
+      {!! form::label('name','Tipo:') !!}
+    </div>
     <div class="col-sm-0">
       <label for="tipoUsuario" class="columnaRadio">{{ __('Tipo de Usuario:') }}</label>
       <div class="radio ">
@@ -77,6 +96,9 @@
   </div>
 
   <div class="row">
+    <div class="col-sm-2">
+      {!! form::label('cedula','Cédula:') !!}
+    </div>
     <div class="col-sm-10">
       <div class="form-group {{ $errors->has('cedula') ? 'has-error' : "" }}">
         {{ Form::text('cedula',NULL, ['class'=>'form-control', 'id'=>'cedula', 'placeholder'=>'Cedula']) }}

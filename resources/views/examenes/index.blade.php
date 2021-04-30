@@ -3,6 +3,11 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
+    {!! Form::open(['method' => 'GET','route' => ['indexConsulta', $idExp],'style'=>'display:inline']) !!}
+    <button type="submit" class="btn btn-primary float-right" style="margin-right: 15px;">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    {!! Form::close() !!}
     <div class="full-right">
       <h2>Examenes</h2>
     </div>
@@ -28,7 +33,7 @@
       <th>Imagen</th>
       <th>Descripción</th>
       <th width="140px" class="text-center">
-        <a href="{{route('createEx', $idCon)}}" class="btn btn-success btn-sm">
+        <a href="{{route('createEx', [$idCon, $idExp])}}" class="btn btn-success btn-sm">
           <i class="fas fa-plus"></i>
         </a>
       </th>
@@ -42,13 +47,13 @@
     <td><img src="{{ asset('images/'.$value->exmm_Imagen) }}" width="45"></td>
     <td>{{ $value->exmm_Descripcion }}</td>
     <td>
-      {!! Form::open(['method' => 'POST','route' => ['editEx', $value->exmm_id, $idCon],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'POST','route' => ['editEx', $value->exmm_id, $idCon, $idExp],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </button>
       {!! Form::close() !!}
 
-      {!! Form::open(['method' => 'DELETE','route' => ['deleteEx', $value->exmm_id, $idCon],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'DELETE','route' => ['deleteEx', $value->exmm_id, $idCon, $idExp],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>

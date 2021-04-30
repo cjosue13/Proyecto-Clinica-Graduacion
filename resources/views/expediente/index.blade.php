@@ -47,7 +47,8 @@
     <td>{{ $value->exp_Metas }}</td>
     <td>{{ $value->exp_Historiabiopatografica }}</td>
     <td>
-      <a class="btn btn-hover btn-sm black-background" href="{{route('expediente.edit',$value->exp_id)}}">
+    
+      <a class="btn btn-hover btn-sm black-background" href="{{route('editExp',[$value->exp_id, $paciente[0]->pac_id])}}">
         <i style="color: #ffffff;" class="fas fa-edit"></i>
       </a>
       {!! Form::open(['method' => 'DELETE','route' => ['expediente.destroy', $value->exp_id],'style'=>'display:inline']) !!}
@@ -55,7 +56,7 @@
         <i style="color: #ffffff;" class="far fa-trash-alt"></i>
       </button>
       {!! Form::close() !!}
-      {!! Form::open(['method' => 'POST','route' => ['MenuAntecedentes', $value->exp_id,$paciente[0]->pac_Genero, $paciente[0]->pac_pNombre,$paciente[0]->pac_pApellido, $paciente[0]->pac_id ],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'POST','route' => ['MenuAntecedentes', $value->exp_id, $paciente[0]->pac_Genero, $paciente[0]->pac_pNombre, $paciente[0]->pac_pApellido, $paciente[0]->pac_id ],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;">Antecedentes</i>
       </button>

@@ -44,7 +44,7 @@
     <th>PRS</th>
     <th>NoCS</th>
     <?php if (sizeof($antecedentesginecologicos) == 0) {?>
-      <th width="140px" class="text-center">
+      <th width="150px" class="text-center">
         <a href="{{route('create', $expediente[0]->exp_id)}}" class="btn btn-success btn-sm">
           <i class="fas fa-plus"></i>
         </a>

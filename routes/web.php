@@ -57,12 +57,13 @@ Route::get('pacientes/VerExpediente/{id}', 'pacientesController@VerExpediente')-
 Route::get('pdf5', 'ReportGeneratorController@ReporteGrafico')->name('pdf5'); //ReporteGrafico
 Route::get('expediente/VerAntecedenteGinecologico/{id}', 'expedienteController@VerAntecedenteGinecologico')->name('VerAntecedenteGinecologico');
 Route::get('expediente/create/{id}', 'expedienteController@create')->name('createExp');
+Route::get('expediente/edit/{id}/{idPac}', 'expedienteController@edit')->name('editExp');
 
 Route::get('personalsocial/create/{id}', 'personalsocialController@create')->name('createPS');
 Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosController@create')->name('create');
 
-Route::get('examenes/create/{idCon}', 'examenesController@create')->name('createEx');
-Route::get('examenesclinicos/createEC/{idCon}', 'examenesclinicosController@createEC')->name('createEC');
+Route::get('examenes/create/{idCon}/{idExp}', 'examenesController@create')->name('createEx');
+Route::get('examenesclinicos/createEC/{idCon}/{idExp}', 'examenesclinicosController@createEC')->name('createEC');
 Route::get('exmcardiovasculares/createECAR/{exm_id}', 'exmCardioController@createECAR')->name('createECAR');
 Route::get('exmsistemasdigestivos/createEDIS/{exm_id}', 'exmDigestivoController@createEDIS')->name('createEDIS');
 Route::get('exmsistemasnerviosos/createESN/{exm_id}', 'exmNerviosoController@createESN')->name('createESN');
@@ -94,7 +95,7 @@ Route::post('expediente/store/{id}', [
 
 
 
-Route::post('antQuiruTrau/index/{idExp}/{Tipo}', [
+Route::get('antQuiruTrau/index/{idExp}/{Tipo}', [
     'as' => 'index', 'uses' => 'antQuiruTrauController@index'
 ]);
 
@@ -233,31 +234,31 @@ Route::delete('personalsocial/deletePS/{id}/{idExp}', [
 
 // Examenes
 
-Route::post('examenes/indexEx/{idCon}', [
+Route::get('examenes/indexEx/{idCon}/{idExp}', [
     'as' => 'indexEx', 'uses' => 'examenesController@indexEx'
 ]);
 
-Route::post('examenes/storeEx/{idCon}', [
+Route::post('examenes/storeEx/{idCon}/{idExp}', [
     'as' => 'storeEx', 'uses' => 'examenesController@storeEx'
 ]);
 
-Route::post('examenes/updateEx/{id}/{idCon}', [
+Route::post('examenes/updateEx/{id}/{idCon}/{idExp}', [
     'as' => 'updateEx', 'uses' => 'examenesController@updateEx'
 ]);
 
-Route::post('examenes/editEx/{id}/{idCon}', [
+Route::post('examenes/editEx/{id}/{idCon}/{idExp}', [
     'as' => 'editEx', 'uses' => 'examenesController@editEx'
 ]);
 
-Route::post('image-upload/{id}/{idCon}', 'examenesController@imageUploadPost')->name('upload-image');
+Route::post('image-upload/{id}/{idCon}/{idExp}', 'examenesController@imageUploadPost')->name('upload-image');
 
-Route::delete('examenes/deleteEx/{id}/{idCon}', [
+Route::delete('examenes/deleteEx/{id}/{idCon}/{idExp}', [
     'as' => 'deleteEx', 'uses' => 'examenesController@deleteEx'
 ]);
 //--------------------------------------------------
 
 //Examenes Clínicos
-Route::post('examenesclinicos/indexEC/{idCon}', [
+Route::get('examenesclinicos/indexEC/{idCon}/{idExp}', [
     'as' => 'indexEC', 'uses' => 'examenesclinicosController@indexEC'
 ]);
 
@@ -277,7 +278,7 @@ Route::post('apariencias/indexAPAR/{exm_id}', [
     'as' => 'indexAPAR', 'uses' => 'aparecienciasController@indexAPAR'
 ]);
 
-Route::post('examenesclinicos/storeEC/{idCon}', [
+Route::post('examenesclinicos/storeEC/{idCon}/{idExp}', [
     'as' => 'storeEC', 'uses' => 'examenesclinicosController@storeEC'
 ]);
 
@@ -298,7 +299,7 @@ Route::post('apariencias/storeAPAR/{exm_id}', [
 ]);
 
 
-Route::post('examenesclinicos/updateEx/{id}/{idCon}', [
+Route::post('examenesclinicos/updateEx/{id}/{idCon}/{idExp}', [
     'as' => 'updateEC', 'uses' => 'examenesclinicosController@updateEC'
 ]);
 
@@ -320,7 +321,7 @@ Route::post('exmcardiovasculares/updateECAR/{id}/{exm_id}', [
 
 
 
-Route::post('examenesclinicos/editEx/{id}/{idCon}', [
+Route::post('examenesclinicos/editEC/{id}/{idCon}/{idExp}', [
     'as' => 'editEC', 'uses' => 'examenesclinicosController@editEC'
 ]);
 
@@ -337,7 +338,7 @@ Route::post('apariencias/editAPAR/{id}/{exm_id}', [
 ]);
 
 
-Route::delete('examenes/deleteEC/{id}/{idCon}', [
+Route::delete('examenes/deleteEC/{id}/{idCon}/{idExp}', [
     'as' => 'deleteEC', 'uses' => 'examenesclinicosController@deleteEC'
 ]);
 

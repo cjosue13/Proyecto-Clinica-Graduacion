@@ -88,10 +88,11 @@ class expedienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $id_pac)
     {
         $expediente = tbl_expedientes::find($id);
-        return view('expediente.edit', compact('expediente'));
+        
+        return view('expediente.edit', compact('expediente', 'id_pac'));
     }
 
 

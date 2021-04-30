@@ -24,11 +24,11 @@ class examenesclinicosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexEC($idCon)
+    public function indexEC($idCon, $idExp)
     {
         $examenesclinicos = DB::table('tbl_examenesclinicos')->select('tbl_examenesclinicos.*')
         ->where('tbl_examenesclinicos.exm_consulta', $idCon)->get()->toArray();
-        return view('examenesclinicos.index', compact('examenesclinicos','idCon'));
+        return view('examenesclinicos.index', compact('examenesclinicos','idCon','idExp'));
     }
 
     /**
@@ -36,9 +36,9 @@ class examenesclinicosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createEC($idCon)
+    public function createEC($idCon, $idExp)
     {
-        return view('examenesclinicos.create', compact('idCon'));
+        return view('examenesclinicos.create', compact('idCon','idExp'));
     }
 
     /**
@@ -47,7 +47,7 @@ class examenesclinicosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeEC(Request $request, $idCon)
+    public function storeEC(Request $request, $idCon, $idExp)
     {
         
         $this->validate($request, [
@@ -62,7 +62,7 @@ class examenesclinicosController extends Controller
 
         $examenesclinicos = DB::table('tbl_examenesclinicos')->select('tbl_examenesclinicos.*')
         ->where('tbl_examenesclinicos.exm_consulta', $idCon)->get()->toArray();
-        return view('examenesclinicos.index', compact('examenesclinicos', 'idCon'))->with('success','Datos guardados con éxito');
+        return view('examenesclinicos.index', compact('examenesclinicos', 'idCon', 'idExp'))->with('success','Datos guardados con éxito');
     }
 
     /**
@@ -71,10 +71,10 @@ class examenesclinicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editEC($id,$idCon)
+    public function editEC($id, $idCon, $idExp)
     {
         $examenesclinicos = tbl_examenesclinicos::find($id);
-        return view('examenesclinicos.edit', compact('examenesclinicos','idCon'));
+        return view('examenesclinicos.edit', compact('examenesclinicos','idCon','idExp'));
     }
 
 
@@ -85,7 +85,7 @@ class examenesclinicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateEC(Request $request, $id, $idCon)
+    public function updateEC(Request $request, $id, $idCon, $idExp )
     {
 
         $this->validate($request, [
@@ -102,7 +102,7 @@ class examenesclinicosController extends Controller
         $examenesclinicos = DB::table('tbl_examenesclinicos')->select('tbl_examenesclinicos.*')
         ->where('tbl_examenesclinicos.exm_consulta', $idCon)->get()->toArray();
 
-        return view('examenesclinicos.index', compact('examenesclinicos', 'idCon'))
+        return view('examenesclinicos.index', compact('examenesclinicos', 'idCon', 'idExp'))
         ->with('success','Datos actualizados con éxito');
     }
 
@@ -112,13 +112,13 @@ class examenesclinicosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteEC($id, $idCon)
+    public function deleteEC($id, $idCon, $idExp)
     {
         tbl_examenesclinicos::find($id)->delete();
         $examenesclinicos = DB::table('tbl_examenesclinicos')->select('tbl_examenesclinicos.*')
         ->where('tbl_examenesclinicos.exm_consulta', $idCon)->get()->toArray();
 
-        return view('examenesclinicos.index', compact('examenesclinicos', 'idCon'))
+        return view('examenesclinicos.index', compact('examenesclinicos', 'idCon','idExp'))
         ->with('success','Datos actualizados con éxito');
     }
 }

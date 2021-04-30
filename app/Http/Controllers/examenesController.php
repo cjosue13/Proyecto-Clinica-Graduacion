@@ -23,11 +23,11 @@ class examenesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexEx($idCon)
+    public function indexEx($idCon, $idExp)
     {
         $examenes = DB::table('tbl_examenes')->select('tbl_examenes.*')
         ->where('tbl_examenes.exmm_fkConsulta', $idCon)->get()->toArray();
-        return view('examenes.index', compact('examenes','idCon'));
+        return view('examenes.index', compact('examenes','idCon', 'idExp'));
     }
 
     /**
@@ -35,9 +35,9 @@ class examenesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($idCon)
+    public function create($idCon, $idExp)
     {
-        return view('examenes.create', compact('idCon'));
+        return view('examenes.create', compact('idCon','idExp'));
     }
 
     /**
@@ -46,7 +46,8 @@ class examenesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeEx(Request $request, $idCon)
+
+    public function storeEx(Request $request, $idCon, $idExp)
     {
         
         $this->validate($request, [
@@ -59,7 +60,7 @@ class examenesController extends Controller
 
         $examenes = DB::table('tbl_examenes')->select('tbl_examenes.*')
         ->where('tbl_examenes.exmm_fkConsulta', $idCon)->get()->toArray();
-        return view('examenes.index', compact('examenes', 'idCon'))->with('success','Datos guardados con éxito');
+        return view('examenes.index', compact('examenes', 'idCon', 'idExp'))->with('success','Datos guardados con éxito');
     }
 
     /**
@@ -68,10 +69,10 @@ class examenesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editEx($id,$idCon)
+    public function editEx($id,$idCon,$idExp)
     {
         $examenes = tbl_examenes::find($id);
-        return view('examenes.edit', compact('examenes','idCon'));
+        return view('examenes.edit', compact('examenes','idCon','idExp'));
     }
 
 
@@ -82,7 +83,7 @@ class examenesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateEx(Request $request, $id,$idCon)
+    public function updateEx(Request $request, $id, $idCon, $idExp)
     {
 
         $this->validate($request, [
@@ -95,7 +96,7 @@ class examenesController extends Controller
         $examenes = DB::table('tbl_examenes')->select('tbl_examenes.*')
         ->where('tbl_examenes.exmm_fkConsulta', $idCon)->get()->toArray();
 
-        return view('examenes.index', compact('examenes', 'idCon'))
+        return view('examenes.index', compact('examenes', 'idCon', 'idExp'))
         ->with('success','Datos actualizados con éxito');
     }
 
@@ -105,13 +106,13 @@ class examenesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteEx($id, $idCon)
+    public function deleteEx($id, $idCon, $idExp)
     {
         tbl_examenes::find($id)->delete();
         $examenes = DB::table('tbl_examenes')->select('tbl_examenes.*')
         ->where('tbl_examenes.exmm_fkConsulta', $idCon)->get()->toArray();
 
-        return view('examenes.index', compact('examenes', 'idCon'))
+        return view('examenes.index', compact('examenes', 'idCon', 'idExp'))
         ->with('success','Datos eliminados con éxito');
     }
 
@@ -131,7 +132,7 @@ class examenesController extends Controller
         return $pdf->stream();
     }
 
-    public function imageUploadPost(Request $request, $id, $idCon)
+    public function imageUploadPost(Request $request, $id, $idCon,$idExp)
     {
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -144,7 +145,7 @@ class examenesController extends Controller
         $examenes = tbl_examenes::find($id);
         $success = 'You have successfully upload image.';
         $image = $imageName;
-        return view('examenes.edit', compact('examenes','idCon','success', 'image'));
+        return view('examenes.edit', compact('examenes','idCon','success', 'image', 'idExp'));
         
    
     }
