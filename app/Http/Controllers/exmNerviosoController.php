@@ -23,7 +23,7 @@ class exmNerviosoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexESN($exm_id)
+    public function indexESN($exm_id, $idCon, $idExp)
     {
         $exmsistemasnerviosos = DB::table('tbl_exmsistemasnerviosos')
             ->join('tbl_sistemanerviosos', 'tbl_exmsistemasnerviosos.exSn_fkSistemaNerviosoC', '=', 'tbl_sistemanerviosos.snc_id')
@@ -37,7 +37,7 @@ class exmNerviosoController extends Controller
                 'tbl_sistemanerviosos.snc_nombre as nombre'
             )->get()->toArray();
 
-        return view('exmsistemasnerviosos.index', compact('exmsistemasnerviosos', 'exm_id'));
+        return view('exmsistemasnerviosos.index', compact('exmsistemasnerviosos', 'exm_id','idCon','idExp'));
     }
 
     /**
@@ -45,7 +45,7 @@ class exmNerviosoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createESN($exm_id)
+    public function createESN($exm_id, $idCon, $idExp)
     {
         $nerviosos = DB::table('tbl_sistemanerviosos')
             ->select(
@@ -53,7 +53,7 @@ class exmNerviosoController extends Controller
                 'snc_nombre'
             )
             ->get()->toArray();
-        return view('exmsistemasnerviosos.create', compact('exm_id', 'nerviosos'));
+        return view('exmsistemasnerviosos.create', compact('exm_id', 'nerviosos','idCon','idExp'));
     }
 
     /**
@@ -62,7 +62,7 @@ class exmNerviosoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeESN(Request $request, $exm_id)
+    public function storeESN(Request $request, $exm_id, $idCon, $idExp)
     {
         $this->validate($request, [
             'exSn_fkSistemaNerviosoC' => 'required|int',
@@ -83,7 +83,7 @@ class exmNerviosoController extends Controller
                 'tbl_sistemanerviosos.snc_nombre as nombre'
             )->get()->toArray();
 
-        return view('exmsistemasnerviosos.index', compact('exmsistemasnerviosos', 'exm_id'))->with('success', 'Datos guardados con éxito');
+        return view('exmsistemasnerviosos.index', compact('exmsistemasnerviosos', 'exm_id','idCon','idExp'))->with('success', 'Datos guardados con éxito');
     }
 
     /**
@@ -92,7 +92,7 @@ class exmNerviosoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editESN($id, $exm_id)
+    public function editESN($id, $exm_id, $idCon, $idExp)
     {
         $nerviosos = DB::table('tbl_sistemanerviosos')
             ->select(
@@ -101,7 +101,7 @@ class exmNerviosoController extends Controller
             )
             ->get()->toArray();
         $exmsistemasnerviosos = tbl_exmsistemasnerviosos::find($id);
-        return view('exmsistemasnerviosos.edit', compact('exmsistemasnerviosos', 'exm_id', 'nerviosos'));
+        return view('exmsistemasnerviosos.edit', compact('exmsistemasnerviosos', 'exm_id', 'nerviosos','idCon','idExp'));
     }
 
     /**
@@ -111,7 +111,7 @@ class exmNerviosoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateESN(Request $request, $id, $exm_id)
+    public function updateESN(Request $request, $id, $exm_id, $idCon, $idExp)
     {
         $this->validate($request, [
             'exSn_fkSistemaNerviosoC' => 'required|int',
@@ -132,7 +132,7 @@ class exmNerviosoController extends Controller
                 'tbl_sistemanerviosos.snc_nombre as nombre'
             )->get()->toArray();
 
-        return view('exmsistemasnerviosos.index', compact('exmsistemasnerviosos', 'exm_id'))
+        return view('exmsistemasnerviosos.index', compact('exmsistemasnerviosos', 'exm_id','idCon','idExp'))
             ->with('success', 'Datos actualizados con éxito');
     }
 
@@ -142,7 +142,7 @@ class exmNerviosoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteESN($id, $exm_id)
+    public function deleteESN($id, $exm_id, $idCon, $idExp)
     {
         tbl_exmsistemasnerviosos::find($id)->delete();
 
@@ -158,7 +158,7 @@ class exmNerviosoController extends Controller
                 'tbl_sistemanerviosos.snc_nombre as nombre'
             )->get()->toArray();
 
-        return view('exmsistemasnerviosos.index', compact('exmsistemasnerviosos', 'exm_id'))
+        return view('exmsistemasnerviosos.index', compact('exmsistemasnerviosos', 'exm_id','idCon','idExp'))
             ->with('success', 'Datos actualizados con éxito');
     }
 }

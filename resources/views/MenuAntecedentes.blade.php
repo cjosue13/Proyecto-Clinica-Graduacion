@@ -33,19 +33,19 @@
                                 <a style=" outline:none;"><button type="submit" id="Button1" onmouseout="CambiarColor(this)" onmouseover="CambiarColor(this)" class="Button1" onclick="CambiarColor(this)"><i style="outline:none; color: #209f85;" class="far fa-file-alt"></i><br><label class="textocool">Consultas</label></button></a>
                                 {!! Form::close() !!}
 
-                                {!! Form::open(['method' => 'POST','route' => ['indexPS', $idExp ],'style'=>'display:inline']) !!}
+                                {!! Form::open(['method' => 'GET','route' => ['indexPS', $idExp ],'style'=>'display:inline']) !!}
                                 <a style=" outline:none;"><button type="submit" id="Button1" onmouseout="CambiarColor(this)" onmouseover="CambiarColor(this)" class="Button1" onclick="CambiarColor(this)"><i style="outline:none; color: #209f85;" class="far fa-file-alt"></i><br><label class="textocool">Personal y Social</label></button></a>
                                 {!! Form::close() !!}
 
-                                {!! Form::open(['method' => 'POST','route' => ['indexNP', $idExp ],'style'=>'display:inline']) !!}
+                                {!! Form::open(['method' => 'GET','route' => ['indexNP', $idExp ],'style'=>'display:inline']) !!}
                                 <a style=" outline:none;"><button type="submit" id="Button1" onmouseout="CambiarColor(this)" onmouseover="CambiarColor(this)" class="Button1" onclick="CambiarColor(this)"><i style="outline:none; color: #209f85;" class="far fa-file-alt"></i><br><label class="textocool">No Patológicos</label></button></a>
                                 {!! Form::close() !!}
 
-                                {!! Form::open(['method' => 'POST','route' => ['indexP', $idExp ],'style'=>'display:inline']) !!}
+                                {!! Form::open(['method' => 'GET','route' => ['indexP', $idExp ],'style'=>'display:inline']) !!}
                                 <a style=" outline:none;"><button type="submit" id="Button1" onmouseout="CambiarColor(this)" onmouseover="CambiarColor(this)" class="Button1" onclick="CambiarColor(this)"><i style="outline:none; color: #209f85;" class="far fa-file-alt"></i><br><label class="textocool">Patológicos</label></button></a>
                                 {!! Form::close() !!}
 
-                                {!! Form::open(['method' => 'POST','route' => ['indexHF', $idExp ],'style'=>'display:inline']) !!}
+                                {!! Form::open(['method' => 'GET','route' => ['indexHF', $idExp ],'style'=>'display:inline']) !!}
                                 <a style=" outline:none;"><button type="submit" id="Button1" onmouseout="CambiarColor(this)" onmouseover="CambiarColor(this)" class="Button1" onclick="CambiarColor(this)"><i style="outline:none; color: #209f85;" class="far fa-file-alt"></i><br><label class="textocool">Heredo Familiares</label></button></a>
                                 {!! Form::close() !!}
                             </ul>

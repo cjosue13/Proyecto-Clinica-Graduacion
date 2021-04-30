@@ -23,11 +23,11 @@ class exmCardioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexECAR($exm_id)
+    public function indexECAR($exm_id, $idCon, $idExp)
     {
         $exmcardiovasculares = DB::table('tbl_exmcardiovasculares')->select('tbl_exmcardiovasculares.*')
         ->where('tbl_exmcardiovasculares.car_examenClinico', $exm_id)->get()->toArray();
-        return view('exmcardiovasculares.index', compact('exmcardiovasculares','exm_id'));
+        return view('exmcardiovasculares.index', compact('exmcardiovasculares','exm_id','idCon','idExp'));
     }
 
     /**
@@ -35,9 +35,9 @@ class exmCardioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createECAR($exm_id)
+    public function createECAR($exm_id, $idCon, $idExp)
     {
-        return view('exmcardiovasculares.create', compact('exm_id'));
+        return view('exmcardiovasculares.create', compact('exm_id','idCon','idExp'));
     }
 
     /**
@@ -46,7 +46,7 @@ class exmCardioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeECAR(Request $request, $exm_id)
+    public function storeECAR(Request $request, $exm_id, $idCon, $idExp)
     {
         
         $this->validate($request, [
@@ -58,7 +58,7 @@ class exmCardioController extends Controller
 
         $exmcardiovasculares = DB::table('tbl_exmcardiovasculares')->select('tbl_exmcardiovasculares.*')
         ->where('tbl_exmcardiovasculares.car_examenClinico', $exm_id)->get()->toArray();
-        return view('exmcardiovasculares.index', compact('exmcardiovasculares', 'exm_id'))->with('success','Datos guardados con éxito');
+        return view('exmcardiovasculares.index', compact('exmcardiovasculares', 'exm_id','idCon','idExp'))->with('success','Datos guardados con éxito');
     }
 
     /**
@@ -67,10 +67,10 @@ class exmCardioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editECAR($id,$exm_id)
+    public function editECAR($id,$exm_id, $idCon, $idExp)
     {
         $exmcardiovasculares = tbl_exmcardiovasculares::find($id);
-        return view('exmcardiovasculares.edit', compact('exmcardiovasculares','exm_id'));
+        return view('exmcardiovasculares.edit', compact('exmcardiovasculares','exm_id','idCon','idExp'));
     }
 
     /**
@@ -80,7 +80,7 @@ class exmCardioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateECAR(Request $request, $id, $exm_id)
+    public function updateECAR(Request $request, $id, $exm_id, $idCon, $idExp)
     {
         $this->validate($request, [
             'car_detalle' => 'required|string',
@@ -92,7 +92,7 @@ class exmCardioController extends Controller
         $exmcardiovasculares = DB::table('tbl_exmcardiovasculares')->select('tbl_exmcardiovasculares.*')
         ->where('tbl_exmcardiovasculares.car_examenClinico', $exm_id)->get()->toArray();
 
-        return view('exmcardiovasculares.index', compact('exmcardiovasculares', 'exm_id'))
+        return view('exmcardiovasculares.index', compact('exmcardiovasculares', 'exm_id','idCon','idExp'))
         ->with('success','Datos actualizados con éxito');
     }
 
@@ -102,12 +102,12 @@ class exmCardioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteECAR($id, $exm_id)
+    public function deleteECAR($id, $exm_id, $idCon, $idExp)
     {
         tbl_exmcardiovasculares::find($id)->delete();
         $exmcardiovasculares = DB::table('tbl_exmcardiovasculares')->select('tbl_exmcardiovasculares.*')
         ->where('tbl_exmcardiovasculares.car_examenClinico', $exm_id)->get()->toArray();
-        return view('exmcardiovasculares.index', compact('exmcardiovasculares', 'exm_id'))
+        return view('exmcardiovasculares.index', compact('exmcardiovasculares', 'exm_id', 'idCon', 'idExp'))
         ->with('success','Datos actualizados con éxito');
     }
 }

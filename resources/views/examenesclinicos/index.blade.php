@@ -71,25 +71,25 @@
       </button>
       {!! Form::close() !!}
 
-      {!! Form::open(['method' => 'POST','route' => ['indexECAR',$value->exm_id],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'GET','route' => ['indexECAR',$value->exm_id, $idCon, $idExp],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;">Exámenes Cardiovasculares</i>
       </button>
       {!! Form::close() !!}
 
-      {!! Form::open(['method' => 'POST','route' => ['indexEDIS',$value->exm_id],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'GET','route' => ['indexEDIS',$value->exm_id, $idCon, $idExp],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;">Exámenes Digestivos</i>
       </button>
       {!! Form::close() !!}
 
-      {!! Form::open(['method' => 'POST','route' => ['indexESN',$value->exm_id],'style'=>'display:inline']) !!}
+      {!! Form::open(['method' => 'GET','route' => ['indexESN',$value->exm_id, $idCon, $idExp],'style'=>'display:inline']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;">Exámenes Nerviosos</i>
       </button>
       {!! Form::close() !!}
 
-      {!! Form::open(['method' => 'POST','route' => ['indexAPAR',$value->exm_id],'style'=>'display:inline-block; margin-top:5px;']) !!}
+      {!! Form::open(['method' => 'GET','route' => ['indexAPAR',$value->exm_id, $idCon, $idExp],'style'=>'display:inline-block; margin-top:5px;']) !!}
       <button type="submit" style="display: inline;" class="btn btn-hover btn-sm black-background">
         <i style="color: #ffffff;">Apariencia</i>
       </button>

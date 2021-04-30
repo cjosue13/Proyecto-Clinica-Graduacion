@@ -64,10 +64,10 @@ Route::get('antecedentesginecologicos/create/{id}', 'antecedentesginecologicosCo
 
 Route::get('examenes/create/{idCon}/{idExp}', 'examenesController@create')->name('createEx');
 Route::get('examenesclinicos/createEC/{idCon}/{idExp}', 'examenesclinicosController@createEC')->name('createEC');
-Route::get('exmcardiovasculares/createECAR/{exm_id}', 'exmCardioController@createECAR')->name('createECAR');
-Route::get('exmsistemasdigestivos/createEDIS/{exm_id}', 'exmDigestivoController@createEDIS')->name('createEDIS');
-Route::get('exmsistemasnerviosos/createESN/{exm_id}', 'exmNerviosoController@createESN')->name('createESN');
-Route::get('apariencias/createAPAR/{exm_id}', 'aparecienciasController@createAPAR')->name('createAPAR');
+Route::get('exmcardiovasculares/createECAR/{exm_id}/{idCon}/{idExp}', 'exmCardioController@createECAR')->name('createECAR');
+Route::get('exmsistemasdigestivos/createEDIS/{exm_id}/{id_con}/{id_exp}', 'exmDigestivoController@createEDIS')->name('createEDIS');
+Route::get('exmsistemasnerviosos/createESN/{exm_id}/{id_con}/{id_exp}', 'exmNerviosoController@createESN')->name('createESN');
+Route::get('apariencias/createAPAR/{exm_id}/{id_con}/{id_exp}', 'aparecienciasController@createAPAR')->name('createAPAR');
 
 
 
@@ -142,15 +142,15 @@ Route::post('antecedentesginecologicos/updateAG/{id}/{idExp}', [
 
 //Antecentes Enfermedades
 
-Route::post('antNoPatologicos/indexNP/{idExp}', [
+Route::get('antNoPatologicos/indexNP/{idExp}', [
     'as' => 'indexNP', 'uses' => 'antNoPatologicosController@indexNP'
 ]);
 
-Route::post('antPatologicos/indexP/{idExp}', [
+Route::get('antPatologicos/indexP/{idExp}', [
     'as' => 'indexP', 'uses' => 'antPatologicosController@indexP'
 ]);
 
-Route::post('antHeredoFamiliares/indexHF/{idExp}', [
+Route::get('antHeredoFamiliares/indexHF/{idExp}', [
     'as' => 'indexHF', 'uses' => 'antHeredoFamiliaresController@indexHF'
 ]);
 
@@ -210,7 +210,7 @@ Route::delete('antHeredoFamiliares/deleteHF/{id}/{idExp}', [
 
 //------------------------------------------------------------------------------------
 // Personal Social
-Route::post('personalsocial/indexPS/{idExp}', [
+Route::get('personalsocial/indexPS/{idExp}', [
     'as' => 'indexPS', 'uses' => 'personalsocialController@indexPS'
 ]);
 
@@ -262,19 +262,19 @@ Route::get('examenesclinicos/indexEC/{idCon}/{idExp}', [
     'as' => 'indexEC', 'uses' => 'examenesclinicosController@indexEC'
 ]);
 
-Route::post('exmcardiovasculares/indexECAR/{exm_id}', [
+Route::get('exmcardiovasculares/indexECAR/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'indexECAR', 'uses' => 'exmCardioController@indexECAR'
 ]);
 
-Route::post('exmsistemasdigestivos/indexEDIS/{exm_id}', [
+Route::get('exmsistemasdigestivos/indexEDIS/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'indexEDIS', 'uses' => 'exmDigestivoController@indexEDIS'
 ]);
 
-Route::post('exmsistemasnerviosos/indexESN/{exm_id}', [
+Route::get('exmsistemasnerviosos/indexESN/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'indexESN', 'uses' => 'exmNerviosoController@indexESN'
 ]);
 
-Route::post('apariencias/indexAPAR/{exm_id}', [
+Route::get('apariencias/indexAPAR/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'indexAPAR', 'uses' => 'aparecienciasController@indexAPAR'
 ]);
 
@@ -282,19 +282,19 @@ Route::post('examenesclinicos/storeEC/{idCon}/{idExp}', [
     'as' => 'storeEC', 'uses' => 'examenesclinicosController@storeEC'
 ]);
 
-Route::post('exmcardiovasculares/storeECAR/{exm_id}', [
+Route::post('exmcardiovasculares/storeECAR/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'storeECAR', 'uses' => 'exmCardioController@storeECAR'
 ]);
 
-Route::post('exmsistemasdigestivos/storeEDIS/{exm_id}', [
+Route::post('exmsistemasdigestivos/storeEDIS/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'storeEDIS', 'uses' => 'exmDigestivoController@storeEDIS'
 ]);
 
-Route::post('exmsistemasnerviosos/storeESN/{exm_id}', [
+Route::post('exmsistemasnerviosos/storeESN/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'storeESN', 'uses' => 'exmNerviosoController@storeESN'
 ]);
 
-Route::post('apariencias/storeAPAR/{exm_id}', [
+Route::post('apariencias/storeAPAR/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'storeAPAR', 'uses' => 'aparecienciasController@storeAPAR'
 ]);
 
@@ -303,19 +303,19 @@ Route::post('examenesclinicos/updateEx/{id}/{idCon}/{idExp}', [
     'as' => 'updateEC', 'uses' => 'examenesclinicosController@updateEC'
 ]);
 
-Route::post('exmsistemasdigestivos/updateEDIS/{id}/{exm_id}', [
+Route::post('exmsistemasdigestivos/updateEDIS/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'updateEDIS', 'uses' => 'exmDigestivoController@updateEDIS'
 ]);
 
-Route::post('exmsistemasnerviosos/updateESN/{id}/{exm_id}', [
+Route::post('exmsistemasnerviosos/updateESN/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'updateESN', 'uses' => 'exmNerviosoController@updateESN'
 ]);
 
-Route::post('apariencias/updateAPAR/{id}/{exm_id}', [
+Route::post('apariencias/updateAPAR/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'updateAPAR', 'uses' => 'aparecienciasController@updateAPAR'
 ]);
 
-Route::post('exmcardiovasculares/updateECAR/{id}/{exm_id}', [
+Route::post('exmcardiovasculares/updateECAR/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'updateECAR', 'uses' => 'exmCardioController@updateECAR'
 ]);
 
@@ -325,15 +325,15 @@ Route::post('examenesclinicos/editEC/{id}/{idCon}/{idExp}', [
     'as' => 'editEC', 'uses' => 'examenesclinicosController@editEC'
 ]);
 
-Route::post('exmsistemasdigestivos/editEDIS/{id}/{exm_id}', [
+Route::post('exmsistemasdigestivos/editEDIS/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'editEDIS', 'uses' => 'exmDigestivoController@editEDIS'
 ]);
 
-Route::post('exmsistemasnerviosos/editESN/{id}/{exm_id}', [
+Route::post('exmsistemasnerviosos/editESN/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'editESN', 'uses' => 'exmNerviosoController@editESN'
 ]);
 
-Route::post('apariencias/editAPAR/{id}/{exm_id}', [
+Route::post('apariencias/editAPAR/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'editAPAR', 'uses' => 'aparecienciasController@editAPAR'
 ]);
 
@@ -342,23 +342,23 @@ Route::delete('examenes/deleteEC/{id}/{idCon}/{idExp}', [
     'as' => 'deleteEC', 'uses' => 'examenesclinicosController@deleteEC'
 ]);
 
-Route::post('exmcardiovasculares/editECAR/{id}/{exm_id}', [
+Route::post('exmcardiovasculares/editECAR/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'editECAR', 'uses' => 'exmCardioController@editECAR'
 ]);
 
-Route::delete('exmcardiovasculares/deleteECAR/{id}/{exm_id}', [
+Route::delete('exmcardiovasculares/deleteECAR/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'deleteECAR', 'uses' => 'exmCardioController@deleteECAR'
 ]);
 
-Route::delete('exmsistemasdigestivos/deleteEDIS/{id}/{exm_id}', [
+Route::delete('exmsistemasdigestivos/deleteEDIS/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'deleteEDIS', 'uses' => 'exmDigestivoController@deleteEDIS'
 ]);
 
-Route::delete('apariencias/deleteAPAR/{id}/{exm_id}', [
+Route::delete('apariencias/deleteAPAR/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'deleteAPAR', 'uses' => 'aparecienciasController@deleteAPAR'
 ]);
 
-Route::delete('exmsistemasnerviosos/deleteESN/{id}/{exm_id}', [
+Route::delete('exmsistemasnerviosos/deleteESN/{id}/{exm_id}/{id_con}/{id_exp}', [
     'as' => 'deleteESN', 'uses' => 'exmNerviosoController@deleteESN'
 ]);
 

@@ -23,14 +23,14 @@ class aparecienciasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexAPAR($exm_id)
+    public function indexAPAR($exm_id, $idCon, $idExp)
     {
         $apariencias = DB::table('tbl_apariencias')
             ->where('tbl_apariencias.apa_examenClinico', $exm_id)
             ->select('tbl_apariencias.*')
             ->get()->toArray();
 
-        return view('apariencias.index', compact('apariencias', 'exm_id'));
+        return view('apariencias.index', compact('apariencias', 'exm_id','idCon','idExp'));
     }
 
     /**
@@ -38,9 +38,9 @@ class aparecienciasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createAPAR($exm_id)
+    public function createAPAR($exm_id, $idCon, $idExp)
     {
-        return view('apariencias.create', compact('exm_id'));
+        return view('apariencias.create', compact('exm_id','idCon','idExp'));
     }
 
     /**
@@ -49,7 +49,7 @@ class aparecienciasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeAPAR(Request $request, $exm_id)
+    public function storeAPAR(Request $request, $exm_id, $idCon, $idExp)
     {
         $this->validate($request, [
             'apa_Piel' => 'required|string',
@@ -65,7 +65,7 @@ class aparecienciasController extends Controller
             ->select('tbl_apariencias.*')
             ->get()->toArray();
 
-        return view('apariencias.index', compact('apariencias', 'exm_id'))->with('success', 'Datos guardados con éxito');
+        return view('apariencias.index', compact('apariencias', 'exm_id','idCon','idExp'))->with('success', 'Datos guardados con éxito');
     }
 
     /**
@@ -74,10 +74,10 @@ class aparecienciasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editAPAR($id, $exm_id)
+    public function editAPAR($id, $exm_id, $idCon, $idExp)
     {
         $apariencias = tbl_apariencias::find($id);
-        return view('apariencias.edit', compact('apariencias', 'exm_id'));
+        return view('apariencias.edit', compact('apariencias', 'exm_id','idCon','idExp'));
     }
 
     /**
@@ -87,7 +87,7 @@ class aparecienciasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateAPAR(Request $request, $id, $exm_id)
+    public function updateAPAR(Request $request, $id, $exm_id, $idCon, $idExp)
     {
         $this->validate($request, [
             'apa_Piel' => 'required|string',
@@ -103,7 +103,7 @@ class aparecienciasController extends Controller
             ->select('tbl_apariencias.*')
             ->get()->toArray();
 
-        return view('apariencias.index', compact('apariencias', 'exm_id'))
+        return view('apariencias.index', compact('apariencias', 'exm_id','idCon','idExp'))
             ->with('success', 'Datos actualizados con éxito');
     }
 
@@ -113,7 +113,7 @@ class aparecienciasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteAPAR($id, $exm_id)
+    public function deleteAPAR($id, $exm_id, $idCon, $idExp)
     {
         tbl_apariencias::find($id)->delete();
 
@@ -122,7 +122,7 @@ class aparecienciasController extends Controller
             ->select('tbl_apariencias.*')
             ->get()->toArray();
 
-        return view('apariencias.index', compact('apariencias', 'exm_id'))
+        return view('apariencias.index', compact('apariencias', 'exm_id','idCon','idExp'))
             ->with('success', 'Datos actualizados con éxito');
     }
 }

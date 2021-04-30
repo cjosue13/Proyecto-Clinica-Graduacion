@@ -23,7 +23,7 @@ class exmDigestivoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexEDIS($exm_id)
+    public function indexEDIS($exm_id, $idCon, $idExp)
     {
         $exmsistemasdigestivos = DB::table('tbl_exmsistemasdigestivos')
             ->join('tbl_sistemadigestivos', 'tbl_exmsistemasdigestivos.exSg_fkSistemaDigestivo', '=', 'tbl_sistemadigestivos.sd_id')
@@ -37,7 +37,7 @@ class exmDigestivoController extends Controller
                 'tbl_sistemadigestivos.sg_nombre as nombre'
             )->get()->toArray();
 
-        return view('exmsistemasdigestivos.index', compact('exmsistemasdigestivos', 'exm_id'));
+        return view('exmsistemasdigestivos.index', compact('exmsistemasdigestivos', 'exm_id', 'idCon', 'idExp'));
     }
 
     /**
@@ -45,7 +45,7 @@ class exmDigestivoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createEDIS($exm_id)
+    public function createEDIS($exm_id, $idCon, $idExp)
     {
         $digestivos = DB::table('tbl_sistemadigestivos')
             ->select(
@@ -53,7 +53,7 @@ class exmDigestivoController extends Controller
                 'sg_nombre'
             )
             ->get()->toArray();
-        return view('exmsistemasdigestivos.create', compact('exm_id', 'digestivos'));
+        return view('exmsistemasdigestivos.create', compact('exm_id', 'digestivos','idCon','idExp'));
     }
 
     /**
@@ -62,7 +62,7 @@ class exmDigestivoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeEDIS(Request $request, $exm_id)
+    public function storeEDIS(Request $request, $exm_id, $idCon, $idExp)
     {
         $this->validate($request, [
             'exSg_fkSistemaDigestivo' => 'required|int',
@@ -83,7 +83,7 @@ class exmDigestivoController extends Controller
                 'tbl_sistemadigestivos.sg_nombre as nombre'
             )->get()->toArray();
 
-        return view('exmsistemasdigestivos.index', compact('exmsistemasdigestivos', 'exm_id'))->with('success', 'Datos guardados con éxito');
+        return view('exmsistemasdigestivos.index', compact('exmsistemasdigestivos', 'exm_id','idCon', 'idExp'))->with('success', 'Datos guardados con éxito');
     }
 
     /**
@@ -92,7 +92,7 @@ class exmDigestivoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editEDIS($id, $exm_id)
+    public function editEDIS($id, $exm_id, $idCon, $idExp)
     {
         $digestivos = DB::table('tbl_sistemadigestivos')
             ->select(
@@ -101,7 +101,7 @@ class exmDigestivoController extends Controller
             )
             ->get()->toArray();
         $exmsistemasdigestivos = tbl_exmsistemasdigestivos::find($id);
-        return view('exmsistemasdigestivos.edit', compact('exmsistemasdigestivos', 'exm_id', 'digestivos'));
+        return view('exmsistemasdigestivos.edit', compact('exmsistemasdigestivos', 'exm_id', 'digestivos','idCon','idExp'));
     }
 
     /**
@@ -111,7 +111,7 @@ class exmDigestivoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateEDIS(Request $request, $id, $exm_id)
+    public function updateEDIS(Request $request, $id, $exm_id, $idCon, $idExp)
     {
         $this->validate($request, [
             'exSg_fkSistemaDigestivo' => 'required|int',
@@ -132,7 +132,7 @@ class exmDigestivoController extends Controller
                 'tbl_sistemadigestivos.sg_nombre as nombre'
             )->get()->toArray();
 
-        return view('exmsistemasdigestivos.index', compact('exmsistemasdigestivos', 'exm_id'))
+        return view('exmsistemasdigestivos.index', compact('exmsistemasdigestivos', 'exm_id','idCon','idExp'))
             ->with('success', 'Datos actualizados con éxito');
     }
 
@@ -142,7 +142,7 @@ class exmDigestivoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteEDIS($id, $exm_id)
+    public function deleteEDIS($id, $exm_id, $idCon, $idExp)
     {
         tbl_exmsistemasdigestivos::find($id)->delete();
 
@@ -158,7 +158,7 @@ class exmDigestivoController extends Controller
                 'tbl_sistemadigestivos.sg_nombre as nombre'
             )->get()->toArray();
 
-        return view('exmsistemasdigestivos.index', compact('exmsistemasdigestivos', 'exm_id'))
+        return view('exmsistemasdigestivos.index', compact('exmsistemasdigestivos', 'exm_id','idCon','idExp'))
             ->with('success', 'Datos actualizados con éxito');
     }
 }
