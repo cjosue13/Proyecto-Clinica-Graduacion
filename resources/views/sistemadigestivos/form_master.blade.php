@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-2">
-    {!! form::label('sg_nombre','Nombre de parte del sistema digestivo') !!}
+    {!! form::label('sg_nombre','Parte del SD:') !!}
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('sg_nombre') ? 'has-error' : "" }}">

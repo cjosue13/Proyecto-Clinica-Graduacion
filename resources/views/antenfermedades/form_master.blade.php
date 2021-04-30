@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-2">
-    {!! form::label('atpnp_nombre','Nombre de Enfermedad') !!}
+    {!! form::label('atpnp_nombre','Nombre de Enfermedad:') !!}
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('atpnp_nombre') ? 'has-error' : "" }}">
@@ -12,12 +12,12 @@
 
 <div class="row">
   <div class="col-sm-2">
-    {!! form::label('atpnp_tipo','Tipo') !!}
+    {!! form::label('atpnp_tipo','Tipo:') !!}
   </div>
   <div class="col-sm-10">
     <div class="form-group {{ $errors->has('atpnp_tipo') ? 'has-error' : "" }}">
       <div class="form-group">
-        <div class="radio " >
+        <div class="radio">
           <label><input id="columnaRadio" name="atpnp_tipo" type="radio" value="P" @isset($antenfermedades) @if($antenfermedades->atpnp_tipo == 'P')
             {{"checked='checked'"}}
             @endif
